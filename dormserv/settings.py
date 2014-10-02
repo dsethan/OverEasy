@@ -24,7 +24,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-LOCAL = False
+LOCAL = True
 
 ALLOWED_HOSTS = []
 
@@ -38,6 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
+    'restaurants',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -53,6 +55,15 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'dormserv.urls'
 
 WSGI_APPLICATION = 'dormserv.wsgi.application'
+
+# API Keys
+GOOGLE_MAPS = "AIzaSyAUYyU_aUoW5iu_pZZ30U0V_bfdPHQMBQM"
+
+# States in the USA that we are currently delivering to.
+
+US_STATES = (
+    ('North_Carolina', 'NC'),
+)
 
 
 # Database
@@ -113,4 +124,3 @@ if not LOCAL:
     STATICFILES_DIRS = (
         os.path.join(BASE_DIR, 'static'),
     )
-
