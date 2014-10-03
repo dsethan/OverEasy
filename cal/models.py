@@ -13,6 +13,8 @@ class Entry(models.Model):
 	demand = models.IntegerField(default=0)
 	restaurant = models.ForeignKey(Restaurant)
 	length = models.IntegerField(default=20)
+	shutoff_hour = models.IntegerField(default=2)
+	shutoff_min = models.IntegerField(default=0)
 
 	def week_num(self):
 		iso = self.date.isocalendar()
@@ -49,6 +51,36 @@ class Entry(models.Model):
 
 		return orders
 
+	def on_calendar(self):
+		today = datetime.date.today()
+		current_week = today.isocalendar()[1]
+		current_day = today.isocalendar()[2]
+
+		this_wk_active = False
+
+		if self.date.year == today.year:
+			if current_week == self.week_num:
+				if (current_day != 6) or (current_day != 7):
+					this_wk_active = True
+			if (current_week + 1) == self.week_num:
+				if (current_day == 6) or (current_day == 7):
+					this_wk_active = True
+
+		return this_wk_active
+
+	def open_or_closed(self):
+		today = datetime.date.today()
+		date = datetime.date.today().date()
+		five = time(self.shutoff_hour,self.shutoff_min)
+		today_at_five = datetime.combine(date, five)
+		dt = datetime.combine(self.date, self.time)
+
+		if dt < today_at_five:
+			return True
+
+		return False
+
+
 	def get_num_orders_for_entry(self):
 		num = 0
 
@@ -60,6 +92,3 @@ class Entry(models.Model):
 
 	def __unicode__(self):
 		return "Entry id:" + str(self.id) + " Date: " + self.get_date_string + " Time: " + self.get_start_time_string
-
-
-
