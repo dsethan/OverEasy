@@ -4,8 +4,9 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, redirect
 from django.conf import settings
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 from users.models import UserProfile, DriverProfile, StaffProfile
 from restaurants.models import Restaurant
@@ -133,6 +134,15 @@ def user_login(request):
 		{},
 		context)
 
+@login_required
+def user_logout(request):
+	context = RequestContext(request)
+	user = request.User
+
+	logout(request)
+
+	return HttpResponseRedirect("/")
+
 def user_type_redirect_manager(user, request):
 	context = RequestContext(request)
 
@@ -193,7 +203,6 @@ def gather_errors_for_template(first, last, username, address_string, phone,
 		},
 		context)
 
-
 def demand_instance_found(first, last, username, address_string, phone, request):
 	context = RequestContext(request)
 
@@ -211,7 +220,6 @@ def demand_instance_found(first, last, username, address_string, phone, request)
 		"coming_soon.html",
 		{},
 		context)
-
 
 def store_user_data(un, pw, addr, num, nom, res, request):
 	context = RequestContext(request)
