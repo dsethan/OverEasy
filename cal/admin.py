@@ -1,3 +1,7 @@
 from django.contrib import admin
+from cal.models import Entry
 
-# Register your models here.
+class EntryAdmin(admin.ModelAdmin):
+	list_display = ('date', 'time', 'available', 'demand', 'restaurant', 'length', 'shutoff_hour', 'shutoff_min')
+
+admin.site.register(Entry, EntryAdmin)

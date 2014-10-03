@@ -3,8 +3,8 @@ from datetime import date, time, timedelta, datetime
 from django.db import models
 from django.utils import timezone
 
-from restaurant.models import Restaurant
-from orders.models import Order
+from restaurants.models import Restaurant
+#from orders.models import Order
 
 class Entry(models.Model):
 	time = models.TimeField()
@@ -41,7 +41,7 @@ class Entry(models.Model):
 
 	def get_demand_ratio(self):
 		return float(demand/available)
-
+	'''
 	def get_orders_for_entry(self):
 		orders = []
 
@@ -50,36 +50,19 @@ class Entry(models.Model):
 				orders.append(o)
 
 		return orders
-
-	def on_calendar(self):
-		today = datetime.date.today()
-		current_week = today.isocalendar()[1]
-		current_day = today.isocalendar()[2]
-
-		this_wk_active = False
-
-		if self.date.year == today.year:
-			if current_week == self.week_num:
-				if (current_day != 6) or (current_day != 7):
-					this_wk_active = True
-			if (current_week + 1) == self.week_num:
-				if (current_day == 6) or (current_day == 7):
-					this_wk_active = True
-
-		return this_wk_active
+	'''
 
 	def open_or_closed(self):
 		today = datetime.date.today()
 		date = datetime.date.today().date()
-		five = time(self.shutoff_hour,self.shutoff_min)
-		today_at_five = datetime.combine(date, five)
+		shutoff_time = time(self.shutoff_hour,self.shutoff_min)
+		today_shutoff_time = datetime.combine(date, five)
 		dt = datetime.combine(self.date, self.time)
 
-		if dt < today_at_five:
+		if dt < today_shutoff_time:
 			return True
 
 		return False
-
 
 	def get_num_orders_for_entry(self):
 		num = 0
@@ -91,4 +74,4 @@ class Entry(models.Model):
 		return num
 
 	def __unicode__(self):
-		return "Entry id:" + str(self.id) + " Date: " + self.get_date_string + " Time: " + self.get_start_time_string
+		return "Entry id:" + str(self.id)
