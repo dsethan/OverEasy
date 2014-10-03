@@ -1,12 +1,13 @@
 import re
 
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.conf import settings
 from django.http import HttpResponse
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 
-from users.models import UserProfile
+from users.models import UserProfile, DriverProfile, StaffProfile
 from restaurants.models import Restaurant
 from demand.models import Demand
 
@@ -63,6 +64,90 @@ def process_new_user(request):
 			return failure
 	
 	return user_reg(request)
+
+def get_profile_type(user):
+	'''
+	Input: a User object
+	Output:	1 if this is a UserProfile
+			2 if this is a DriverProfile
+			3 if this is a StaffProfile
+			0 if it is not any type of profile
+	'''
+
+	for up in UserProfile.objects.all():
+		if up.user == user:
+			return 1
+
+	for dp in DriverProfile.objects.all():
+		if dp.user == user:
+			return 2
+
+	for sp in StaffProfile.objects.all():
+		if sp.user == user:
+			return 3
+
+	return 0
+
+def user_login(request):
+	context = RequestContext(request)
+	user = request.user
+
+	ptype = get_profile_type(user)
+
+	if user.is_active:
+		if ptype == 1:
+			return redirect('cal', user=user)
+		if ptype == 2:
+			return redirect('driver', user=user)
+		if ptype == 3:
+			return redirect('kitchen', user=user)
+
+	if request.method == 'POST':
+		un = request.POST['username']
+		pw = request.POST['password']
+
+		user = authenticate(username=un, password=pw)
+
+		if user is not None:
+			if user.is_active:
+				login(request, user)
+				return user_type_redirect_manager(user, request)
+
+			else:
+				return render_to_response(
+					'account_disabled.html',
+					{},
+					context)
+
+		else:
+			error = "The details you supplied do not match our records. Please try again!"
+			return render_to_response(
+				'login.html',
+				{
+				'error':error,
+				},
+				context)
+
+	return render_to_response(
+		'login.html',
+		{},
+		context)
+
+def user_type_redirect_manager(user, request):
+	context = RequestContext(request)
+
+	ptype = get_profile_type(user)
+	print ptype
+
+	if user.is_active:
+		if ptype == 1:
+			return redirect('cal', user=user)
+		if ptype == 2:
+			return redirect('driver', user=user)
+		if ptype == 3:
+			return redirect('kitchen', user=user)
+
+	return redirect('user_login')
 
 def gather_errors_for_template(first, last, username, address_string, phone,
 	un, pw, addr, num, nom, res, request):
