@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'users',
     'restaurants',
     'demand',
+    'cal',
 )
 
 MIDDLEWARE_CLASSES = (
