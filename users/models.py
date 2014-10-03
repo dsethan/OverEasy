@@ -14,7 +14,7 @@ class UserProfile(models.Model):
 	phone = models.CharField(max_length=12)
 
 	# Restaurant this UserProfile is mapped to
-	#restaurant = models.ForeignKey(Restaurant)
+	restaurant = models.ForeignKey(Restaurant)
 
 	def get_address_string(self):
 		space = " "
@@ -65,6 +65,9 @@ class DriverProfile(models.Model):
 	# Restaurant this DriverProfile is mapped to
 	restaurant = models.ForeignKey(Restaurant)
 
+	def __unicode__(self):
+		return self.user.username
+
 class StaffProfile(models.Model):
 	# Basic profile data for StaffProfile object
 	user = models.OneToOneField(User)
@@ -75,3 +78,6 @@ class StaffProfile(models.Model):
 
 	# Restaurant this StaffProfile is mapped to
 	restaurant = models.ForeignKey(Restaurant)
+
+	def __unicode__(self):
+		return self.user.username

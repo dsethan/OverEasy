@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+
+{% block heading %}
+
+	<h1>Register for Dormserv</h1>
+
+{% endblock %}
+
+{% block content %}
+	<form method="post" action="process_new_user">
+		{% csrf_token %}
+
+		{% for error in nom_errors %}
+		{{ error }}
+		{% endfor %}
+
+		<input id="first" name="first" placeholder="First name"><br>
+		<input id="last" name="last" placeholder="Last name"><br>
+
+		{% for error in pw_errors %}
+		{{ error }}
+		{% endfor %}
+		<input id="id_password1" name="password1" type="password" placeholder="Password"><br>
+		<input id="id_password2" name="password2" type="password" placeholder="Retype Password"><br>
+		<hr>
+
+		{% for error in un_errors %}
+		{{ error }}
+		{% endfor %}
+		<input id="username" name="username" placeholder="Email"><br>
+
+		{% for error in num_errors %}
+		{{ error }}
+		{% endfor %}
+		<input id="id_phone" name="phone" placeholder="Phone"><br>
+		<hr>
+
+		{% for error in addr_errors %}
+		{{ error }}
+		{% endfor %}
+		<input id="address1" name="address1" placeholder="Address"><br>
+		<input id="address2" name="address2" placeholder="Apt #, Suite, etc."><br>
+		<input id="city" name="city" placeholder="City"><br>
+		<select id="id_state" name="state" placeholder="State">
+		{% for state in states %}
+		<option value="{{ state }}" name="state">{{ state }}</option>
+		{% endfor %}
+
+		</select><br>
+		<input type="submit" name="submit" value="Submit" />
+	</form>
+{% endblock %}

@@ -1,42 +1,40 @@
-from django.shortcuts import render
-from users.models import UserProfile, DriverProfile, StaffProfile
+import re
+
+from django.template import RequestContext
+from django.shortcuts import render_to_response
+from django.conf import settings
+from django.http import HttpResponse
 from django.contrib.auth.models import User
-from datetime import date, time, timedelta
+
+from users.models import UserProfile
+from restaurants.models import Restaurant
+from demand.models import Demand
+
 from pygeocoder import Geocoder
 from googlemaps import GoogleMaps
-from restaurants.models import Restaurant
-from django.conf import settings
 
+def user_reg(request):
+	context = RequestContext(request)
 
+	states = []
 
-def get_profile_type(user):
-	'''
-	Input: a User object
-	Output:	1 if this is a UserProfile
-			2 if this is a DriverProfile
-			3 if this is a StaffProfile
-			0 if it is not any type of profile
-	'''
+	for state in settings.US_STATES:
+		states.append(state[1])
 
-	for up in UserProfile.objects.all():
-		if up.user == user:
-			return 1
+	return render_to_response(
+		'register.html',
+		{
+		'states':states,
+		},
+		context)
 
-	for dp in DriverProfile.objects.all():
-		if dp.user == user:
-			return 2
-
-	for sp in StaffProfile.objects.all():
-		if sp.user == user:
-			return 3
-
-	return 4
-
-def user_profile_register(request):
+def process_new_user(request):
 	context = RequestContext(request)
 
 	if request.method == 'POST':
-		email = request.POST.get('email')
+		first = request.POST.get('first')
+		last = request.POST.get('last')
+		username = request.POST.get('username')
 		password1 = request.POST.get('password1')
 		password2 = request.POST.get('password2')
 		address1 = request.POST.get('address1')
@@ -45,66 +43,196 @@ def user_profile_register(request):
 		state = request.POST.get('state')
 		phone = request.POST.get('phone')
 
-		v_email = validate_email(email)
-		v_password = validate_password(password1, password2)
-		v_address = validate_address(address1, address2, city, state)
-		v_phone = validate_phone(phone)
+		address_string = get_address_string(address1, address2, city, state)
 
-		if v_email and v_password and v_address and v_phone:
-			c_address = clean_address(address1, address2, city, state)
-			c_phone = clean_phone(phone)
+		un = verify_username(username)
+		pw = verify_password(password1, password2)
+		addr = verify_address(address_string)
+		num = verify_phone(phone)
+		nom = verify_name(first, last)
+		res = verify_restaurant(address_string)
+		print un, pw, addr, num, nom, res
+
+		if un[0] and pw[0] and addr[0] and num[0] and nom[0] and res[0]:
+			success = store_user_data(un, pw, addr, num, nom, res, request)
+			return success
+
+		else:
+			failure = gather_errors_for_template(first, last, username, address_string, phone, 
+				un, pw, addr, num, nom, res, request)
+			return failure
+	
+	return user_reg(request)
+
+def gather_errors_for_template(first, last, username, address_string, phone,
+	un, pw, addr, num, nom, res, request):
+	context = RequestContext(request)
+
+	un_errors = []
+	pw_errors = []
+	addr_errors = []
+	num_errors = []
+	nom_errors = []
+	res_errors = []
+
+	if not un[0]:
+		un_errors.append(un[1])
+
+	if not pw[0]:
+		pw_errors.append(pw[1])
+
+	if not addr[0]:
+		addr_errors.append(addr[1])
+
+	if not num[0]:
+		num_errors.append(num[1])
+
+	if not res[0]:
+		demand = demand_instance_found(first, last, username, address_string, phone, request)
+		return demand
+
+	states = []
+
+	for state in settings.US_STATES:
+		states.append(state[1])
+
+	return render_to_response(
+		'register.html',
+		{
+		'un_errors':un_errors,
+		'pw_errors':pw_errors,
+		'addr_errors':addr_errors,
+		'num_errors':num_errors,
+		'res_errors':res_errors,
+		'states':states,
+		},
+		context)
 
 
-def clean_address(address1, address2, city, state):
-	address_string = get_address_string(address1, address2, city, state)
+def demand_instance_found(first, last, username, address_string, phone, request):
+	context = RequestContext(request)
+
+	_demand = Demand(
+		first=first,
+		last=last,
+		email=username,
+		phone=phone,
+		address=address_string
+		)
+
+	_demand.save()
+
+	return render_to_response(
+		"coming_soon.html",
+		{},
+		context)
+
+
+def store_user_data(un, pw, addr, num, nom, res, request):
+	context = RequestContext(request)
+
+	username = un[1]
+	password = pw[1]
+	address = addr[1]
+	city = addr[2]
+	state = addr[3]
+	phone = num[1]
+	first = nom[1]
+	last = nom[2]
+	restaurant = res[1]
+
+	_user = User(
+		first_name=first,
+		last_name=last,
+		username=username)
+
+	_user.set_password(password)
+
+	_user.save()
+
+	_user_profile = UserProfile(
+		user=_user,
+		address=address,
+		city=city,
+		state=state,
+		phone=phone,
+		restaurant=restaurant)
+
+	_user_profile.save()
+
+	return render_to_response(
+		'welcome.html',
+		{'user_profile':_user_profile},
+		context)
+
+def verify_restaurant(start):
+	api_key = settings.GOOGLE_MAPS
+	geo = GoogleMaps(api_key)
+
+	for r in Restaurant.objects.all():
+		end = r.get_address_string()
+		dirs = geo.directions(start, end)
+		dist = dirs['Directions']['Distance']['meters']
+
+		if dist < r.max_radius:
+			return (True, r)
+
+	error = "Unfortunately, we are not yet delivering in your area."
+	return (False, error)
+
+def verify_name(first, last):
+	if not (first > 0) and (last > 0):
+		error = "You must provide both a first and last name."
+		return (False, error)
+	f = first.title()
+	l = last.title()
+	return (True, f, l)
+
+def verify_phone(phone):
+	if not re.match(r"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", phone):
+		error = "Please provide a valid phone number."
+		return (False, error)
+	return (True, phone)
+
+def verify_address(address_string):
 	geo = Geocoder()
 	result = Geocoder.geocode(address_string)
-	return result
+	if not result.valid_address:
+		error = "Please enter a valid address."
+		return (False, error)
+	split = str(result).split(",")
+	addr = split[0]
+	city = split[1]
+	state = split[2]
+	return (True, addr, city, state)
 
-def validate_email(email):
-	if not re.match(r"^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", email):
-		return "Please provide a valid email address."
-	return True
-
-def validate_password(password1, password2):
-	if len(password1) < 6:
-		return "Passwords must be at least 6 characters long."
+def verify_password(password1, password2):
 	if password1 != password2:
-		return "Passwords do not match."
-	return True
+		error = "Passwords do not match."
+		return (False, error)
+	if len(password1) < 7:
+		error = "Passwords must be at least 6 characters in length."
+		return (False, error)
 
-def validate_address(address1, address2, city, state):
-	address_string = get_address_string(address1, address2, city, state)
-	geo = Geocoder()
-	is_valid = g.geocode(address_string).valid_address
-	if not is_valid:
-		return "Please provide a valid address."
+	return (True, password1)
 
-	return True
+def verify_username(username):
+	if not re.match(r"^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", username):
+		error = "Please enter a valid email address."
+		return (False, error)
 
-def validate_phone(phone):
-	if not re.match(r"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", phone):
-		return "Please provide a valid phone number, including area code."
-	return True
+	users = User.objects.all()
+	for u in users:
+		if u.username == username:
+			error = "This email already has an account associated with it."
+			return (False, error)
+
+	return (True, username)
 
 def get_address_string(address1, address2, city, state):
 	space = " "
 	comma = ", "
-	return address1 + space + address2 + comma + city + comma + state
+	if len(address2) > 0:
+		return address1 + space + address2 + comma + city + comma + state
 
-
-def find_restaurant(address_string):
-	api_key = settings.GOOGLE_MAPS
-	geo = GoogleMaps(api_key)
-	start = address_string
-
-	for restaurant in Restaurant.objects.all():
-		end = restaurant.get_address_string
-		dirs = geo.directions(start, end)
-		dist = dirs['Directions']['Distance']['Meters']
-
-		if dist < restaurant.max_radius:
-			return restaurant
-
-	return "Sorry, you are not within a valid delivery area."
-
+	return address1 + comma + city + comma + state

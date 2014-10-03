@@ -8,7 +8,7 @@ class Restaurant(models.Model):
 	address1 = models.CharField(max_length=100)
 	address2 = models.CharField(max_length=100)
 	city = models.CharField(max_length=50)
-	state = models.CharField(max_length=2, choices=settings.US_STATES)
+	state = models.CharField(max_length=14, choices=settings.US_STATES)
 
 	# Define a maximum delivery radius for this Restaurant (IN METERS)
 	# Default value is a 1.5 mile radius around the restaurant
