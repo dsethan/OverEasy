@@ -89,6 +89,29 @@ def get_profile_type(user):
 
 	return 0
 
+def return_associated_profile_type(user):
+	'''
+	Input: a User object
+	Output:	1 if this is a UserProfile
+			2 if this is a DriverProfile
+			3 if this is a StaffProfile
+			0 if it is not any type of profile
+	'''
+
+	for up in UserProfile.objects.all():
+		if up.user == user:
+			return up
+
+	for dp in DriverProfile.objects.all():
+		if dp.user == user:
+			return dp
+
+	for sp in StaffProfile.objects.all():
+		if sp.user == user:
+			return sp
+
+	return None
+
 def user_login(request):
 	context = RequestContext(request)
 	user = request.user

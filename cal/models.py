@@ -4,6 +4,7 @@ from django.db import models
 from django.utils import timezone
 
 from restaurant.models import Restaurant
+from orders.models import Order
 
 class Entry(models.Model):
 	time = models.TimeField()
