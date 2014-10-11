@@ -17,10 +17,11 @@
 			{% for deliv in day %}
 				<form role="form" method="post" action="cal_process_add">
 				{% csrf_token %}
-
-				<center>{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}</center>
+				
+				<center><b>{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}</b></center>
 				<center>Demand: {{deliv.demand}}</center>
 				<center>Available: <input id="{{ deliv.id }}" name="available" placeholder="{{deliv.available}}"></center>
+				<input name="deliv_id" type="hidden" value="{{ deliv.id }}">
 				<center><input type="submit" name="submit" value="Update" /></center>
 				</form>
 			{% endfor %}
@@ -30,6 +31,8 @@
 
 	<p>Initialize Week</p>
 		<form role="form" method="post" action="initialize_week">
+		{% csrf_token %}
+
 		<input type="checkbox" name="m">Monday<br>
 		<input type="checkbox" name="t">Tuesday<br>
 		<input type="checkbox" name="w">Wednesday<br>
@@ -38,12 +41,14 @@
 		<input type="checkbox" name="s">Saturday<br>
 		<input type="checkbox" name="su">Sunday<br>
 		# Daily Entries: <input name="num_entries"><br>
-		Start Time:<input name="start_time"><br>
-		End Time:<input name="end_time"><br>
+		Start Hour:<input name="start_time_hour"><br>
+		Start Min:<input name="start_time_min"><br>
+		Window Length:<input name="win_len"><br>
 		{% if valid_to_add %}
 		<input type="submit" name="submit" value="Update" /></center>
 		{% else %}
-		<input type="submit" name="submit" value="Already Updated..." disabled/>
+		<input type="submit" name="submit" value="Already Updated..."/>
 		{% endif %}
 	</form>
+
 {% endblock %}

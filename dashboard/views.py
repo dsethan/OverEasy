@@ -6,6 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from datetime import datetime, date, time, timedelta
 
 from cal.models import Entry
+from restaurants.models import Restaurant
 
 def set_calendar(request):
 	context = RequestContext(request)
@@ -59,7 +60,7 @@ def set_calendar(request):
 			if len(k) > 0:
 				valid_to_add = False
 				break
-				
+
 		return render_to_response(
 			'caladmin.html',
 			{
@@ -67,6 +68,175 @@ def set_calendar(request):
 			'days':days
 			},
 			context)
+
+def cal_process_add(request):
+	context = RequestContext(request)
+
+	available = request.POST.get("available")
+	deliv_id = request.POST.get("deliv_id")
+
+	entry_to_update = Entry.objects.get(id=deliv_id)
+	entry_to_update.available = int(available)
+
+	entry_to_update.save()
+
+	return redirect('set_calendar')
+
+def initialize_week(request):
+	context = RequestContext(request)
+
+	mon = request.POST.get("m")
+	tue = request.POST.get("t")
+	wed = request.POST.get("w")
+	thu = request.POST.get("th")
+	fri = request.POST.get("f")
+	sat = request.POST.get("s")
+	sun = request.POST.get("su")
+	start_hour = int(request.POST.get("start_time_hour"))
+	start_min = int(request.POST.get("start_time_min"))
+
+	daily_entries = int(request.POST.get("num_entries"))
+	window_length = int(request.POST.get("win_len"))
+
+	days = [mon, tue, wed, thu, fri, sat, sun]
+
+	today = datetime.today().date()
+	weekday = today.isocalendar()[2]
+	monday = today - timedelta(days=weekday-1)
+	tuesday = today - timedelta(days=weekday-2)
+	wednesday = today - timedelta(days=weekday-3)
+	thursday = today - timedelta(days=weekday-4)
+	friday = today - timedelta(days=weekday-5)
+	saturday = today - timedelta(days=weekday-6)
+	sunday = today - timedelta(days=weekday-7)
+	
+	if mon == "on":
+		start_time = time(start_hour, start_min)
+
+		for k in range(daily_entries):
+			new_entry = Entry(
+				time = start_time,
+				date = monday,
+				restaurant = Restaurant.objects.get(id=1),
+				length = window_length
+				)
+
+			new_entry.save()
+
+			d = date(2000, 01, 01)
+			dt = datetime.combine(d, start_time)
+			start_dt = dt + timedelta(minutes=window_length)
+			start_time = start_dt.time()
+
+	if tue == "on":
+		start_time = time(start_hour, start_min)
+
+		for k in range(daily_entries):
+			new_entry = Entry(
+				time = start_time,
+				date = tuesday,
+				restaurant = Restaurant.objects.get(id=1),
+				length = window_length
+				)
+
+			new_entry.save()
+
+			d = date(2000, 01, 01)
+			dt = datetime.combine(d, start_time)
+			start_dt = dt + timedelta(minutes=window_length)
+			start_time = start_dt.time()
+
+	if wed == "on":
+		start_time = time(start_hour, start_min)
+
+		for k in range(daily_entries):
+			new_entry = Entry(
+				time = start_time,
+				date = wednesday,
+				restaurant = Restaurant.objects.get(id=1),
+				length = window_length
+				)
+
+			new_entry.save()
+
+			d = date(2000, 01, 01)
+			dt = datetime.combine(d, start_time)
+			start_dt = dt + timedelta(minutes=window_length)
+			start_time = start_dt.time()
+
+	if thu == "on":
+		start_time = time(start_hour, start_min)
+
+		for k in range(daily_entries):
+			new_entry = Entry(
+				time = start_time,
+				date = thursday,
+				restaurant = Restaurant.objects.get(id=1),
+				length = window_length
+				)
+
+			new_entry.save()
+
+			d = date(2000, 01, 01)
+			dt = datetime.combine(d, start_time)
+			start_dt = dt + timedelta(minutes=window_length)
+			start_time = start_dt.time()
+
+	if fri == "on":
+		start_time = time(start_hour, start_min)
+
+		for k in range(daily_entries):
+			new_entry = Entry(
+				time = start_time,
+				date = friday,
+				restaurant = Restaurant.objects.get(id=1),
+				length = window_length
+				)
+
+			new_entry.save()
+
+			d = date(2000, 01, 01)
+			dt = datetime.combine(d, start_time)
+			start_dt = dt + timedelta(minutes=window_length)
+			start_time = start_dt.time()
+
+	if sat == "on":
+		start_time = time(start_hour, start_min)
+
+		for k in range(daily_entries):
+			new_entry = Entry(
+				time = start_time,
+				date = saturday,
+				restaurant = Restaurant.objects.get(id=1),
+				length = window_length
+				)
+
+			new_entry.save()
+
+			d = date(2000, 01, 01)
+			dt = datetime.combine(d, start_time)
+			start_dt = dt + timedelta(minutes=window_length)
+			start_time = start_dt.time()
+
+	if sun == "on":
+		start_time = time(start_hour, start_min)
+
+		for k in range(daily_entries):
+			new_entry = Entry(
+				time = start_time,
+				date = sunday,
+				restaurant = Restaurant.objects.get(id=1),
+				length = window_length
+				)
+
+			new_entry.save()
+
+			d = date(2000, 01, 01)
+			dt = datetime.combine(d, start_time)
+			start_dt = dt + timedelta(minutes=window_length)
+			start_time = start_dt.time()
+
+	return redirect('set_calendar')
 
 def sort_list_by_time(times):
 	sorted_times = []
@@ -82,5 +252,6 @@ def sort_list_by_time(times):
 		for t in times:
 			if k == t.time.strftime("%I:%M"):
 				original_entries.append(t)
+
 
 	return original_entries
