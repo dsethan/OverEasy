@@ -120,7 +120,7 @@ def user_login(request):
 
 	if user.is_active:
 		if ptype == 1:
-			return redirect('cal', user=user)
+			return redirect('/cal')
 		if ptype == 2:
 			return redirect('driver', user=user)
 		if ptype == 3:
@@ -174,11 +174,11 @@ def user_type_redirect_manager(user, request):
 
 	if user.is_active:
 		if ptype == 1:
-			return redirect('cal', user=user)
+			return redirect('/cal/')
 		if ptype == 2:
-			return redirect('driver', user=user)
+			return redirect('driver')
 		if ptype == 3:
-			return redirect('kitchen', user=user)
+			return redirect('kitchen')
 
 	return redirect('user_login')
 

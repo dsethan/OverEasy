@@ -9,6 +9,7 @@ from restaurants.models import Restaurant
 class Entry(models.Model):
 	time = models.TimeField()
 	date = models.DateField()
+	original_capacity = models.IntegerField(default=2)
 	available = models.IntegerField(default=2)
 	demand = models.IntegerField(default=0)
 	restaurant = models.ForeignKey(Restaurant)
@@ -25,8 +26,8 @@ class Entry(models.Model):
 		return iso[2]
 
 	def end_time(self):
-		dt = datetime.combine(self.time, self.date)
-		td = datetime.timedelta(minutes=length)
+		dt = datetime.combine(self.date, self.time)
+		td = timedelta(minutes=self.length)
 		end = dt + td
 		return end
 
@@ -37,10 +38,11 @@ class Entry(models.Model):
 		return self.time.strftime("%I:%M")
 
 	def get_end_time_string(self):
-		return self.end_time.strftime("%I:%M")
+		end =  self.end_time()
+		return end.strftime("%I:%M")
 
 	def get_demand_ratio(self):
-		return float(demand/available)
+		return float(demand/original_capacity)
 	'''
 	def get_orders_for_entry(self):
 		orders = []
@@ -51,15 +53,21 @@ class Entry(models.Model):
 
 		return orders
 	'''
+	def orders_still_open(self):
+		if self.available == 0:
+			return False
+		else:
+			return True
 
-	def open_or_closed(self):
-		today = datetime.date.today()
-		date = datetime.date.today().date()
+	def open(self):
+		today = datetime.today()
+		today_date = today.date()
+		today_time = today.time()
 		shutoff_time = time(self.shutoff_hour,self.shutoff_min)
-		today_shutoff_time = datetime.combine(date, five)
-		dt = datetime.combine(self.date, self.time)
+		entry_shutoff_time = datetime.combine(self.date, shutoff_time)
+		dt = datetime.combine(today_date, today_time)
 
-		if dt < today_shutoff_time:
+		if dt < entry_shutoff_time:
 			return True
 
 		return False

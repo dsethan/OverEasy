@@ -1,0 +1,49 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+
+
+
+<table border='1' cellspacing='2' cellpadding='2'>
+	<tr>
+		{% for day in day_list %}
+		<td><center><h5><b>{{ day }}</b></h5></center></td>
+		{% endfor %}
+	</tr>
+
+	<tr>
+		{% for day in days %}
+		<td>
+			{% for deliv in day %}
+				<form role="form" method="post" action="cal_process_add">
+				{% csrf_token %}
+
+				<center>{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}</center>
+				<center>Demand: {{deliv.demand}}</center>
+				<center>Available: <input id="{{ deliv.id }}" name="available" placeholder="{{deliv.available}}"></center>
+				<center><input type="submit" name="submit" value="Update" /></center>
+				</form>
+			{% endfor %}
+		</td>
+		{% endfor %}
+</table>
+
+	<p>Initialize Week</p>
+		<form role="form" method="post" action="initialize_week">
+		<input type="checkbox" name="m">Monday<br>
+		<input type="checkbox" name="t">Tuesday<br>
+		<input type="checkbox" name="w">Wednesday<br>
+		<input type="checkbox" name="th">Thursday<br>
+		<input type="checkbox" name="f">Friday<br>
+		<input type="checkbox" name="s">Saturday<br>
+		<input type="checkbox" name="su">Sunday<br>
+		# Daily Entries: <input name="num_entries"><br>
+		Start Time:<input name="start_time"><br>
+		End Time:<input name="end_time"><br>
+		{% if valid_to_add %}
+		<input type="submit" name="submit" value="Update" /></center>
+		{% else %}
+		<input type="submit" name="submit" value="Already Updated..." disabled/>
+		{% endif %}
+	</form>
+{% endblock %}
