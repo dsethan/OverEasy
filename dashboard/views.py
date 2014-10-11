@@ -253,5 +253,4 @@ def sort_list_by_time(times):
 			if k == t.time.strftime("%I:%M"):
 				original_entries.append(t)
 
-
 	return original_entries
