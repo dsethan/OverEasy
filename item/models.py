@@ -11,11 +11,25 @@ class Item(models.Model):
 		(PRE, 'PRE'),
 		(DRINK, 'BEV')
 		)
+
+	CLASSIC = 'CLA'
+	JUICE = 'JUI'
+	SIDES = 'SID'
+	DRINKS = 'DRI'
+
+	MENU_CATEGORIES = (
+		(CLASSIC, 'CLA'),
+		(JUICE, 'JUI'),
+		(SIDES, 'SID'),
+		(DRINKS, 'DRI')
+		)
+
 	name = models.CharField(max_length=50)
 	price = models.IntegerField(default=0) # in cents
 	cost = models.IntegerField(default=0) # in cents
 	description = models.TextField(max_length=10)
 	prep_category = models.CharField(max_length=5,choices=PREP_CATEGORIES)
+	menu_category = models.CharField(max_length=3, choices=MENU_CATEGORIES)
 	number_ordered = models.IntegerField(default=0)
 	total_spent = models.IntegerField(default=0)
 	available = models.BooleanField(default=False)

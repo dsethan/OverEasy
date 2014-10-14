@@ -65,7 +65,8 @@ def set_calendar(request):
 			'caladmin.html',
 			{
 			'day_list':day_list,
-			'days':days
+			'days':days,
+			'valid_to_add':valid_to_add,
 			},
 			context)
 

@@ -133,8 +133,8 @@ def process_cal(request, entry_id):
 	context = RequestContext(request)
 	entry = Entry.objects.get(id=entry_id)
 	if entry.orders_still_open():
-		entry.demand = entry.demand + 1
-		entry.save()
+		#entry.demand = entry.demand + 1
+		#entry.save()
 		return redirect('/menu/', entry_id=entry_id)
 	else:
 		entry.demand = entry.demand + 1
