@@ -118,6 +118,9 @@ def user_login(request):
 
 	ptype = get_profile_type(user)
 
+	if user.is_superuser:
+		return redirect('/dashboard')
+
 	if user.is_active:
 		if ptype == 1:
 			return redirect('/cal')

@@ -8,6 +8,11 @@ class Cart(models.Model):
 	total = models.IntegerField(default=0)
 	entry = models.ForeignKey(Entry)
 
+	def __unicode__(self):
+		profile = str(self.profile)
+		entry = str(self.entry)
+		return entry + profile
+
 class CartItem(models.Model):
 	cart = models.ForeignKey(Cart)
 	item = models.ForeignKey(Item)

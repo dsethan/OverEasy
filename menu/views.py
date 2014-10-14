@@ -14,7 +14,7 @@ import users.views
 import cart.views
 
 @login_required
-def display_menu(request, entry_id):
+def display_menu(request):
 	context = RequestContext(request)
 	user = request.user
 	profile = users.views.return_associated_profile_type(user)
