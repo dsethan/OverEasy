@@ -55,6 +55,7 @@ def display_menu(request, entry_id=False):
 		},
 		context)
 
+
 def cart_exists(user, entry):
 	profile = users.views.return_associated_profile_type(user)
 

@@ -7,6 +7,8 @@ from datetime import datetime, date, time, timedelta
 
 from cal.models import Entry
 from restaurants.models import Restaurant
+from item.models import Item, ItemCategory
+
 
 def set_calendar(request):
 	context = RequestContext(request)

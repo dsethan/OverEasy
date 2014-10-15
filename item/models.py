@@ -17,19 +17,19 @@ class Item(models.Model):
 	SIDES = 'SID'
 	DRINKS = 'DRI'
 
-	MENU_CATEGORIES = (
+	CATEGORIES = (
 		(CLASSIC, 'CLA'),
 		(JUICE, 'JUI'),
 		(SIDES, 'SID'),
-		(DRINKS, 'DRI')
+		(DRINKS, 'DRI'),
 		)
+
 
 	name = models.CharField(max_length=50)
 	price = models.IntegerField(default=0) # in cents
 	cost = models.IntegerField(default=0) # in cents
 	description = models.TextField(max_length=10)
 	prep_category = models.CharField(max_length=5,choices=PREP_CATEGORIES)
-	menu_category = models.CharField(max_length=3, choices=MENU_CATEGORIES)
 	number_ordered = models.IntegerField(default=0)
 	total_spent = models.IntegerField(default=0)
 	available = models.BooleanField(default=False)
@@ -42,5 +42,26 @@ class Item(models.Model):
 			return "$" + price_string[0:len(price_string)-2] + "." + price_string[len(price_string)-2:len(price_string)]
 
 		return "issue"
+
 	def __unicode__(self):
 		return self.name
+
+
+class ItemCategory(models.Model):
+	CLASSIC = 'CLA'
+	JUICE = 'JUI'
+	SIDES = 'SID'
+	DRINKS = 'DRI'
+
+	CATEGORIES = (
+		(CLASSIC, 'CLA'),
+		(JUICE, 'JUI'),
+		(SIDES, 'SID'),
+		(DRINKS, 'DRI'),
+		)
+
+	item = models.ForeignKey(Item)
+	category = models.CharField(max_length=3, choices=CATEGORIES)
+
+	def __unicode__(self):
+		return self.item + " " + self.category
