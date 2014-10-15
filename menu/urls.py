@@ -5,4 +5,5 @@ from menu import views
 admin.autodiscover()
 
 urlpatterns = patterns('',
+	url(r'^$', views.add_item_to_cart, name='add_item_to_cart'),
     )

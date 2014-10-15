@@ -24,8 +24,6 @@ def set_menu(request):
 			name = cat[0]
 			items_by_cat[name] = ItemCategory.objects.filter(category=cat[1])
 			categories.append(cat[1])
-
-		print items_by_cat
 		
 		return render_to_response(
 			'menuadmin.html',
