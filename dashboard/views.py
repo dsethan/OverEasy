@@ -18,8 +18,52 @@ def set_menu(request):
 		return HttpResponse("You are not permissioned to be in this area.")
 
 	else:
-		for category in settings.ITEM_CATEGORIES:
-			print category
+		categories = []
+		items_by_cat = {}
+		for cat in settings.ITEM_CATEGORIES:
+			name = cat[0]
+			items_by_cat[name] = ItemCategory.objects.filter(category=cat[1])
+			categories.append(cat[1])
+
+		print items_by_cat
+		
+		return render_to_response(
+			'menuadmin.html',
+			{
+			'items_by_cat':items_by_cat,
+			'categories':categories,
+			},
+			context)
+
+def initialize_new_menu_item(request):
+	context = RequestContext(request)
+	user = request.user
+
+	item_name = request.POST.get('item_name')
+	price = request.POST.get('price')
+	cost = request.POST.get('cost')
+	description = request.POST.get('description')
+	prep_category = request.POST.get('prep_category')
+	category = request.POST.get('category')
+
+	new_item = Item(
+		name=item_name,
+		price=int(price),
+		cost=int(cost),
+		description=description,
+		prep_category=prep_category
+		)
+
+	new_item.save()
+
+	new_category = ItemCategory(
+		item=new_item,
+		category=category)
+
+	new_category.save()
+
+	return redirect('set_menu')
+
 
 
 def set_calendar(request):

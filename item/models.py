@@ -53,4 +53,4 @@ class ItemCategory(models.Model):
 	category = models.CharField(max_length=3, choices=settings.ITEM_CATEGORIES)
 
 	def __unicode__(self):
-		return self.item + " " + self.category
+		return self.item.name + " " + self.category

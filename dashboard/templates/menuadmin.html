@@ -1,0 +1,51 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+
+<h1>Menu Admin</h1>
+
+{% for key, value in items_by_cat.items %}
+
+<h2>{{ key }}</h2>
+
+{% for item in value %}
+
+<h3>{{ item.item.name }}</h3>
+Price (cents): {{item.item.price}}<br>
+Cost: {{item.item.cost}}<br>
+Number Ordered: {{item.item.number_ordered}}<br>
+Total Spent: {{ item.item.total_spent }}<br>
+
+{{ price }}
+
+{% endfor %}
+<hr>
+
+{% endfor %}
+
+<br>
+<form role="form" method="post" action="initialize_new_menu_item">
+	{% csrf_token %}
+
+	Item Name: <input name="item_name"><br>
+	Price (cents): <input name="price"><br>
+	Cost: <input name="cost"><br>
+	Description: <input name="description"><br>
+	Prep Category: 
+	<select id="prep_category" name="prep_category" placeholder="prep_category">
+	<option value="HOT" name="prep">HOT</option>
+	<option value="COLD" name="prep">COLD</option>
+	<option value="PRE" name="prep">PRE</option>
+	<option value="BEV" name="prep">BEV</option>
+	</select>
+	Category:<select id="category" name="category" placeholder="category">
+	{% for category in categories %}
+	<option value="{{category}}" name="category">{{ category }}</option>
+	{% endfor %}
+	</select>
+	<input type="submit" name="submit" value="Add Item" />
+
+</form>
+
+
+{% endblock %}
