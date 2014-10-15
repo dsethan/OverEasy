@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 class Item(models.Model):
 	HOT = 'HOT'
@@ -48,20 +49,8 @@ class Item(models.Model):
 
 
 class ItemCategory(models.Model):
-	CLASSIC = 'CLA'
-	JUICE = 'JUI'
-	SIDES = 'SID'
-	DRINKS = 'DRI'
-
-	CATEGORIES = (
-		(CLASSIC, 'CLA'),
-		(JUICE, 'JUI'),
-		(SIDES, 'SID'),
-		(DRINKS, 'DRI'),
-		)
-
 	item = models.ForeignKey(Item)
-	category = models.CharField(max_length=3, choices=CATEGORIES)
+	category = models.CharField(max_length=3, choices=settings.ITEM_CATEGORIES)
 
 	def __unicode__(self):
 		return self.item + " " + self.category

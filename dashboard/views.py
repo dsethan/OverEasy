@@ -2,12 +2,24 @@ from django.shortcuts import render, render_to_response, redirect
 from django.shortcuts import render
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
+from django.conf import settings
 
 from datetime import datetime, date, time, timedelta
 
 from cal.models import Entry
 from restaurants.models import Restaurant
 from item.models import Item, ItemCategory
+
+def set_menu(request):
+	context = RequestContext(request)
+	user = request.user
+
+	if not user.is_superuser:
+		return HttpResponse("You are not permissioned to be in this area.")
+
+	else:
+		for category in settings.ITEM_CATEGORIES:
+			print category
 
 
 def set_calendar(request):

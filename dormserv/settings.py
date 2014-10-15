@@ -71,6 +71,14 @@ US_STATES = (
     ('North_Carolina', 'NC'),
 )
 
+# Categories of Items that we offer:
+
+ITEM_CATEGORIES = (
+    ('Classic', 'CLA'),
+    ('Juice', 'JUI'),
+    ('Sides', 'SID'),
+    ('Drinks', 'DRI'),
+)
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
