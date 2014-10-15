@@ -24,7 +24,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-LOCAL = False
+LOCAL = True
 
 ALLOWED_HOSTS = []
 

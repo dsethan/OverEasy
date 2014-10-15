@@ -13,6 +13,12 @@ class Cart(models.Model):
 		entry = str(self.entry)
 		return entry + profile
 
+	def is_active(self):
+		if self.entry.orders_still_open() and self.entry.open():
+			return True
+		return False
+
+
 class CartItem(models.Model):
 	cart = models.ForeignKey(Cart)
 	item = models.ForeignKey(Item)

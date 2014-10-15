@@ -7,6 +7,7 @@ from datetime import datetime, date, time, timedelta
 
 from cal.models import Entry
 import users.views
+import menu.views
 
 @login_required
 def render_first_look_calendar(request):
@@ -135,7 +136,7 @@ def process_cal(request, entry_id):
 	if entry.orders_still_open():
 		entry.demand = entry.demand + 1
 		entry.save()
-		return redirect('/menu/')
+		return menu.views.display_menu(request, entry_id)
 	else:
 		entry.demand = entry.demand + 1
 		entry.save()

@@ -14,8 +14,6 @@
 		<td>
 			{% for deliv in day %}
 				{% if deliv.open %}
-				<form role="form" method="post" action="process">
-					{% csrf_token %}
 
 				<center><a href="{{ deliv.id }}">{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}</a></center>
 
