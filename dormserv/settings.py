@@ -20,11 +20,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'zko6y7!iue(ik_o5$9d@4moqh8swk$_n+o0sur!qm708aab$6#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
-LOCAL = True
+LOCAL = False
 
 ALLOWED_HOSTS = []
 
@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'checkout',
     'payments',
     'orders',
+    'home',
 )
 
 MIDDLEWARE_CLASSES = (

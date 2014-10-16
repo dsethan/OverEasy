@@ -9,3 +9,8 @@ urlpatterns = patterns('',
     url(r'^dashboard/', include('dashboard.urls')),
     url(r'^checkout/', include('checkout.urls')),
 )
+
+if not settings.DEBUG:
+   urlpatterns += patterns('',
+       (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+   )
