@@ -1,0 +1,81 @@
+from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.template import RequestContext
+from django.shortcuts import render_to_response, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
+
+from cal.models import Entry
+from users.models import UserProfile
+from cart.models import Cart, CartItem
+from payments.models import Card
+
+import stripe
+
+@login_required
+def checkout(request):
+	context = RequestContext(request)
+	user = request.user
+
+	if request.method == 'POST':
+		entry_id = request.POST.get('entry_id')
+		cart_id = request.POST.get('cart_id')
+
+		entry = Entry.objects.get(id=int(entry_id))
+		cart = Cart.objects.get(id=int(cart_id))
+		cart_items = cart.get_items()
+		items_with_quantity = cart.get_item_names_and_quantities()
+
+		cards = Card.objects.filter(user=user)
+
+		total_price = cart.get_total_price_of_cart()
+		cart_id = cart.id
+
+		return render_to_response(
+			'checkout.html',
+			{
+			'cart':cart,
+			'cart_id':cart_id,
+			'items_with_quantity':items_with_quantity,
+			'entry':entry,
+			'cards':cards,
+			'total_price':total_price,
+			},
+			context)
+
+@login_required
+def process_new_card(request):
+	context = RequestContext(request)
+	user = request.user
+
+	if request.method == 'POST':
+		cart_id = request.POST.get('cart_id')
+		total_price = request.POST.get('total_price')
+		token = request.POST['stripeToken']
+		stripe.api_key = settings.STRIPE
+
+		print token
+
+		customer = stripe.Customer.create(
+			card=token,
+			description=user.username)
+
+		new_card = Card(
+			user = user,
+			customer=customer.id,
+			token=token,
+			)
+
+		new_card.save()
+
+		stripe.Charge.create(
+			amount = int(total_price),
+			currency="usd",
+			customer=new_card.customer,
+			)
+
+		return HttpResponse("Charge successful")
+
+
+
+

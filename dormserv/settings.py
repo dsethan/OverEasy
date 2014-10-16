@@ -46,6 +46,8 @@ INSTALLED_APPS = (
     'menu',
     'cart',
     'dashboard',
+    'checkout',
+    'payments',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -64,6 +66,7 @@ WSGI_APPLICATION = 'dormserv.wsgi.application'
 
 # API Keys
 GOOGLE_MAPS = "AIzaSyAUYyU_aUoW5iu_pZZ30U0V_bfdPHQMBQM"
+STRIPE = "sk_test_gii6sAzH4fvDd6xCENhAgb9j"
 
 # States in the USA that we are currently delivering to.
 

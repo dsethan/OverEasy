@@ -40,21 +40,15 @@ def display_menu(request, entry_id=False):
 
 	cart_items = CartItem.objects.filter(cart=user_cart)
 
-	items_with_quantity = {}
+	items_with_quantity = user_cart.get_item_names_and_quantities()
 
 	item_names = []
-
-	for k in cart_items:
-		item_names.append(k.item.name)
-
-	for i in item_names:
-		if i not in items_with_quantity.keys():
-			items_with_quantity[i] = item_names.count(i)
-		print items_with_quantity
 
 	for cat in settings.ITEM_CATEGORIES:
 		name = cat[0]
 		items_by_cat[name] = ItemCategory.objects.filter(category=cat[1])
+
+	cart_id = user_cart.id
 
 	return render_to_response(
 		'menu.html',
@@ -66,6 +60,7 @@ def display_menu(request, entry_id=False):
 		'items_by_cat':items_by_cat,
 		'cart_items':cart_items,
 		'items_with_quantity':items_with_quantity,
+		'cart_id':cart_id,
 		},
 		context)
 
