@@ -75,6 +75,15 @@ Total: {{ cart.view_order_total_in_usd }}
 {% for card in cards %}
 Card:
 {{ card.token }}
+
+<form action="process_existing_card/" method="POST" id="payment-form">
+  {% csrf_token %}   
+  <input type="hidden" name="card_token" value="{{ card.token }}">
+  <input type="hidden" name="cart_id" value="{{ cart_id }}">
+  <input type="submit" value="Submit">
+</form>
+
+<br>
 {% endfor %}
 
 <h2>Add a Card</h2>

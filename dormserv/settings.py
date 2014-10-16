@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'dashboard',
     'checkout',
     'payments',
+    'orders',
 )
 
 MIDDLEWARE_CLASSES = (

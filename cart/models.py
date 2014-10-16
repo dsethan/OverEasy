@@ -7,6 +7,7 @@ class Cart(models.Model):
 	profile = models.ForeignKey(UserProfile)
 	total = models.IntegerField(default=0)
 	entry = models.ForeignKey(Entry)
+	cart_still_active = models.BooleanField(default=True)
 
 	def __unicode__(self):
 		profile = str(self.profile)
@@ -34,6 +35,21 @@ class Cart(models.Model):
 				names_and_quantities[i] = list_items.count(i)
 
 		return names_and_quantities
+
+	def get_items_and_quantities(self):
+		items = CartItem.objects.filter(cart=self)
+
+		list_items = []
+		for i in items:
+			list_items.append(i.item)
+
+		items_to_return = {}
+		for i in list_items:
+			if i not in items_to_return.keys():
+				items_to_return[i] = list_items.count(i)
+
+		return items_to_return
+
 
 	def get_total_price_of_cart(self):
 		items = CartItem.objects.filter(cart=self)

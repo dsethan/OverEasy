@@ -9,6 +9,9 @@ from cal.models import Entry
 from users.models import UserProfile
 from cart.models import Cart, CartItem
 from payments.models import Card
+from orders.models import Order, OrderItem
+
+import users.views
 
 import stripe
 
@@ -43,6 +46,32 @@ def checkout(request):
 			},
 			context)
 
+
+@login_required
+def process_existing_card(request):
+	context = RequestContext(request)
+	user = request.user
+
+	if request.method == 'POST':
+		cart_id = request.POST.get('cart_id')
+		token = request.POST.get('card_token')
+		cart = Cart.objects.get(id=cart_id)
+		total_price = cart.get_total_price_of_cart()
+
+		card = Card.objects.get(token=token)
+
+		stripe.api_key = settings.STRIPE
+
+		stripe.Charge.create(
+			amount = int(total_price),
+			currency = "usd",
+			customer = card.customer
+			)
+
+		return create_order(cart_id, user, context)
+
+	return HttpResponse("Uh oh! Something went wrong :(")
+
 @login_required
 def process_new_card(request):
 	context = RequestContext(request)
@@ -53,8 +82,6 @@ def process_new_card(request):
 		total_price = request.POST.get('total_price')
 		token = request.POST['stripeToken']
 		stripe.api_key = settings.STRIPE
-
-		print token
 
 		customer = stripe.Customer.create(
 			card=token,
@@ -74,8 +101,42 @@ def process_new_card(request):
 			customer=new_card.customer,
 			)
 
-		return HttpResponse("Charge successful")
 
+		cart_id = int(cart_id)
 
+		return create_order(cart_id, user, context)
 
+def create_order(cart_id, user, context):
+	cart = Cart.objects.get(id=cart_id)
+	items = cart.get_items_and_quantities()
+	profile = users.views.return_associated_profile_type(user)
+	entry = cart.entry
 
+	new_order = Order(
+		profile=profile,
+		total=cart.get_total_price_of_cart(),
+		entry=entry,
+		status='PDG',
+		)
+
+	new_order.save()
+
+	for item in items.keys():
+		new_order_item = OrderItem(
+			item=item,
+			order=new_order,
+			quantity=items[item]
+			)
+		new_order_item.save()
+
+	entry.available = entry.available - 1
+	entry.save()
+
+	cart.cart_still_active = False
+	cart.delete()
+
+	return render_to_response(
+		'successful_charge.html',
+		{
+		},
+		context)
