@@ -26,7 +26,7 @@ body {
   border-color: rgb(0, 0, 0);
   background-color: rgb(255, 255, 255);
   box-shadow: 20px 34.641px 79.8px 4.2px rgba(0, 0, 0, 0.46);
-  width: 70%;
+  width: 50%;
   height: 40%;
   margin-left: auto;
   margin-right: auto;
@@ -96,12 +96,12 @@ label          {
   -webkit-transition:0.2s ease all;
 } */
 
-/* active state */
+/* active state */ /*
 input:focus ~ label, input:valid ~ label    {
   top:-20px;
   font-size:14px;
   color:#5264AE;
-}
+} */
 
 /* BOTTOM BARS ================================= */
 .bar  { position:relative; display:block; width:100%; }
