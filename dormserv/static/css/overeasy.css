@@ -19,9 +19,6 @@ body {
   z-index: 4;
 }
 
-#button {
-  margin-top: 30px;
-}
 
 #rectangle {
   border-style: solid;
@@ -161,4 +158,10 @@ input:focus ~ .highlight {
 @keyframes inputHighlighter {
   from { background:#5264AE; }
   to  { width:0; background:transparent; }
+}
+
+#button {
+  margin-top: 30px;
+  width:186px;
+  height: 43px;
 }
