@@ -1,32 +1,8 @@
-{% load staticfiles %}
-
-@media (min-width: @screen-sm-min) {
 body {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-
-}
-}
-
-@media (min-width: @screen-md-min) {
-body {
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-}
-
-@media (min-width: @screen-lg-min) {
-body {
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  background=url("{% static 'img/overeasy-background.jpeg' %}")
-}
 }
 
 #menurectangle {
