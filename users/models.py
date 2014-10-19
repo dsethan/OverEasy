@@ -10,7 +10,7 @@ class UserProfile(models.Model):
 	user = models.OneToOneField(User)
 	address = models.CharField(max_length=50)
 	city = models.CharField(max_length=50)
-	state = models.CharField(max_length=2, choices=settings.US_STATES)
+	state = models.CharField(max_length=30, choices=settings.US_STATES)
 	phone = models.CharField(max_length=12)
 
 	# Restaurant this UserProfile is mapped to
