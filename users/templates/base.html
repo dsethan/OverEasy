@@ -30,13 +30,11 @@
     <div id="heading">
 		{% block heading %}{% endblock %}
 	</div>
-		<div class="jumbotron">
+		<div class="container-fluid">
 			<div id="logo">
 				<img src="{% static "img/logo.png" %}" class="center" width=300px>
 			</div>
-		    <div class="container-fluid">
 		        {% block content %}{% endblock %}
-		    </div>
 		</div>
   </body>
 </html>
