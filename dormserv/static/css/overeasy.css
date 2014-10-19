@@ -82,7 +82,7 @@ input         {
 }
 input:focus     { outline:none; }
 
-/* LABEL ======================================= */
+/* LABEL =======================================
 label          {
   color:#999; 
   font-size:14px;
@@ -94,7 +94,7 @@ label          {
   transition:0.2s ease all; 
   -moz-transition:0.2s ease all; 
   -webkit-transition:0.2s ease all;
-}
+} */
 
 /* active state */
 input:focus ~ label, input:valid ~ label    {
@@ -111,7 +111,7 @@ input:focus ~ label, input:valid ~ label    {
   width:0;
   bottom:1px; 
   position:absolute;
-  background:#5264AE; 
+  background:#FF9000; 
   transition:0.2s ease all; 
   -moz-transition:0.2s ease all; 
   -webkit-transition:0.2s ease all;
