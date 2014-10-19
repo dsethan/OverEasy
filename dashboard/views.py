@@ -106,7 +106,7 @@ def set_calendar(request):
 				su = Entry.objects.filter(date=day)
 
 		for j in [m, t, w, th, f, s, su]:
-			sort_list_by_time(j)
+			j = sort_list_by_time(j)
 
 		valid_to_add = True
 
