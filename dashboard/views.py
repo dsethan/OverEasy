@@ -157,6 +157,9 @@ def initialize_week(request):
 
 	days = [mon, tue, wed, thu, fri, sat, sun]
 
+	week = today.isocalendar()[1]
+	weekday = today.isocalendar()[2]
+
 	today = datetime.today().date()
 	weekday = today.isocalendar()[2]
 	monday = today - timedelta(days=weekday-1)
@@ -166,7 +169,18 @@ def initialize_week(request):
 	friday = today - timedelta(days=weekday-5)
 	saturday = today - timedelta(days=weekday-6)
 	sunday = today - timedelta(days=weekday-7)
-	
+
+	if (weekday == 6) or (weekday == 7):
+		week = week + 1
+		monday = monday + timedelta(days=7)
+		tuesday = tuesday + timedelta(days=7)
+		wednesday = wednesday + timedelta(days=7)
+		thursday = thursday + timedelta(days=7)
+		friday = friday + timedelta(days=7)
+		saturday = saturday + timedelta(days=7)
+		sunday = sunday + timedelta(days=7)
+
+
 	if mon == "on":
 		start_time = time(start_hour, start_min)
 
