@@ -105,8 +105,13 @@ def set_calendar(request):
 			if i == 6:
 				su = Entry.objects.filter(date=day)
 
-		for j in [m, t, w, th, f, s, su]:
-			j = sort_list_by_time(j)
+		m = sort_list_by_time(m)
+		t = sort_list_by_time(t)
+		w = sort_list_by_time(w)
+		th = sort_list_by_time(th)
+		f = sort_list_by_time(f)
+		s = sort_list_by_time(s)
+		su = sort_list_by_time(su)
 
 		valid_to_add = True
 
