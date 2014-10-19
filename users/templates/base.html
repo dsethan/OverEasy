@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-<!--<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">-->
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/overeasy.min.css' %}">
 
 <html lang="en">
@@ -30,9 +30,15 @@
     <div id="heading">
 		{% block heading %}{% endblock %}
 	</div>
-    <div id="content">
-        {% block content %}{% endblock %}
-    </div>
-
+	<div id="wrap">
+		<div id="rectangle">
+			<div id="logo">
+				<img src="{% static "img/logo.png" %}" class="center" width=300px>
+			</div>
+		    <div id="content">
+		        {% block content %}{% endblock %}
+		    </div>
+		</div>
+	</div>
   </body>
 </html>
