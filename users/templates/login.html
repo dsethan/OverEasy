@@ -6,8 +6,6 @@
 {% endblock %}
 
 {% block content %}
-	<div class="container">
-	<div class="box">
 	<form method="post" action="login">
 		{% csrf_token %}
 
@@ -17,8 +15,6 @@
 			<input id="password" name="password" type="password" placeholder="Password"><br>
 		<input type="submit" name="submit" value="Submit" />
 	</form>
-	</div>
-	</div>
 	<a href="/users/register">
 		Register
 	</a>
