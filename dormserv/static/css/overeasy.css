@@ -39,13 +39,16 @@ img.center {
   margin-right: auto;
 }
 
-#logo{
+.logo{
   padding-top: 15px;
   padding-bottom: 15px;
-  width: 90%;
   margin: 0 auto;
   pointer-events:none;
 
+}
+
+.logo img{
+  width:100%;
 }
 
 #wrap {
