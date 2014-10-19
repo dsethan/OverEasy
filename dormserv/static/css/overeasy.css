@@ -70,11 +70,11 @@ img.center {
 /* form starting stylings ------------------------------- */
 .group        { 
   position:relative; 
-  margin-bottom:45px; 
+  margin-bottom:5px; 
 }
 input         {
   font-size:14px;
-  padding:0px 0px 0px 5px;
+  padding:5px 5px 5px 5px;
   display:block;
   width:100%;
   border:none;
