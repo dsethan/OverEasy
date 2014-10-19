@@ -1,9 +1,15 @@
 body {
+  /*
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  background-image: no-repeat;
+  */
+  /*background-image:url('../images/bg.png');*/
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:center;
+
 }
 
 #menurectangle {
