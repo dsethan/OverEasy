@@ -157,10 +157,10 @@ def initialize_week(request):
 
 	days = [mon, tue, wed, thu, fri, sat, sun]
 
+	today = datetime.today().date()
 	week = today.isocalendar()[1]
 	weekday = today.isocalendar()[2]
 
-	today = datetime.today().date()
 	weekday = today.isocalendar()[2]
 	monday = today - timedelta(days=weekday-1)
 	tuesday = today - timedelta(days=weekday-2)
