@@ -40,7 +40,9 @@ img.center {
 }
 
 #logo{
-  padding-top: 45px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  width: 90%;
   margin: 0 auto;
   pointer-events:none;
 
