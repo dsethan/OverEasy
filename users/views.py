@@ -161,9 +161,6 @@ def user_login(request):
 
 @login_required
 def user_logout(request):
-	context = RequestContext(request)
-	user = request.User
-
 	logout(request)
 
 	return redirect("/users/login")
