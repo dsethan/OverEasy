@@ -46,4 +46,54 @@
 {% endfor %}
 </table>
 
+<div id="calendar_wrapper">
+	<div id="calendar-header">
+		<h2>PICK A TIME</h2>
+		<div id="alert">
+		<h3>{{ message }}</h3>
+		</div>
+	</div>
+	<table cellspacing="8" cellpadding="8">
+		<tr>
+			{% for day in day_list %}
+			<td>
+				<div class="cal_box">
+					<div class="cal_box_weekday">{{ day.0 }}</div>
+					<div class="cal_box_date">{{ day.1 }}</div>
+				</div>
+				<hr>
+	
+			</td>		
+			{% endfor %}
+		</tr>
+
+		<tr>
+			{% for day in days %}
+			<td>
+				{% for deliv in day %}
+					{% if deliv.open and deliv.orders_still_open %}
+					<div class="cal_box">
+
+					<a href="/cal/{{ deliv.id }}">{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}</a>
+
+					</form>
+					</div>
+					
+					{% else %}
+					<div class="cal_box_taken">
+
+						{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}
+					
+					</div>
+					{% endif %}
+
+				<hr>
+				{% endfor %}
+
+			</td>
+			{% endfor %}
+
+	</table>
+</div>
+
 {% endblock %}
