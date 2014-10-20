@@ -34,7 +34,7 @@ body {
   border-color: rgb(0, 0, 0);
   background-color: rgb(255, 255, 255);
   box-shadow: 20px 34.641px 79.8px 4.2px rgba(0, 0, 0, 0.46);
-  width: 45%;
+  width: 40%;
   height: 45%;
   margin-left: auto;
   margin-right: auto;
@@ -80,4 +80,8 @@ img.center {
 
 #button {
   margin-top: 30px;
+}
+
+.home-page-footer {
+  display: inline;
 }
