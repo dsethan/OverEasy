@@ -20,6 +20,7 @@
 			{% for day in days %}
 			<td>
 				{% for deliv in day %}
+				<div class="cal_box">
 					{% if deliv.open %}
 
 					<center><a href="{{ deliv.id }}">{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}</a></center>
@@ -30,6 +31,7 @@
 					{% endif %}
 
 				{% endfor %}
+				</div>
 			</td>
 			{% endfor %}
 

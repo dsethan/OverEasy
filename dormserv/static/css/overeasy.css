@@ -125,3 +125,7 @@ img.center {
 #cal_space td{
   padding: 15px;
 }
+
+.cal_box{
+  border: 1px black;
+}
