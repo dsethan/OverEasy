@@ -153,6 +153,18 @@ img.center {
   font-size: 20px;
 }
 
+.menu_box_category {
+  font-size: 27px;
+}
+
+.menu_box {
+  font-family: 'Abel', sans-serif;
+  padding-left: 60px;
+  padding-right: 60px;
+  border: 1px;
+}
+
+
 #alert {
   color: #800000;
 }

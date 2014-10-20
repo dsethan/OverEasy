@@ -4,19 +4,14 @@
 
 <div id="calendar_wrapper">
 	<div id="calendar-header">
-	<h1>Menu</h1>
-	</div>
-
-<div id="calendar_wrapper">
-	<div id="calendar-header">
 		<h2>MENU</h2>
 	</div>
 	<table>
 		<tr>
 			{% for key in items_by_cat.keys %}
 			<td>
-				<div class="cal_box">
-					<div class="cal_box_weekday">{{ key }}</div>
+				<div class="menu_box">
+					<div class="menu_box_category">{{ key }}</div>
 				</div>
 				<hr>
 	
@@ -28,7 +23,7 @@
 			{% for key, value in items_by_cat.items %}
 			<td>
 				{% for item in value %}
-					<div class="cal_box">
+					<div class="menu_box">
 
 					{{ item.item.name }}
 					<form role="form" method="post" action="/menu/">
