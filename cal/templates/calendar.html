@@ -8,7 +8,9 @@
 	<table border='1' cellspacing='2' cellpadding='2'>
 		<tr>
 			{% for day in day_list %}
-			<td><b><h3>{{ day.0 }}</h3><br><h5>{{ day.1 }}</h5></b></td>			
+			<div id="cal_space">
+			<td><b><h3>{{ day.0 }}</h3><h5>{{ day.1 }}</h5></b></td>
+			</div>	
 			{% endfor %}
 		</tr>
 

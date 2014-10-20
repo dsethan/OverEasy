@@ -118,7 +118,11 @@ img.center {
   margin-top: -30px;
 }
 
-
 #cal_wrap_wrap {
   margin-left: 15px;
+}
+
+#cal_space {
+  margin-left: 15px;
+  margin-right: 15px;
 }
