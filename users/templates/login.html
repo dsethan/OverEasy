@@ -7,11 +7,12 @@
 {% endblock %}
 
 {% block content %}
+	<div id="center_text">
+		<img src="{% static "img/text.png" %}" class="center" width=300px>
+	</div>
+
 	<form method="post" action="login">
 		{% csrf_token %}
-			<div id="center_text">
-				<img src="{% static "img/text.png" %}" class="center" width=300px>
-			</div>
 
 		{{ error }}
 
