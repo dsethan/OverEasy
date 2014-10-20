@@ -133,8 +133,8 @@ img.center {
 
 .cal_box_taken {
   font-family: 'Abel', sans-serif;
-  padding-left: 30%;
-  padding-right: 30%;
+  margin-left: 30%;
+  margin-right: 30%;
   border: 1px;
   background-color: #CACAD4;
 }
