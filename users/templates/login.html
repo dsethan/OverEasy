@@ -16,7 +16,10 @@
 	<form method="post" action="login">
 		{% csrf_token %}
 
-		{{ error }}
+			<div id="error-on-login">
+				{{ error }}
+			</div>
+
 			<div class="form-group">
 				<label for="exampleInputEmail1">Email address</label>
 				<input type="email" class="form-control" id="username" name="username" placeholder="Enter email">
