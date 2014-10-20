@@ -34,7 +34,7 @@
 					{% if deliv.open and deliv.orders_still_open %}
 					<div class="cal_box">
 
-					<a href="{{ deliv.id }}">{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}</a>
+					<a href="/cal/{{ deliv.id }}">{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}</a>
 
 					</form>
 					</div>
