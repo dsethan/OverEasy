@@ -35,7 +35,7 @@ def render_first_look_calendar(request):
 
 	for i in range(0, 5):
 		day = mon + timedelta(days=i)
-		formatted_day = day.strftime("%A, %B %d")
+		formatted_day = day.strftime("%a \n %b %d")
 		day_list.append(formatted_day)
 
 		if i == 0:
@@ -96,7 +96,7 @@ def render_second_look_calendar(request):
 
 	for i in range(0, 7):
 		day = mon + timedelta(days=i)
-		formatted_day = day.strftime("%A, %B %d")
+		formatted_day = day.strftime("%a \n %b %d")
 		day_list.append(formatted_day)
 
 		if i == 0:
