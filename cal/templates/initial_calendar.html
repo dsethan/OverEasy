@@ -8,7 +8,6 @@
 
 <div id="calendar_wrapper">
 	<div id="calendar-header">
-		<h2>Hello, {{ user.first_name }}</h2>
 		<h2>PICK A TIME</h2>
 	</div>
 	<table cellspacing="8" cellpadding="8">
@@ -18,7 +17,9 @@
 				<div class="cal_box">
 					<div class="cal_box_weekday">{{ day.0 }}</div>
 					<div class="cal_box_date">{{ day.1 }}</div>
-				</div>	
+				</div>
+				<hr>
+	
 			</td>		
 			{% endfor %}
 		</tr>
@@ -38,7 +39,9 @@
 					{% endif %}
 
 				</div>
+				<hr>
 				{% endfor %}
+
 			</td>
 			{% endfor %}
 
