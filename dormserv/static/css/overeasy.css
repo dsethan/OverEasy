@@ -125,7 +125,7 @@ img.center {
   padding: 15px;
 }
 
-.nav navbar-nav navbar-right{
+#navbar_custom {
   font-family: 'Abel', sans-serif;
   margin-right: 30px;
 }
