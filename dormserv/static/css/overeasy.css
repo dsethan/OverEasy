@@ -34,12 +34,22 @@ body {
   border-color: rgb(0, 0, 0);
   background-color: rgb(255, 255, 255);
   box-shadow: 20px 34.641px 79.8px 4.2px rgba(0, 0, 0, 0.46);
-  width: 50%;
+  width: 45%;
   height: 40%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 90px;
   z-index: 4;
+}
+
+ul.login-form-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+li.login-form-wrapper {
+  display: inline;
 }
 
 img.center {
