@@ -14,7 +14,8 @@
 			{% for day in day_list %}
 			<td>
 				<div class="cal_box">
-					{{ day.0 }}{{ day.1 }
+					<div class="cal_box_weekday">{{ day.0 }}</div>
+					<div class="cal_box_date">{{ day.1 }}</div>
 				</div>	
 			</td>		
 			{% endfor %}

@@ -114,7 +114,7 @@ img.center {
 
 #calendar-header {
   font-family: 'PT Sans', sans-serif;
-  font-size: 28px;
+  font-size: 35px;
   margin-top: -18px;
 }
 
@@ -122,8 +122,18 @@ img.center {
 #cal_space td{
   padding: 15px;
 }
+
 .cal_box {
+  font-family: 'Abel', sans-serif;
   padding-left: 30px;
   padding-right: 30px;
   border: 1px;
+}
+
+#cal_box_weekday {
+  font-size: 30px;
+}
+
+#cal_box_date {
+  font-size: 20px;
 }
