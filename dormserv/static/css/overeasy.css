@@ -124,5 +124,6 @@ img.center {
 }
 .cal_box {
   padding-left: 30px;
-  border: 1px black;
+  padding-right: 30px;
+  border: 1px;
 }
