@@ -67,7 +67,6 @@
 			{% for key, value in items_by_cat.items %}
 			<td>
 				{% for item in value %}
-					{% if deliv.open and deliv.orders_still_open %}
 					<div class="cal_box">
 
 					{{ item.item.name }}
