@@ -7,3 +7,8 @@ from demand.models import Demand
 
 from pygeocoder import Geocoder
 from googlemaps import GoogleMaps
+
+def home(request):
+	context = RequestContext(request)
+	
+	return redirect("/users/login")
