@@ -108,5 +108,6 @@ img.center {
 #calendar-header {
   font-family: 'PT Sans', sans-serif;
   font-size: 28px;
+  margin-top: -30px;
 }
 
