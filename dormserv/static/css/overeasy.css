@@ -44,6 +44,7 @@ body {
 
 button.login-form-wrapper {
   display: inline;
+  width: 45%;
 }
 
 img.center {
