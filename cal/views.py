@@ -56,7 +56,8 @@ def render_first_look_calendar(request):
 	for j in [m, t, w, th, f, s, su]:
 		sort_list_by_time(j)
 
-	days = [m, t, w, th, f, s, su]
+	# ADD S, SU WHEN WE START DELIVERING.
+	days = [m, t, w, th, f]
 
 	return render_to_response(
 		'initial_calendar.html',
