@@ -82,6 +82,16 @@ img.center {
   margin-top: 30px;
 }
 
-.home-page-footer {
-  display: inline-block;
+#home-page-footer ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: center;
+  width: 80%;
+}
+
+#home-page-footer li {
+  display: inline;
+  font-family: Arial;
+  font-size: 10px;
 }
