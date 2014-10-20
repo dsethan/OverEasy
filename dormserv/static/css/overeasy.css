@@ -115,17 +115,13 @@ img.center {
 #calendar-header {
   font-family: 'PT Sans', sans-serif;
   font-size: 28px;
-  margin-top: -30px;
+  margin-top: -18px;
 }
 
-#cal_wrap_wrap {
-  margin-left: 15px;
-}
 
 #cal_space td{
   padding: 15px;
 }
-
-.cal_box{
+.cal_box {
   border: 1px black;
 }
