@@ -153,17 +153,21 @@ img.center {
   font-size: 23px;
 }
 
-.menu_box_category {
+.menu_box {
+  font-family: 'Abel', sans-serif;
+  padding-left: 40px;
+  padding-right: 40px;
+  border: 1px;
   font-size: 24px;
 }
 
-.menu_box {
+.menu_box_item {
   font-family: 'Abel', sans-serif;
-  padding-left: 60px;
-  padding-right: 60px;
+  padding-left: 40px;
+  padding-right: 40px;
   border: 1px;
+  font-size: 23px;
 }
-
 
 #alert {
   color: #800000;

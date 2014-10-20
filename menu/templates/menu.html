@@ -11,7 +11,7 @@
 			{% for key in items_by_cat.keys %}
 			<td>
 				<div class="menu_box">
-					<div class="menu_box_category"><b>{{ key }}</b></div>
+					<b>{{ key }}</b>
 				</div>
 				<hr>
 	
@@ -23,7 +23,7 @@
 			{% for key, value in items_by_cat.items %}
 			<td>
 				{% for item in value %}
-					<div class="menu_box">
+					<div class="menu_box_item">
 
 					<b>{{ item.item.name }}</b>
 					<form role="form" method="post" action="/menu/">
