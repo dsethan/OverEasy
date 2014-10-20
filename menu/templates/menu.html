@@ -5,22 +5,24 @@
 <div id="calendar_wrapper">
 	<div id="calendar-header">
 	<h1>Menu</h1>
+<table>
+
 {% for key, value in items_by_cat.items %}
+	<td>
+	<tr><h2>{{ key }}</h2></tr>
 
-<h2>{{ key }}</h2>
+	{% for item in value %}
 
-{% for item in value %}
-
-<h3>{{ item.item.name }}</h3>
+	<tr><h3>{{ item.item.name }}</h3>
 
 	<form role="form" method="post" action="/menu/">
 		{% csrf_token %}
 		<input type="hidden" name="item_id" value="{{ item.item.id }}">
 		<input type="hidden" name="entry_id" value="{{ entry_id }}">
 		<input type="submit" name="submit" value="Add to Cart">
-	</form>
+	</form></tr>
 
-{% endfor %}
+	{% endfor %}
 
 {% endfor %}
 
