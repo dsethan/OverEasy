@@ -102,6 +102,9 @@ img.center {
 }
 
 #error-on-login {
+  border: 1px;
+  padding-top: 15px;
   color: #FF0000;
+  padding-bottom: 15px;
 }
 
