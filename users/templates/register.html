@@ -33,27 +33,43 @@
 			{% for error in un_errors %}
 			{{ error }}
 			{% endfor %}
-			<input id="username" name="username" placeholder="Email"><br>
+
+			<div class="form-group">
+			    <input type="email" class="form-control" id="username" name="username" placeholder="Email">
+			</div>
 
 			{% for error in num_errors %}
 			{{ error }}
 			{% endfor %}
-			<input id="id_phone" name="phone" placeholder="Phone"><br>
+
+			<div class="form-group">
+			    <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
+			</div>
+
 			<hr>
 
 			{% for error in addr_errors %}
 			{{ error }}
 			{% endfor %}
-			<input id="address1" name="address1" placeholder="Address"><br>
-			<input id="address2" name="address2" placeholder="Apt #, Suite, etc."><br>
-			<input id="city" name="city" placeholder="City"><br>
-			<select id="id_state" name="state" placeholder="State">
+
+			<div class="form-group">
+			    <input type="text" class="form-control" id="address1" name="address1" placeholder="Address">
+			</div>
+			<div class="form-group">
+			    <input type="text" class="form-control" id="address2" name="address2" placeholder="Apt #, Suite, etc.">
+			</div>
+			<div class="form-group">
+			    <input type="text" class="form-control" id="city" name="city" placeholder="City">
+			</div>
+
+			<select class="form-control" id="id_state" name="state" placeholder="State">
 			{% for state in states %}
 			<option value="{{ state }}" name="state">{{ state }}</option>
 			{% endfor %}
 
 			</select><br>
-			<input type="submit" name="submit" value="Submit" />
+
+			<button type="submit" class="btn btn-default" style="width:100%;"><b>Submit</b></button>
 		</form>
 	</div>
 {% endblock %}
