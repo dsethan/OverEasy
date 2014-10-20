@@ -105,3 +105,8 @@ img.center {
   padding-bottom: 15px;
 }
 
+#calendar-header {
+  font-family: 'PT Sans', sans-serif;
+  font-size: 28px;
+}
+
