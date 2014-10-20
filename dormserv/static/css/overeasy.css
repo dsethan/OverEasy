@@ -77,6 +77,8 @@ input         {
   padding:5px 5px 5px 5px;
   display:block;
   width:80%;
+    left:10%;
+  right: 10%;
   border:none;
   border-bottom:1px solid #757575;
 }
@@ -132,9 +134,10 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
 .highlight {
   position:absolute;
   height:60%; 
-  width:100%; 
+  width:80%; 
   top:25%; 
-  left:0;
+  left:10%;
+  right: 10%;
   pointer-events:none;
   opacity:0.5;
 }
