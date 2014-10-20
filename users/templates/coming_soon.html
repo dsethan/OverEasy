@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
 
 {% block heading %}
 
-	<h1>Dormserv: Coming Soon</h1>
-
 {% endblock %}
 
-<h2>Dormserv is not yet available in your area.</h2>
-
 {% block content %}
-
+	<div id="center_text">
+		<img src="{% static "img/notyetavail.png" %}" class="center" width=300px>
+	</div>
+	
 {% endblock %}
