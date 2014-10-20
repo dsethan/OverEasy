@@ -44,6 +44,9 @@ class Item(models.Model):
 
 		return "issue"
 
+	def name_in_caps(self):
+		return self.name.upper()
+
 	def __unicode__(self):
 		return self.name
 

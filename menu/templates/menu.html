@@ -25,7 +25,7 @@
 				{% for item in value %}
 					<div class="menu_box_item">
 
-					<b>{{ item.item.name }}</b>
+					<b>{{ item.item.name_in_caps }}</b>
 					<form role="form" method="post" action="/menu/">
 					{% csrf_token %}
 					<input type="hidden" name="item_id" value="{{ item.item.id }}">
