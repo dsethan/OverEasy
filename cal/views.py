@@ -33,7 +33,7 @@ def render_first_look_calendar(request):
 
 	day_list = []
 
-	for i in range(0, 6):
+	for i in range(0, 5):
 		day = mon + timedelta(days=i)
 		formatted_day = day.strftime("%A, %B %d")
 		day_list.append(formatted_day)
