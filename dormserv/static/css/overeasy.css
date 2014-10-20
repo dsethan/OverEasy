@@ -105,6 +105,13 @@ img.center {
   padding-bottom: 15px;
 }
 
+#upper-nav {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
 #calendar-header {
   font-family: 'PT Sans', sans-serif;
   font-size: 28px;
@@ -114,6 +121,6 @@ img.center {
 #calendar-wrapper {
   margin-left: auto;
   margin-right: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
