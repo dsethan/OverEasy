@@ -33,7 +33,7 @@ def render_first_look_calendar(request):
 
 	day_list = []
 
-	for i in range(0, 4):
+	for i in range(0, 6):
 		day = mon + timedelta(days=i)
 		formatted_day = day.strftime("%A, %B %d")
 		day_list.append(formatted_day)
@@ -48,20 +48,17 @@ def render_first_look_calendar(request):
 			th = Entry.objects.filter(date=day)
 		if i == 4:
 			f = Entry.objects.filter(date=day)
-
-		# TO ADD BACK
-		'''
 		if i == 5:
 			s = Entry.objects.filter(date=day)
 		if i == 6:
 			su = Entry.objects.filter(date=day)
-		'''
+
 
 	for j in [m, t, w, th, f, s, su]:
 		sort_list_by_time(j)
 
 	# TO ADD BACK
-	days = [m, t, w, th, f ', s, su']
+	days = [m, t, w, th, f, s, su]
 
 	return render_to_response(
 		'initial_calendar.html',
