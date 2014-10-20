@@ -84,10 +84,9 @@ img.center {
 
 #home-page-footer ul {
   margin: 0;
-  padding: 0;
+  padding-top: 30px;
   list-style-type: none;
   text-align: center;
-  width: 80%;
 }
 
 #home-page-footer li {
