@@ -166,7 +166,7 @@ def user_logout(request):
 
 	logout(request)
 
-	return HttpResponseRedirect("/")
+	return redirect("/users/login")
 
 def user_type_redirect_manager(user, request):
 	context = RequestContext(request)
