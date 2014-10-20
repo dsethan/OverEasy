@@ -45,7 +45,7 @@ def display_menu(request, entry_id=False):
 	item_names = []
 
 	for cat in settings.ITEM_CATEGORIES:
-		name = cat[0]
+		name = cat[0].upper()
 		items_by_cat[name] = ItemCategory.objects.filter(category=cat[1])
 
 	cart_id = user_cart.id
