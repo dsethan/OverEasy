@@ -1,0 +1,16 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'cal/css/dormserv.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'cal/css/bootstrap.css' %}"/>
+
+
+<div id="upper_nav">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <a class="navbar-brand" href="/"><div class="imagewrapper2"><img src="{% static "img/logo.png" %}" alt="dormserv"/></div></a>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/cal/profile/">{{ current_user.first_name }}'s Profile</a></li>
+      <li><a href="/logout/">Log Out</a>                  
+    </ul>
+    </div><!-- /.navbar-collapse -->
+  </nav
+</div>
