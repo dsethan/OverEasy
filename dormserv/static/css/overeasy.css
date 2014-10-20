@@ -131,9 +131,10 @@ img.center {
 }
 
 .cal_box_weekday {
-  font-size: 30px;
+  font-size: 35px;
 }
 
 .cal_box_date {
-  font-size: 20px;
+  margin-top: -5px;
+  font-size: 15px;
 }
