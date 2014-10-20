@@ -117,7 +117,7 @@ def render_second_look_calendar(request):
 	for j in [m, t, w, th, f, s, su]:
 		sort_list_by_time(j)
 
-	days = [m, t, w, th, f, s, su]
+	days = [m, t, w, th, f]
 	
 	message = "Sorry! There is no more availability at that time."
 
