@@ -5,6 +5,10 @@ body {
   background-size: cover;
 }
 
+.login-form-wrapper {
+  width: 80%;
+}
+
 #menurectangle {
   border-style: solid;
   border-width: 1px;
