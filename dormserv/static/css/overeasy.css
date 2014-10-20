@@ -109,7 +109,7 @@ img.center {
   margin-left: auto;
   margin-right: auto;
   padding-left: 30px;
-  padding-right: 30px;
+  padding-right: 60px;
 }
 
 #calendar-header {
@@ -130,10 +130,10 @@ img.center {
   border: 1px;
 }
 
-#cal_box_weekday {
+.cal_box_weekday {
   font-size: 30px;
 }
 
-#cal_box_date {
+.cal_box_date {
   font-size: 20px;
 }
