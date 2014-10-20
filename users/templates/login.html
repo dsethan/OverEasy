@@ -11,11 +11,12 @@
 		<img src="{% static "img/text.png" %}" class="center" width=300px>
 	</div>
 
+	<div class="login-form-wrapper">
+
 	<form method="post" action="login">
 		{% csrf_token %}
 
 		{{ error }}
-		<div class="login-form-wrapper">
 			<div class="form-group">
 				<label for="exampleInputEmail1">Email address</label>
 				<input type="email" class="form-control" id="username" name="username" placeholder="Enter email">
@@ -29,15 +30,17 @@
 
 			<button type="submit" class="btn btn-default" style="width:49%;"><b>Sign In</b></button>
 			<a href="users/register"><button class="btn btn-default" style="width:49%; color:#000000; background-color:#FF9000;"><b>Sign Up</b></button></a>
-
-	 	</div>
 	</form>
 
-	<div id="home-page-footer">
-		<ul>
-			<li><a href="about"><b>About</b></a></li>
-			<li><a href="terms"><b>Terms</b></a></li>
-		</ul>
+		<div id="home-page-footer">
+			<ul>
+				<li><a href="about"><b>About</b></a></li>
+				<li><a href="terms"><b>Terms</b></a></li>
+			</ul>
+		</div>
+
 	</div>
+
+
 
 {% endblock %}

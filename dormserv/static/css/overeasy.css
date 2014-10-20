@@ -93,4 +93,9 @@ img.center {
   display: inline;
   font-family: Arial;
   font-size: 10px;
+  color: black;
+}
+
+#home-page-footer li:hover {
+  color: black;
 }
