@@ -6,6 +6,8 @@ body {
 }
 
 .login-form-wrapper {
+  margin-left: auto;
+  margin-right: auto;
   width: 80%;
 }
 
