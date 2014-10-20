@@ -43,9 +43,11 @@ body {
 }
 
 ul.login-form-wrapper {
-  margin-left: auto;
-  margin-right: auto;
-  width: 80%;
+    float: left;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
 }
 
 li.login-form-wrapper {
