@@ -155,15 +155,15 @@ img.center {
 
 .menu_box {
   font-family: 'Abel', sans-serif;
-  padding-right: 100px;
-  border: 1px;
+  padding-left: 40px;
+  padding-right: 40px;  border: 1px;
   font-size: 20px;
 }
 
 .menu_box_item {
   font-family: 'Abel', sans-serif;
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 40px;
+  padding-right: 40px;
   border: 1px;
   font-size: 18px;
 }
