@@ -122,7 +122,6 @@ img.center {
   margin-left: 15px;
 }
 
-#cal_space {
-  padding-left: 15px;
-  margin-right: 15px;
+#cal_space td{
+  padding: 15px;
 }
