@@ -8,12 +8,8 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <a class="navbar-brand" href="/"><div class="imagewrapper2"><img src="{% static "img/logo.png" %}" alt="dormserv" width="180px" style="margin-top:-10px;"/></div></a>
     <ul class="nav navbar-nav navbar-right">
-    	<div id="navbar_custom">
-      <li><a href="/profile/">{{ user.first_name }}'s Profile</a></li>
-      </div>
-      <div id="navbar_custom">
+      <li><a href="/profile/" style:"font-family: 'Abel', sans-serif;">{{ user.first_name }}'s Profile</a></li>
       <li><a href="/users/logout/" style="margin-right:-5%;">Log Out</a></li>                  
-      </div>
     </ul>
     </div><!-- /.navbar-collapse -->
   </nav
