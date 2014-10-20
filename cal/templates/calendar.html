@@ -4,27 +4,29 @@
 
 {{ message }}
 
-<table border='1' cellspacing='2' cellpadding='2'>
-	<tr>
-		{% for day in day_list %}
-		<td><center><h5><b>{{ day }}</b></h5></center></td>
-		{% endfor %}
-	</tr>
-
-	<tr>
-		{% for day in days %}
-		<td>
-			{% for deliv in day %}
-				{% if deliv.open and deliv.orders_still_open %}
-				<center><a href="/cal/{{ deliv.id }}">{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}</a></center>
-				{% else %}
-					<center>{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}
-				{% endif %}
-
+<div id="calendar_wrapper">
+	<table border='1' cellspacing='2' cellpadding='2'>
+		<tr>
+			{% for day in day_list %}
+			<td><center><h5><b>{{ day }}</b></h5></center></td>
 			{% endfor %}
-		</td>
-		{% endfor %}
+		</tr>
 
-</table>
+		<tr>
+			{% for day in days %}
+			<td>
+				{% for deliv in day %}
+					{% if deliv.open and deliv.orders_still_open %}
+					<center><a href="/cal/{{ deliv.id }}">{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}</a></center>
+					{% else %}
+						<center>{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}
+					{% endif %}
+
+				{% endfor %}
+			</td>
+			{% endfor %}
+
+	</table>
+</div>
 
 {% endblock %}

@@ -111,3 +111,9 @@ img.center {
   margin-top: -30px;
 }
 
+#calendar-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
