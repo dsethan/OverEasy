@@ -12,7 +12,8 @@
 	<table cellspacing='8' cellpadding='8'>
 		<tr>
 			{% for day in day_list %}
-			<td><h5><b>{{ day }}</b></h5></td>
+			<td><h3><b>{{ day.0 }}</b></h3></td>
+			<td><h5><b>{{ day.1 }}</b></h5></td>
 			{% endfor %}
 		</tr>
 
