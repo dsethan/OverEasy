@@ -5,11 +5,12 @@
 
 
 <div id="cal_wrap_wrap">
-<div id="calendar-header">
-	<h2>Hello, {{ user.first_name }}</h2>
-	<h2>PICK A TIME</h2>
-</div>
+
 <div id="calendar_wrapper">
+	<div id="calendar-header">
+		<h2>Hello, {{ user.first_name }}</h2>
+		<h2>PICK A TIME</h2>
+	</div>
 	<table cellspacing="8" cellpadding="8">
 		<tr>
 			{% for day in day_list %}
@@ -29,11 +30,11 @@
 				<div class="cal_box">
 					{% if deliv.open %}
 
-					<center><a href="{{ deliv.id }}">{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}</a></center>
+					<a href="{{ deliv.id }}">{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}</a>
 
 					</form>
 					{% else %}
-						<center>{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}
+						{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}
 					{% endif %}
 
 				</div>
