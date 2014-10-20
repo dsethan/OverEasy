@@ -48,18 +48,14 @@
 
 <div id="calendar_wrapper">
 	<div id="calendar-header">
-		<h2>PICK A TIME</h2>
-		<div id="alert">
-		<h3>{{ message }}</h3>
-		</div>
+		<h2>MENU</h2>
 	</div>
-	<table cellspacing="8" cellpadding="8">
+	<table>
 		<tr>
-			{% for day in day_list %}
+			{% for key in items_by_cat.keys %}
 			<td>
 				<div class="cal_box">
-					<div class="cal_box_weekday">{{ day.0 }}</div>
-					<div class="cal_box_date">{{ day.1 }}</div>
+					<div class="cal_box_weekday">{{ key }}</div>
 				</div>
 				<hr>
 	
@@ -68,24 +64,16 @@
 		</tr>
 
 		<tr>
-			{% for day in days %}
+			{% for key, value in items_by_cat.items %}
 			<td>
-				{% for deliv in day %}
+				{% for item in value %}
 					{% if deliv.open and deliv.orders_still_open %}
 					<div class="cal_box">
 
-					<a href="/cal/{{ deliv.id }}">{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}</a>
-
-					</form>
+					{{ item.item.name }}
 					</div>
 					
-					{% else %}
-					<div class="cal_box_taken">
-
-						{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}
-					
-					</div>
-					{% endif %}
+			
 
 				<hr>
 				{% endfor %}
