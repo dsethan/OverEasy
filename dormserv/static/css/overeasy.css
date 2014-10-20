@@ -125,6 +125,11 @@ img.center {
   padding: 15px;
 }
 
+.nav navbar-nav navbar-right{
+  font-family: 'Abel', sans-serif;
+  margin-right: 30px;
+}
+
 .cal_box {
   font-family: 'Abel', sans-serif;
   padding-left: 40px;
