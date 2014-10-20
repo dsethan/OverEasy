@@ -6,11 +6,11 @@
 		<form method="post" action="process_new_user">
 			{% csrf_token %}
 
-			<div id="error-on-login">
 			{% for error in nom_errors %}
+			<div id="error-on-login">
 			{{ error }}
-			{% endfor %}
 			</div>
+			{% endfor %}
 
 			<div class="form-group">
 				<input type="text" class="form-control" id="first" name="first" placeholder="First name">
@@ -19,12 +19,12 @@
 				<input type="text" class="form-control" id="last" name="last" placeholder="Last name">
 			</div>
 
-			<div id="error-on-login">
-
 			{% for error in pw_errors %}
+			<div id="error-on-login">
 			{{ error }}
-			{% endfor %}
 			</div>
+			{% endfor %}
+	
 
 			<div class="form-group">
 			    <input type="password" class="form-control" id="password1" name="password1" placeholder="Password">
@@ -35,23 +35,21 @@
 
 			<hr>
 
-			<div id="error-on-login">
-
 			{% for error in un_errors %}
+			<div id="error-on-login">
 			{{ error }}
-			{% endfor %}
 			</div>
+			{% endfor %}
 
 			<div class="form-group">
 			    <input type="email" class="form-control" id="username" name="username" placeholder="Email">
 			</div>
 
-			<div id="error-on-login">
-
 			{% for error in num_errors %}
+			<div id="error-on-login">
 			{{ error }}
-			{% endfor %}
 			</div>
+			{% endfor %}
 
 			<div class="form-group">
 			    <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
@@ -59,12 +57,12 @@
 
 			<hr>
 
-			<div id="error-on-login">
 
 			{% for error in addr_errors %}
+			<div id="error-on-login">
 			{{ error }}
-			{% endfor %}
 			</div>
+			{% endfor %}
 
 			<div class="form-group">
 			    <input type="text" class="form-control" id="address1" name="address1" placeholder="Address">
