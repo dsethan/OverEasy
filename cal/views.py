@@ -35,8 +35,9 @@ def render_first_look_calendar(request):
 
 	for i in range(0, 5):
 		day = mon + timedelta(days=i)
-		formatted_day = day.strftime("%a \n %b %d")
-		day_list.append(formatted_day)
+		formatted_weekday = day.strftime("%a")
+		formatted_day = day.strftime("%b %d")
+		weekday_list.append((formatted_weekday, formatted_day))
 
 		if i == 0:
 			m = Entry.objects.filter(date=day)
