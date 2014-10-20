@@ -146,7 +146,7 @@ def user_login(request):
 					context)
 
 		else:
-			error = "The details you supplied do not match our records. Please try again!"
+			error = "We can't seem to find a user with those details. Try again!"
 			return render_to_response(
 				'login.html',
 				{
