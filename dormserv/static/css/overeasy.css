@@ -83,5 +83,5 @@ img.center {
 }
 
 .home-page-footer {
-  display: inline;
+  display: inline-block;
 }
