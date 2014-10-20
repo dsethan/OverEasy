@@ -1,16 +1,28 @@
+{% endblock %}
+
 {% extends 'cal_base.html' %}
 
 {% block content %}
 
-{{ message }}
+
+
+<div id="cal_wrap_wrap">
 
 <div id="calendar_wrapper">
-	<table border='1' cellspacing='2' cellpadding='2'>
+	<div id="calendar-header">
+		<h2>PICK A TIME</h2>
+	</div>
+	<table cellspacing="8" cellpadding="8">
 		<tr>
 			{% for day in day_list %}
-			<div id="cal_space">
-			<td><b><h3>{{ day.0 }}</h3><h5>{{ day.1 }}</h5></b></td>
-			</div>	
+			<td>
+				<div class="cal_box">
+					<div class="cal_box_weekday">{{ day.0 }}</div>
+					<div class="cal_box_date">{{ day.1 }}</div>
+				</div>
+				<hr>
+	
+			</td>		
 			{% endfor %}
 		</tr>
 
@@ -19,16 +31,28 @@
 			<td>
 				{% for deliv in day %}
 					{% if deliv.open and deliv.orders_still_open %}
-					<center><a href="/cal/{{ deliv.id }}">{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}</a></center>
+					<div class="cal_box">
+
+					<a href="{{ deliv.id }}">{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}</a>
+
+					</form>
+					</div>
+					
 					{% else %}
-						<center>{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}
+					<div class="cal_box_taken">
+
+						{{ deliv.get_start_time_string }} - {{ deliv.get_end_time_string }}
+					
+					</div>
 					{% endif %}
 
+				<hr>
 				{% endfor %}
+
 			</td>
 			{% endfor %}
 
 	</table>
 </div>
-
+</div>
 {% endblock %}
