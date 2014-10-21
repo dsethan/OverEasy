@@ -143,6 +143,7 @@ img.center {
 
 .cal_box_taken {
   font-family: 'Abel', sans-serif;
+  font-size: 15px;
   margin-left: 40px;
   margin-right: 40px;
   border: 1px;
@@ -154,7 +155,7 @@ img.center {
 
 .cal_box_date {
   margin-top: -5px;
-  font-size: 25px;
+  font-size: 23px;
 }
 
 .menu_box {
