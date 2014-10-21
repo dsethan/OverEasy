@@ -1,3 +1,9 @@
+* {
+  -webkit-border-radius: 0 !important;
+     -moz-border-radius: 0 !important;
+          border-radius: 0 !important;
+}
+
 body {
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -178,4 +184,9 @@ img.center {
 
 #alert {
   color: #800000;
+}
+
+#submit-button-home {
+  width: 186px;
+  height: 43px;
 }
