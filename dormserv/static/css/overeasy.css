@@ -186,7 +186,7 @@ img.center {
   color: #800000;
 }
 
-#submit-button-home input{
+#submit-button-home form{
   width: 186px;
   height: 43px;
 }
