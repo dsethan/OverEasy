@@ -120,6 +120,10 @@ img.center {
   margin-left: 40px;
 }
 
+#calendar-header h2{
+  font-size: 45px;
+}
+
 
 #cal_space td{
   padding: 15px;
