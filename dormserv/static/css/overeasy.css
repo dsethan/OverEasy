@@ -191,7 +191,9 @@ img.center {
   height: 43;
 }
 
-button.center {
+button.input {
+  width: 186;
+  height: 43;
   display: block;
   margin-left: auto;
   margin-right: auto;
