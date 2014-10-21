@@ -28,6 +28,7 @@
 					<b>{{ item.item.name_in_caps }}</b><br>
 					{{ item.item.description }}
 					{{ item.item.price }}
+					
 					<form role="form" method="post" action="/menu/">
 					{% csrf_token %}
 					<input type="hidden" name="item_id" value="{{ item.item.id }}">
