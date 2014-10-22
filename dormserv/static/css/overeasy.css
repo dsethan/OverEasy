@@ -199,8 +199,8 @@ button.input {
   margin-right: auto;
 }
 
-.ul.center {
-  display: block;
+.ul {
+  width: 70%;
   margin-left: auto;
   margin-right: auto;
 }
