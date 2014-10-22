@@ -139,7 +139,7 @@ def user_cart_no_longer_active(request):
 	context = RequestContext(request)
 	message = "Sorry, but the window you chose is no longer active. Want to try another?"
 	return render_to_response(
-		'order_unavailable',
+		'order_unavailable.html',
 		{
 		'message':message
 		},
