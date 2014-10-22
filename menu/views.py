@@ -43,7 +43,7 @@ def display_menu(request, entry_id=False):
 	items_with_quantity = user_cart.get_items_and_quantities()
 
 	item_urls = {}
-	for item in user_cart.get_cart_items()):
+	for item in user_cart.get_cart_items():
 		item_urls[item.id] = get_url_for_item(item.item)
 
 	item_names = []
