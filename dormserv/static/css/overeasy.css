@@ -226,6 +226,7 @@ button.input {
    position:fixed;
    bottom:0;
    width:90%;
+   margin-top: 10px;
    height:40px;   /* Height of the footer */
    text-align: center;
 }
