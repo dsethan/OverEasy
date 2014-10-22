@@ -1,17 +1,10 @@
-{% extends "base.html" %}
+{% extends "reg-base.html" %}
 
 {% load staticfiles %}
 
 {% block content %}
 
-<div id="rectangle">
-
-	<div class="logo">
-		<a href="/users/login">
-		<img src="{% static "img/logo.png" %}" class="center">
-		</a>
-	</div>
-	<div class="login-form-wrapper-reg">
+	<div class="login-form-wrapper">
 
 	<div id="center_text">
 		<img src="{% static "img/signuptext.png" %}" class="center" width=300px>
@@ -110,5 +103,4 @@
 
 
 	</div>
-</div>
 {% endblock %}
