@@ -222,10 +222,10 @@ button.input {
 
 #box-footer ul {
   list-style: none;
-  color: #FFFFFF;
   font-family: "Abel", sans-serif;
 }
 
-#box-footer ul li {
+#box-footer ul li { 
+  color: #FFFFFF;
   display: inline;
 }
