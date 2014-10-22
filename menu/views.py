@@ -75,8 +75,8 @@ def display_menu(request, entry_id=False):
 
 
 def get_urls_for_items(items):
-	base_str_url = ""{% static 'img/menu/""
-	end_str_url = "".png'%}""
+	base_str_url = "&quot;{% static &#39;img/menu/"
+	end_str_url = ".png&#39;%}&quot;"
 	list_of_urls = []
 	for item in items:
 		url = base_str_url + str(item.id) + end_str_url
