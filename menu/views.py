@@ -48,6 +48,11 @@ def display_menu(request, entry_id=False):
 		name = cat[0].upper()
 		items_by_cat[name] = ItemCategory.objects.filter(category=cat[1])
 
+	cart_more_than_one = False
+
+	if len(items_with_quantity.keys()) > 0:
+		cart_more_than_one = True
+
 	cart_id = user_cart.id
 
 	return render_to_response(
@@ -61,6 +66,7 @@ def display_menu(request, entry_id=False):
 		'cart_items':cart_items,
 		'items_with_quantity':items_with_quantity,
 		'cart_id':cart_id,
+		'cart_more_than_one':cart_more_than_one,
 		},
 		context)
 

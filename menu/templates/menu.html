@@ -6,6 +6,14 @@
 
 <div id="calendar_wrapper">
 	<div id="calendar-header">
+		{% if cart_more_than_one %}
+		<table>
+			<td><h4>Cart</h4></td>
+			{% for key, VALUE in items_with_quantity.items %}
+			<td> {{ key.id }} </td>
+			{% endfor %}
+		</table>
+		{% endif %}
 		<h2>MENU</h2>
 	</div>
 	<table>
@@ -314,11 +322,7 @@
 			</td>
 		</tr>
 	</table>
-	<div id="calendar-header">
-	<h2>Cart</h2>
 
-
-	</div>
 </div>
 
 <h1>In Your Cart</h1>
