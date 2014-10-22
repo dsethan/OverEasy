@@ -80,7 +80,7 @@ US_STATES = (
 
 ITEM_CATEGORIES = (
     ('Classic', 'CLA'),
-    ('Juice', 'JUI'),
+    ('Pressed Juice', 'JUI'),
     ('Sides', 'SID'),
     ('Drinks', 'DRI'),
 )
