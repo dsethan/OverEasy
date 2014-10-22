@@ -36,7 +36,18 @@
 			<td>
 				<div class="cal_box">
 				<img src="{% static "img/menu/burrito1.png"%}" style="  pointer-events:none; width:186px; height:100px;" class="center">
-				<img src="{% static "img/menu/button-notoggle.png"%}" style="  pointer-events:none; width:186px; height:100px;" class="center">
+				
+
+				<form role="form" method="post" action="/menu/">
+				{% csrf_token %}
+				<input type="hidden" name="item_id" value="{{ item.item.id }}">
+				<input type="hidden" name="entry_id" value="{{ entry_id }}">
+
+				<input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" />
+
+				<!--<input type="submit" name="submit" value="Add to Cart">-->
+				</form>
+				</div>
 				</div>
 			</td>
 		</tr>
@@ -57,15 +68,6 @@
 {% endfor %}
 </table>
 
-	<!--
-	<form role="form" method="post" action="/menu/">
-	{% csrf_token %}
-	<input type="hidden" name="item_id" value="{{ item.item.id }}">
-	<input type="hidden" name="entry_id" value="{{ entry_id }}">
-	<input type="submit" name="submit" value="Add to Cart">
-	</form>
-	</div>
-	-->
 {% endblock %}
 
 
