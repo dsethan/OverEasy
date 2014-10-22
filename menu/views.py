@@ -112,7 +112,7 @@ def add_item_to_cart(request):
 
 			return display_menu(request, entry_id)
 
-	return HttpResponse("error")
+	return redirect('/cal')
 
 
 @login_required
