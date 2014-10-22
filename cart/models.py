@@ -21,7 +21,12 @@ class Cart(models.Model):
 
 	def get_items(self):
 		items = CartItem.objects.filter(cart=self)
-		return items
+		i = []
+
+		for item in items:
+			i.append(item.item)
+
+		return i
 
 	def get_item_names_and_quantities(self):
 		items = CartItem.objects.filter(cart=self)
