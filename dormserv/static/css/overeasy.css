@@ -45,7 +45,7 @@ body {
   height: 45%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 150px;
+  margin-top: 15px;
   margin-bottom: 80px;
   z-index: 4;
 }
@@ -184,17 +184,4 @@ img.center {
 
 #alert {
   color: #800000;
-}
-
-.button{
-  width: 186px;
-  height: 43px;
-}
-
-button.input {
-  width: 186px;
-  height: 43px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
