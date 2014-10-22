@@ -40,7 +40,7 @@ def display_menu(request, entry_id=False):
 
 	cart_items = CartItem.objects.filter(cart=user_cart)
 
-	items_with_quantity = user_cart.get_item_names_and_quantities()
+	items_with_quantity = user_cart.get_items_and_quantities()
 
 	item_names = []
 

@@ -9,7 +9,7 @@
 		{% if cart_more_than_one %}
 		<table>
 			<td><h4>Cart</h4></td>
-			{% for key, VALUE in items_with_quantity.items %}
+			{% for key, value in items_with_quantity.items %}
 			<td> {{ key.id }} </td>
 			{% endfor %}
 		</table>
