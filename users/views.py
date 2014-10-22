@@ -275,7 +275,10 @@ def store_user_data(un, pw, addr, num, nom, res, request):
 
 	_user_profile.save()
 
-	login(request, _user)
+	new_user = authenticate(username=username,
+		password=password)
+
+	login(request, new_user)
 
 	return redirect('/cal')
 
