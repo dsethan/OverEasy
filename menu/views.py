@@ -59,6 +59,8 @@ def display_menu(request, entry_id=False):
 
 	cart_id = user_cart.id
 
+	total = user_cart.view_order_total_in_usd()
+
 	return render_to_response(
 		'menu.html',
 		{
@@ -72,6 +74,7 @@ def display_menu(request, entry_id=False):
 		'cart_id':cart_id,
 		'cart_more_than_one':cart_more_than_one,
 		'item_urls':item_urls,
+		'total':total,
 		},
 		context)
 
