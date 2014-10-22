@@ -10,7 +10,7 @@
 		<table>
 			<td><h4>Cart</h4></td>
 			{% for key, value in items_with_quantity.items %}
-			<td> {{ key.id }}<img src="{% static 'img/cart/{{key.id}}.png'%}" style="pointer-events:none;" class="center"> </td>
+			<td> {{ key.id }}<img src="{% static "img/cart/"%}/{{key.id}}.png" style="pointer-events:none;" class="center"> </td>
 			{% endfor %}
 		</table>
 		{% endif %}
