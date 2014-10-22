@@ -219,3 +219,7 @@ button.input {
    height:40px;   /* Height of the footer */
    text-align: center;
 }
+
+#footer ul li {
+  display: inline;
+}
