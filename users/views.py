@@ -275,10 +275,9 @@ def store_user_data(un, pw, addr, num, nom, res, request):
 
 	_user_profile.save()
 
-	return render_to_response(
-		'welcome.html',
-		{'user_profile':_user_profile},
-		context)
+	login(request, _user)
+
+	return redirect('/cal')
 
 def verify_restaurant(start):
 	api_key = settings.GOOGLE_MAPS
