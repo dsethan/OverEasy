@@ -355,10 +355,10 @@ def get_address_string(address1, address2, city, state):
 	return address1 + comma + city + comma + state
 
 
-def menu(request):
+def homemenu(request):
 	context = RequestContext(request)
 
 	return render_to_response(
-		'menu.html',
+		'homemenu.html',
 		{},
 		context)
