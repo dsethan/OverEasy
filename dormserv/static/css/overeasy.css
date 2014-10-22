@@ -173,6 +173,14 @@ img.center {
   border: 1px;
 }
 
+.menu_box {
+  font-family: 'Abel', sans-serif;
+  font-size: 17px;
+  padding-left: 10px;
+  padding-right: 20px;
+  border: 1px;
+}
+
 .cal_box_taken {
   font-family: 'Abel', sans-serif;
   font-size: 17px;
