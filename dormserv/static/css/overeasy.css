@@ -206,9 +206,9 @@ button.input {
 }
 
 #box-footer {
-   position:fixed;
+   /*position:fixed;*/
    width:90%;
-   height:40px;   /* Height of the footer */
+   /*height:40px;  */ /* Height of the footer */
    text-align: center;
 }
 
