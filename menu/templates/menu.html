@@ -10,7 +10,7 @@
 		<table>
 			<td><h4>Cart</h4></td>
 			{% for url in item_urls %}
-			<td> {{ key.id }}<img src="{{ url }}" style="pointer-events:none; width:186px; height:100px;" class="center"></td>
+			<td> {{ key.id }}<img src={{ url }} style="pointer-events:none; width:186px; height:100px;" class="center"></td>
 			{% endfor %}
 		</table>
 		{% endif %}
