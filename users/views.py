@@ -351,3 +351,12 @@ def get_address_string(address1, address2, city, state):
 		return address1 + space + address2 + comma + city + comma + state
 
 	return address1 + comma + city + comma + state
+
+
+def menu(request):
+	context = RequestContext(request)
+
+	return render_to_response(
+		'menu.html',
+		{},
+		context)
