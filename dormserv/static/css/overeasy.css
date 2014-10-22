@@ -229,3 +229,9 @@ button.input {
   color: #000000;
   display: inline;
 }
+
+#box-footer ul li a {
+  color: #000000;
+  font-family: 'Abel', sans-serif;
+  font-size: 14px;
+}
