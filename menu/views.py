@@ -84,9 +84,6 @@ def get_urls_for_items(items):
 	return list_of_urls
 
 
-
-
-
 @login_required
 def add_item_to_cart(request):
 	context = RequestContext(request)
