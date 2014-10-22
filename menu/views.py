@@ -42,7 +42,9 @@ def display_menu(request, entry_id=False):
 
 	items_with_quantity = user_cart.get_items_and_quantities()
 
-	item_urls = get_urls_for_items(user_cart.get_items())
+	item_urls = {}
+	for item in user_cart.get_cart_items()):
+		item_urls[item.id] = get_url_for_item(item.item)
 
 	item_names = []
 
@@ -74,14 +76,11 @@ def display_menu(request, entry_id=False):
 		context)
 
 
-def get_urls_for_items(items):
+def get_url_for_item(item):
 	base_str_url = "/static/img/cart/"
 	end_str_url = ".png"
-	list_of_urls = []
-	for item in items:
-		url = base_str_url + str(item.id) + end_str_url
-		list_of_urls.append(url)
-	return list_of_urls
+	url = base_str_url + str(item.id) + end_str_url
+	return url
 
 
 @login_required

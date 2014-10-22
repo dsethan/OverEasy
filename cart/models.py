@@ -19,6 +19,10 @@ class Cart(models.Model):
 			return True
 		return False
 
+	def get_cart_items(self):
+		items = CartItem.objects.filter(cart=self)
+		return items
+
 	def get_items(self):
 		items = CartItem.objects.filter(cart=self)
 		i = []

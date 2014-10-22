@@ -9,16 +9,16 @@
 		{% if cart_more_than_one %}
 		<table>
 			<td><h4>Cart</h4></td>
-			{% for url in item_urls %}
+			{% for key, value in item_urls.items %}
 			<td> 
 
-				<img src={{ url }} style="pointer-events:none; width:60px; height:60px;" class="center">
+				<img src={{ value }} style="pointer-events:none; width:60px; height:60px;" class="center">
 
 				<form role="form" method="post" action="/menu/remove_from_cart/">
 				{% csrf_token %}
-				<input type="hidden" name="item_id" value="18">
+				<input type="hidden" name="item_id" value="key">
 				<input type="hidden" name="entry_id" value="{{ entry_id }}">
-				
+
 				<div class="cart_remove_button">
 					<input type="image" src="{% static "img/menu/button-remove.png"%}" alt="Remove from cart" />
 				</div>
