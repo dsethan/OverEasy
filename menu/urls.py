@@ -6,4 +6,6 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 	url(r'^$', views.add_item_to_cart, name='add_item_to_cart'),
+	url(r'^remove_from_cart/', views.remove_from_cart, name='remove_from_cart'),
+
     )
