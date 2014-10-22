@@ -182,12 +182,13 @@ img.center {
 }
 
 .cart_add_button {
+  margin-top: -10px;
   text-align: center;
 }
 
 .cart_add_button input {
-  height: 15px;
-  width: 15px;
+  height: 20px;
+  width: 20px;
 }
 
 .cal_box_taken {
