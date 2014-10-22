@@ -86,9 +86,9 @@ def remove_from_cart(request):
 		entry_id = request.POST.get('entry_id')
 		cart_item.delete()
 
-		return HttpResponse(entry_id)
+		#return HttpResponse(entry_id)
 
-		#return redirect('/menu/display_menu', entry_id)
+		return display_menu(request, entry_id)
 
 	return redirect('/cal')
 
