@@ -85,9 +85,9 @@ def remove_from_cart(request):
 		cart_item = CartItem.objects.get(id=int(cart_item_id))
 		cart_item.delete()
 
-		return redirect('/display_menu')
+		return redirect('/menu/display_menu')
 
-	return redirect('/display_menu')
+	return redirect('/menu/display_menu')
 
 
 def get_url_for_item(item):
