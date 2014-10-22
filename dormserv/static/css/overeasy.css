@@ -20,6 +20,16 @@ body {
   width: 80%;
 }
 
+.login-form-wrapper-reg {
+  font-family: 'PT Sans', sans-serif;
+  font-size: 15px;
+  padding-top: -5px;
+  margin-top: -100px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
 #menurectangle {
   border-style: solid;
   border-width: 1px;
