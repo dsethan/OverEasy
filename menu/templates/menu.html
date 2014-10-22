@@ -28,6 +28,14 @@
 			<td>&nbsp;</td>
 			{% endfor %}
 			<td><h4>Total: {{total }}</h4></td>
+			<td>
+				<form role="form" method="post" action="/checkout/">
+					{% csrf_token %}
+					<input type="hidden" name="entry_id" value="{{ entry_id }}">
+					<input type="hidden" name="cart_id" value="{{ cart_id }}">
+					<input type="submit" name="submit" value="Checkout">
+				</form>
+			</td>
 		</table>
 		{% endif %}
 		<h2>MENU</h2>
