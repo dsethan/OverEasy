@@ -3,12 +3,12 @@
 {% load staticfiles %}
 
 {% block content %}
-	<div id="center_text">
-		<img src="{% static "img/signuptext.png" %}" class="center" width=300px>
-	</div>
 
 	<div class="login-form-wrapper-reg">
 
+	<div id="center_text">
+		<img src="{% static "img/signuptext.png" %}" class="center" width=300px>
+	</div>
 
 		<form method="post" action="process_new_user">
 			{% csrf_token %}
