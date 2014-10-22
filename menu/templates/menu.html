@@ -9,8 +9,9 @@
 		{% if cart_more_than_one %}
 		<table>
 			<td><h4>Cart</h4></td>
+			<td> &nbsp </td>
 			{% for url in item_urls %}
-			<td> {{ key.id }}<img src={{ url }} style="pointer-events:none; width:40px; height:40px;" class="center"></td>
+			<td> {{ key.id }}<img src={{ url }} style="pointer-events:none; width:60px; height:60px;" class="center"></td>
 			{% endfor %}
 		</table>
 		{% endif %}
