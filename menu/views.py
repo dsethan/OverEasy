@@ -76,6 +76,20 @@ def display_menu(request, entry_id=False):
 		context)
 
 
+def remove_from_cart(request):
+	context = RequestContext(request)
+	user = request.user
+
+	if request.method == 'POST':
+		cart_item_id = request.POST.get('cart_item_id')
+		cart_item = CartItem.objects.get(id=int(cart_item_id))
+		cart_item.delete()
+
+		return redirect('/menu')
+
+	return redirect('/menu')
+
+
 def get_url_for_item(item):
 	base_str_url = "/static/img/cart/"
 	end_str_url = ".png"
@@ -111,7 +125,7 @@ def add_item_to_cart(request):
 
 			return display_menu(request, entry_id)
 
-	return redirect('/cal')
+	return redirect('/menu')
 
 
 @login_required
