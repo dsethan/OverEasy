@@ -44,6 +44,12 @@ class Item(models.Model):
 
 		return "issue"
 
+	def view_price_usd(self):
+		self_str = str(self.price)
+		cents = self_str[-2:]
+		dollars = self_str[:-2]
+		return "$" + dollars + "." + cents
+
 	def name_in_caps(self):
 		return self.name.upper()
 
