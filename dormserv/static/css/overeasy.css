@@ -352,3 +352,7 @@ button.input {
   margin-top: -18px;
   margin-left: 40px;
 }
+
+.col-md-9 table tr td{
+  font-weight: normal;
+}
