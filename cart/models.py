@@ -60,13 +60,28 @@ class Cart(models.Model):
 
 		return items_to_return
 
+	def get_subtotal_price_of_cart(self):
+		items = CartItem.objects.filter(cart=self)
+		total = 0
+		for i in items:
+			total = total + i.item.price
+		return total
+
+	def get_tax(self):
+		items = CartItem.objects.filter(cart=self)
+		total = 0
+		for i in items:
+			total = total + i.item.price
+		tax = float(total) * 7.5
+		return tax
 
 	def get_total_price_of_cart(self):
 		items = CartItem.objects.filter(cart=self)
 		total = 0
 		for i in items:
 			total = total + i.item.price
-		return total
+		tax = float(total) * 7.5
+		return total + tax
 
 	def view_order_total_in_usd(self):
 		items = CartItem.objects.filter(cart=self)

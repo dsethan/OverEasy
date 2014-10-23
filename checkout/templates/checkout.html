@@ -44,10 +44,20 @@
             <tr>
               <td></td>
               <td>{{ value }}x {{ key.name_in_caps }}</td>
-              <td>&nbsp; &nbsp;</td>
+              <td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
               <td>{{ key.view_price_usd }}</td>
             </tr>
             {% endfor %}
+            <tr>
+              <td></td>
+              <td>Tax</td>
+              <td>{{ cart.get_tax }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Total</td>
+              <td>{{ cart.get_total_price_of_cart }}</td>
+            </tr>
           </table>
           <br>
 
