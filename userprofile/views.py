@@ -14,7 +14,7 @@ def display_profile(request):
 	context = RequestContext(request)
 	user = request.user
 	profile = UserProfile.objects.get(user=user)
-	orders = Order.objects.get(profile=profile)
+	orders = Order.objects.filter(profile=profile)
 
 	no_orders_yet = False
 
