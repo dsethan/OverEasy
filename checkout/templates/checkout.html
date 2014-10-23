@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-{% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/card.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/overeasy.css' %}">
 
-<link href='http://fonts.googleapis.com/css?family=Oswald|Abel' rel='stylesheet' type='text/css'>
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'users/css/dormserv.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'users/css/bootstrap.css' %}"/>
 
 <html lang="en">
 <head>
@@ -55,151 +53,39 @@
   </script>
 </head>
 <body>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
 
 {% include 'head.html' %}
 
-<div id="heading">
-
-</div>
-<div class="container-fluid">
-
-<div id="calendar_wrapper">
-  <div id="calendar-header">
-    <h2>CHECKOUT</h2>
-
-    <div class="row">
-      <div class="col-md-4">
-        <h4><b>Address<b></h4>
-        <h5>
-        {{ user.first_name }} {{ user.last_name }}<br>
-        {{ profile.address }}<br>
-        {{ profile.city }}, {{ profile.state }}<br>
-        Phone: {{ profile.phone }}
-        </h5>
-        <a href="/profile"><input class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Change Address"></a>
-        <!--{% if card_on_file %}-->
-        <h4><b>Payment<b></h4>
-        <!--{% endif %}-->
-      </div>
-
-      <div class="col-md-8">
-        <h4><b>Your Order for {{ entry.full_date_and_time_string }}<b></h4>
-        <hr>
-        <table>
-          {% for key, value in items_with_quantity.items %}
-          <tr>
-            <td></td>
-            <td>{{ value }}x {{ key.name_in_caps }}</td>
-            <td>&nbsp; &nbsp;</td>
-            <td>{{ key.price.format_price_usd }}</td>
-          </tr>
-          {% endfor %}
-        </table>
 
 
-    <br>
-    <h4><b>Add Card Information</b></h4>
-    <hr>
-    <div class="row">
-    <!--<div class="demo-container">-->
-        <div class="col-md-5">
-          <div class="card-wrapper"></div>
-        </div>
-        <div class="col-md-5">        
-          <div class="form-container active">
-            <form action="process_new_card/" method="POST" id="payment-form">
+<div id="wrap">
+  <h1>Charge</h1>
 
-                {% csrf_token %}   
+  <h2> What you ordered: </h2>
 
-                <span class="payment-errors"></span>
+  <table>
+    <tr>
+      <td>Item</td>
+      <td>Quantity</td>
+      <td>Item Price</td>
+    </tr>
+  {% for item in order_items %}
+    <tr>
+      <td>{{ item.item.name }}</td>
+      <td>{{ item.quantity }}</td>
+      <td>{{ item.item.view_order_total_in_usd }}</td>
+    </tr>
+  {% endfor %}
+  </table>
 
-                <div class="form-row">
-                <input placeholder="Card number" class="form-control" type="text" name="number" data-stripe="number">
-                </div>
+  <br>
+  Total Order: {{ total_price_display }}
+  
+  <br><br>
 
-                <div class="form-row">
-                <input placeholder="Full name" class="form-control" type="text" name="name">
-                </div>
+  <h2>For testing, use 4242424242424242 for card number, 05/15 for expiration date, and 050 for CVC code.</h2>
 
-                <div class="form-row">
-                  <label>
-                    <span>Expiration (MM/YYYY)</span>
-                    <input type="text" size="2" data-stripe="exp-month"/>
-                  </label>
-                  <span> / </span>
-                  <input type="text" size="4" data-stripe="exp-year"/>
-                </div>
-
-                <div class="form-row">
-                <input placeholder="CVC" type="text" class="form-control" name="cvc" data-stripe="cvc">
-                </div>
-
-                <input type="hidden" name="total_price" value="{{ total_price }}">
-                <input type="hidden" name="cart_id" value="{{ cart_id }}">
-
-                <input type="submit"></button>
-            </form>
-          </div>
-        </div>
-    <!--</div>-->
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="{% static 'js/card.js' %}"></script>
-    <script>
-        $('.active form').card({
-            container: $('.card-wrapper')
-        })
-    </script>
-    </div>
-
-  </div>
-</div>
-
-
-
-<h1>What You Ordered</h1>
-
-<table border='1'>
-  <tr>
-    <td>Item</td>
-    <td>Quantity</td>
-  </tr>
-{% for key, value in items_with_quantity.items %}
-  <tr>
-    <td>{{ key }}</td>
-    <td>{{ value }}</td>
-  </td>
-{% endfor %}
-</table>
-
-Total: {{ cart.view_order_total_in_usd }}
-
-<h2>When It's Coming</h2>
-{{ entry.get_date_string}}<br>
-{{ entry.get_start_time_string }} - {{ entry.get_end_time_string }} 
-
-<h2>Payment Details</h2>
-
-{% for card in cards %}
-Card:
-{{ card.token }}
-
-<form action="process_existing_card/" method="POST" id="payment-form">
-  {% csrf_token %}   
-  <input type="hidden" name="card_token" value="{{ card.token }}">
-  <input type="hidden" name="cart_id" value="{{ cart_id }}">
-  <input type="submit" value="Submit">
-</form>
-
-<br>
-{% endfor %}
-
-<h2>Add a Card</h2>
-
+  <br>
   <form action="process_new_card/" method="POST" id="payment-form">
     {% csrf_token %}
     <span class="payment-errors"></span>
@@ -231,8 +117,6 @@ Card:
     <input type="hidden" name="cart_id" value="{{ cart_id }}">
     <button type="submit">Submit Payment</button>
   </form>
-
-    </div>
-  </body>
-
+</div>
+</body>
 </html>
