@@ -156,8 +156,6 @@ img.center {
   position: absolute;
   right: 10px;
   margin-top: -15px;
-  margin-bottom: 10px;
-  padding-bottom: 1px;
 }
 
 #calendar-header h2{
@@ -203,6 +201,7 @@ img.center {
 
 .cart_remove_button {
   margin-top: -20px;
+  margin-bottom: 15px;
   text-align: center;
 }
 
