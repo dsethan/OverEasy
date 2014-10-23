@@ -111,7 +111,12 @@
                 </div>
 
                 <div class="form-row">
-                <input placeholder="MM/YY" type="text" class="form-control" name="expiry" data-stripe="exp-year">
+                  <label>
+                    <span>Expiration (MM/YYYY)</span>
+                    <input type="text" size="2" data-stripe="exp-month"/>
+                  </label>
+                  <span> / </span>
+                  <input type="text" size="4" data-stripe="exp-year"/>
                 </div>
 
                 <div class="form-row">
