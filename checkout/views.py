@@ -30,7 +30,7 @@ def checkout(request):
 		cart_items = cart.get_items()
 		items_with_quantity = cart.get_items_and_quantities()
 
-		urls = get_url_for_item(cart_items)
+		#urls = get_url_for_item(cart_items)
 
 		cards = Card.objects.filter(user=user)
 
