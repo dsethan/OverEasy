@@ -19,10 +19,11 @@
 				{% csrf_token %}
 				<input type="hidden" name="cart_item_id" value="{{key}}">
 				<input type="hidden" name="entry_id" value="{{ entry_id }}">
-				</form>
 				<div class="cart_remove_button">
 					<input type="image" src="{% static "img/menu/button-remove.png"%}" alt="Remove from cart" />
 				</div>
+				</form>
+
 
 			</td>
 			<td>&nbsp;</td>

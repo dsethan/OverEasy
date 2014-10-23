@@ -134,6 +134,8 @@ def create_order(cart_id, user, context):
 	profile = users.views.return_associated_profile_type(user)
 	entry = cart.entry
 
+	
+
 	new_order = Order(
 		profile=profile,
 		total=cart.get_total_price_of_cart(),
