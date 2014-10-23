@@ -55,7 +55,6 @@ def checkout(request):
 			'cards':cards,
 			'total_price':total_price,
 			'card_on_file':card_on_file,
-			'last_four':last_four,
 			},
 			context)
 
@@ -103,6 +102,8 @@ def process_new_card(request):
 		customer = stripe.Customer.create(
 			card=token,
 			description=user.username)
+
+		return HttpResponse(customer.cards)
 		
 		new_card = Card(
 			user = user,
