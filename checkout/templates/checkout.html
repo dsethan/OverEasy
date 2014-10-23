@@ -102,18 +102,12 @@
           </table>
 
           <h4><b>Add Card Information</b></h4>
+        </div>
           <hr>
           <div class="row">
             <div class="col-md-5">
               <div class="card-wrapper"></div>
-              <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-              <script src="{% static 'js/card.js' %}"></script>
-              <script>
-              $('.active form').card({
-                container: $('.card-wrapper')
-              })
-          </script>
-            </div>
+              </div>
             <div class="col-md-5">
               <div class="form-container active">
                 <form action="process_new_card/" method="POST" id="payment-form">
@@ -146,12 +140,16 @@
               </div>
             </div>
           </div>
-
-
-        </div>
       </div>
     </div>
   </div>
 </div>
 </body>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+              <script src="{% static 'js/card.js' %}"></script>
+              <script>
+              $('.active form').card({
+                container: $('.card-wrapper')
+              })
+            </script>
 </html>
