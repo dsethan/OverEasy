@@ -90,7 +90,8 @@ def process_new_card(request):
 		total_price = request.POST.get('total_price')
 		token = request.POST['stripeToken']
 		stripe.api_key = settings.STRIPE
-		#last_four = request.POST['last4']
+		last_four = request.POST['last4']
+		brand = request.POST['brand']
 
 		customer = stripe.Customer.create(
 			card=token,
@@ -104,15 +105,31 @@ def process_new_card(request):
 
 		new_card.save()
 
-		
+		company = ""
+		if brand == "Visa":
+			company = 'VIS'
+		elif brand == "MasterCard":
+			company = 'MCD'
+		elif brand == "American Express":
+			company = 'AME'
+		elif brand == "Discover":
+			company = 'DIS'
+		else:
+			brand = 'VIS'
 
+		new_card_data = CardData(
+			card = new_card,
+			company = company,
+			last_four = last_four
+			)
+
+		new_card_data.save()
 
 		stripe.Charge.create(
 			amount = int(total_price),
 			currency="usd",
 			customer=new_card.customer,
 			)
-
 
 		cart_id = int(cart_id)
 
