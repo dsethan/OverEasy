@@ -1,102 +1,10 @@
 {% extends 'checkout_base.html' %}
 
-{% load staticfiles %}
+{% block header %}
+
+{% endblock %}
 
 {% block content %}
-
-<div id="calendar_wrapper">
-  <div id="calendar-header">
-    <h2>CHECKOUT</h2>
-
-    <div class="row">
-      <div class="col-md-4">
-        <h4><b>Address<b></h4>
-        <h5>
-        {{ user.first_name }} {{ user.last_name }}<br>
-        {{ profile.address }}<br>
-        {{ profile.city }}, {{ profile.state }}<br>
-        Phone: {{ profile.phone }}
-        </h5>
-        <a href="/profile"><input class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Change Address"></a>
-        <!--{% if card_on_file %}-->
-        <h4><b>Payment<b></h4>
-        <!--{% endif %}-->
-      </div>
-
-      <div class="col-md-8">
-        <h4><b>Your Order for {{ entry.full_date_and_time_string }}<b></h4>
-        <hr>
-        <table>
-          {% for key, value in items_with_quantity.items %}
-          <tr>
-            <td></td>
-            <td>{{ value }}x {{ key.name_in_caps }}</td>
-            <td>&nbsp; &nbsp;</td>
-            <td>{{ key.price.format_price_usd }}</td>
-          </tr>
-          {% endfor %}
-        </table>
-
-
-    <br>
-    <h4><b>Add Card Information</b></h4>
-    <hr>
-    <div class="row">
-    <!--<div class="demo-container">-->
-        <div class="col-md-5">
-          <div class="card-wrapper"></div>
-        </div>
-        <div class="col-md-5">        
-          <div class="form-container active">
-            <form action="process_new_card/" method="POST" id="payment-form">
-
-                {% csrf_token %}   
-
-                <span class="payment-errors"></span>
-
-                <div class="form-row">
-                <input placeholder="Card number" class="form-control" type="text" name="number" data-stripe="number">
-                </div>
-
-                <div class="form-row">
-                <input placeholder="Full name" class="form-control" type="text" name="name">
-                </div>
-
-                <div class="form-row">
-                  <label>
-                    <span>Expiration (MM/YYYY)</span>
-                    <input type="text" size="2" data-stripe="exp-month"/>
-                  </label>
-                  <span> / </span>
-                  <input type="text" size="4" data-stripe="exp-year"/>
-                </div>
-
-                <div class="form-row">
-                <input placeholder="CVC" type="text" class="form-control" name="cvc" data-stripe="cvc">
-                </div>
-
-                <input type="hidden" name="total_price" value="{{ total_price }}">
-                <input type="hidden" name="cart_id" value="{{ cart_id }}">
-
-                <input type="submit"></button>
-            </form>
-          </div>
-        </div>
-    <!--</div>-->
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="{% static 'js/card.js' %}"></script>
-    <script>
-        $('.active form').card({
-            container: $('.card-wrapper')
-        })
-    </script>
-    </div>
-
-  </div>
-</div>
-
 
 <h1>What You Ordered</h1>
 
@@ -124,22 +32,13 @@ Total: {{ cart.view_order_total_in_usd }}
 {% for card in cards %}
 Card:
 {{ card.token }}
-
-<form action="process_existing_card/" method="POST" id="payment-form">
-  {% csrf_token %}   
-  <input type="hidden" name="card_token" value="{{ card.token }}">
-  <input type="hidden" name="cart_id" value="{{ cart_id }}">
-  <input type="submit" value="Submit">
-</form>
-
-<br>
 {% endfor %}
 
 <h2>Add a Card</h2>
 
+  <h1>Charge $10 with Stripe</h1>
+ 
   <form action="process_new_card/" method="POST" id="payment-form">
-  {% csrf_token %}   
-
     <span class="payment-errors"></span>
  
     <div class="form-row">
@@ -158,15 +57,13 @@ Card:
  
     <div class="form-row">
       <label>
+        <span>Expiration (MM/YYYY)</span>
         <input type="text" size="2" data-stripe="exp-month"/>
       </label>
       <span> / </span>
       <input type="text" size="4" data-stripe="exp-year"/>
     </div>
-  
-    <input type="hidden" name="total_price" value="{{ total_price }}">
-    <input type="hidden" name="cart_id" value="{{ cart_id }}">
-
-    <input type="submit">Submit Payment</button>
+ 
+    <button type="submit">Submit Payment</button>
   </form>
 {% endblock %}
