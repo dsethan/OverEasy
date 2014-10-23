@@ -23,7 +23,7 @@
       <h2>CHECKOUT</h2>
 
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
           <h4><b>Address<b></h4>
           <h5>
             {{ user.first_name }} {{ user.last_name }}<br>
@@ -34,9 +34,12 @@
           <a href="/profile"><input class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Change Address"></a>
           <!--{% if card_on_file %}-->
           <h4><b>Payment<b></h4>
+          {% for card in last_four %}
+          {{ card }}
+          {% endfor %}
           <!--{% endif %}-->
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9">
           <h4><b>Your Order for {{ entry.full_date_and_time_string }}<b></h4>
           <hr>
           <table>
@@ -69,7 +72,7 @@
             <div class="col-md-5">
               <div class="card-wrapper"></div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-6">
               <div class="form-container active">
                 <form action="process_new_card/" method="POST" id="payment-form">
                   {% csrf_token %}

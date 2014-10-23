@@ -22,6 +22,7 @@ def checkout(request):
 	profile = UserProfile.objects.get(user=user)
 
 	if request.method == 'POST':
+		stripe.api_key = settings.STRIPE
 		entry_id = request.POST.get('entry_id')
 		cart_id = request.POST.get('cart_id')
 		entry = Entry.objects.get(id=int(entry_id))
@@ -32,6 +33,14 @@ def checkout(request):
 		#urls = get_url_for_item(cart_items)
 
 		cards = Card.objects.filter(user=user)
+
+		last_four = []
+
+		for card in cards:
+			cust = stripe.Customer.retrieve(card.customer)
+			for cc in cust.cards:
+				last_four.append(cc.last4)
+
 
 		card_on_file = False
 		if len(cards) > 0:
@@ -54,6 +63,7 @@ def checkout(request):
 			'cards':cards,
 			'total_price':total_price,
 			'card_on_file':card_on_file,
+			'last_four':last_four,
 			},
 			context)
 
@@ -109,14 +119,6 @@ def process_new_card(request):
 			)
 
 		new_card.save()
-
-		#new_card_data = CardData(
-		#	card = new_card,
-		#	company = company,
-		#	last_four = last_four
-		#	)
-
-		#new_card_data.save()
 
 		stripe.Charge.create(
 			amount = int(total_price),
