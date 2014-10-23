@@ -133,11 +133,19 @@
 
                   <input type="hidden" name="total_price" value="{{ total_price }}">
                   <input type="hidden" name="cart_id" value="{{ cart_id }}">
-                  <button type="submit">Submit Payment</button>
+                  <button type="submit" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5">Submit Payment</button>
+
                 </form>
               </div>
             </div>
           </div>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+          <script src="{% static 'js/card.js' %}"></script>
+          <script>
+            $('.active form').card({
+              container: $('.card-wrapper')
+            })
+          </script>
         </div>
       </div>
     </div>
