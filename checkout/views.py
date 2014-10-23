@@ -28,7 +28,7 @@ def checkout(request):
 		entry = Entry.objects.get(id=int(entry_id))
 		cart = Cart.objects.get(id=int(cart_id))
 		cart_items = cart.get_items()
-		items_with_quantity = cart.get_item_names_and_quantities()
+		items_with_quantity = cart.get_items_and_quantities()
 
 		urls = get_url_for_item(cart_items)
 
