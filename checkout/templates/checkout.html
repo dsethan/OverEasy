@@ -70,9 +70,17 @@
 
       <div class="col-md-8">
         <h4><b>Your Order for {{ entry.full_date_and_time_string }}<b></h4>
+        <hr>
+        <table>
+          {% for key, value in items_with_quantity.items %}
+          <tr>
+            <td>{{ key }}x {{ value }}</td>
+            <td>{{ key.price }}</td>
+          </tr>
+          <hr>
 
-        
-
+        {% endfor %}
+        </table>
       </div>
     </div>
 
