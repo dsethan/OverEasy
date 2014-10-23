@@ -21,7 +21,7 @@ class Entry(models.Model):
 	def full_date_and_time_string(self):
 		date = self.date.strftime("%A, %B %d, %Y")
 		time = self.time.strftime("%I:%M am")
-		return date + " " + time
+		return date + " at " + time
 
 	def week_num(self):
 		iso = self.date.isocalendar()
