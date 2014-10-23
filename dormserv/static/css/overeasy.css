@@ -300,7 +300,7 @@ button.input {
 .demo-container {
     width: 100%;
     max-width: 350px;
-    margin: 50px auto;
+    margin-left: 0px;
 }
 
 form {
