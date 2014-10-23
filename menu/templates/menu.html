@@ -7,11 +7,12 @@
 <div id="calendar_wrapper">
 	<div id="cart-header">
 		{% if cart_more_than_one %}
+		
 		<table>
 			<td><h4>Cart</h4></td>
 			<td>&nbsp;</td>
 			{% for key, value in item_urls.items %}
-			<td> 
+			<td>
 
 				<img src={{ value }} style="pointer-events:none; width:60px; height:60px;" class="center">
 
