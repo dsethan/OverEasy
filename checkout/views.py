@@ -30,6 +30,8 @@ def checkout(request):
 		cart_items = cart.get_items()
 		items_with_quantity = cart.get_item_names_and_quantities()
 
+		urls = get_url_for_item(cart_items)
+
 		cards = Card.objects.filter(user=user)
 
 		card_on_file = False
@@ -42,6 +44,7 @@ def checkout(request):
 		return render_to_response(
 			'checkout.html',
 			{
+			'urls':urls,
 			'entry':entry,
 			'profile':profile,
 			'user':user,
@@ -170,3 +173,9 @@ def create_order(cart_id, user, context):
 		{
 		},
 		context)
+
+def get_url_for_item(item):
+	base_str_url = "/static/img/cart/"
+	end_str_url = ".png"
+	url = base_str_url + str(item.id) + end_str_url
+	return url

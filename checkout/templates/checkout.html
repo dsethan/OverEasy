@@ -74,10 +74,12 @@
         <table>
           {% for key, value in items_with_quantity.items %}
           <tr>
+            <td></td>
             <td>{{ value }}x {{ key }}</td>
             <td>{{ value.price }}</td>
+            <hr>
           </tr>
-          <hr>
+         
 
         {% endfor %}
         </table>
