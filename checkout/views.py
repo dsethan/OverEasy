@@ -103,7 +103,14 @@ def process_new_card(request):
 			card=token,
 			description=user.username)
 
-		return HttpResponse(customer.cards.data)
+		data = customer.cards.data
+		exp_month = data.exp_month
+		exp_year = data.exp_year
+		brand = data.brand
+		last_four = data.last4
+
+		return HttpResponse(str(exp_month) + " " + str(exp_year))
+
 		new_card = Card(
 			user = user,
 			customer=customer.id,
