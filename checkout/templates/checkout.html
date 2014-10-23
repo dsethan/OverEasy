@@ -97,10 +97,15 @@
         <div class="col-md-5">        
           <div class="form-container active">
             <form action="">
-                <input placeholder="Card number" class="form-control" type="text" name="number">
+                <input placeholder="Card number" class="form-control" type="text" name="number" data-stripe="number">
                 <input placeholder="Full name" class="form-control" type="text" name="name">
-                <input placeholder="MM/YY" type="text" class="form-control" name="expiry">
-                <input placeholder="CVC" type="text" class="form-control" name="cvc">
+                <input placeholder="MM/YY" type="text" class="form-control" name="expiry" data-stripe="exp-year">
+                <input placeholder="CVC" type="text" class="form-control" name="cvc" data-stripe="cvc">
+
+                <input type="hidden" name="total_price" value="{{ total_price }}">
+                <input type="hidden" name="cart_id" value="{{ cart_id }}">
+
+                <input type="submit">Submit Payment</button>
             </form>
           </div>
         </div>
