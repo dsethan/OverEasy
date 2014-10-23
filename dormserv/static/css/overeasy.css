@@ -156,6 +156,7 @@ img.center {
   position: absolute;
   right: 10px;
   margin-top: -15px;
+  padding-bottom: 1px;
 }
 
 #calendar-header h2{
