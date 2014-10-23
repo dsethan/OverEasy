@@ -38,11 +38,11 @@ Card:
 
   <h1>Charge $10 with Stripe</h1>
 
-  {% csrf_token %}
- 
   <form action="process_new_card/" method="POST" id="payment-form">
     <span class="payment-errors"></span>
  
+   {% csrf_token %}
+
     <div class="form-row">
       <label>
         <span>Card Number</span>
