@@ -38,6 +38,7 @@ def checkout(request):
 
 		for card in cards:
 			cust = stripe.Customer.retrieve(card.customer)
+			return HttpResponse(dir(cust))
 			for cc in cust.cards:
 				last_four.append(cc.last4)
 
