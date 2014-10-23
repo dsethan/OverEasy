@@ -88,13 +88,14 @@ def process_existing_card(request):
 def process_new_card(request):
 	context = RequestContext(request)
 	user = request.user
+	stripe.api_key = settings.STRIPE
+
 
 	if request.method == 'POST':
 		return HttpResponse(request)
 		cart_id = request.POST.get('cart_id')
 		total_price = request.POST.get('total_price')
 		token = request.POST['stripeToken']
-		stripe.api_key = settings.STRIPE
 		#last_four = request.POST.get('last4')
 		#brand = request.POST.get('brand')
 
