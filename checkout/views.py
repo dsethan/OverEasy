@@ -109,8 +109,6 @@ def process_new_card(request):
 		brand = data["brand"]
 		last_four = data["last4"]
 
-		return HttpResponse(str(exp_month) + " " + str(exp_year))
-
 		new_card = Card(
 			user = user,
 			customer=customer.id,
@@ -119,6 +117,16 @@ def process_new_card(request):
 
 		new_card.save()
 
+		new_card_attributes = CardAttributes(
+			card = new_card,
+			brand = brand,
+			exp_month = exp_month,
+			exp_year = exp_year,
+			last_four = last_four
+			)
+
+		new_card_attributes.save()
+		
 		stripe.Charge.create(
 			amount = int(total_price),
 			currency="usd",
