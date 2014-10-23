@@ -54,7 +54,7 @@
           {{ attr.brand }} ending in {{ attr.last_four }} Expiration: {{ attr.get_expiration_string }}<br>
           
           <br>
-          <form action="process_existing_card/" method="POST" id="payment-form">
+          <form action="process_existing_card/" method="POST">
             {% csrf_token %}   
             <input type="hidden" name="card" value="{{ attr.card }}">
             <input type="hidden" name="cart_id" value="{{ cart_id }}">
