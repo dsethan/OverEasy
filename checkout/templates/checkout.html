@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-
 {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'users/css/dormserv.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'users/css/bootstrap.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/card.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/overeasy.css' %}">
+
+<link href='http://fonts.googleapis.com/css?family=Oswald|Abel' rel='stylesheet' type='text/css'>
 
 <html lang="en">
 <head>
@@ -53,6 +55,9 @@
   </script>
 </head>
 <body>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
 
 {% include 'head.html' %}
 
@@ -155,5 +160,79 @@
 </div>
 
 
-</body>
+
+<h1>What You Ordered</h1>
+
+<table border='1'>
+  <tr>
+    <td>Item</td>
+    <td>Quantity</td>
+  </tr>
+{% for key, value in items_with_quantity.items %}
+  <tr>
+    <td>{{ key }}</td>
+    <td>{{ value }}</td>
+  </td>
+{% endfor %}
+</table>
+
+Total: {{ cart.view_order_total_in_usd }}
+
+<h2>When It's Coming</h2>
+{{ entry.get_date_string}}<br>
+{{ entry.get_start_time_string }} - {{ entry.get_end_time_string }} 
+
+<h2>Payment Details</h2>
+
+{% for card in cards %}
+Card:
+{{ card.token }}
+
+<form action="process_existing_card/" method="POST" id="payment-form">
+  {% csrf_token %}   
+  <input type="hidden" name="card_token" value="{{ card.token }}">
+  <input type="hidden" name="cart_id" value="{{ cart_id }}">
+  <input type="submit" value="Submit">
+</form>
+
+<br>
+{% endfor %}
+
+<h2>Add a Card</h2>
+
+  <form action="process_new_card/" method="POST" id="payment-form">
+    {% csrf_token %}
+    <span class="payment-errors"></span>
+ 
+    <div class="form-row">
+      <label>
+        <span>Card Number</span>
+        <input type="text" size="20" data-stripe="number"/>
+      </label>
+    </div>
+ 
+    <div class="form-row">
+      <label>
+        <span>CVC</span>
+        <input type="text" size="4" data-stripe="cvc"/>
+      </label>
+    </div>
+ 
+    <div class="form-row">
+      <label>
+        <span>Expiration (MM/YYYY)</span>
+        <input type="text" size="2" data-stripe="exp-month"/>
+      </label>
+      <span> / </span>
+      <input type="text" size="4" data-stripe="exp-year"/>
+    </div>
+  
+    <input type="hidden" name="total_price" value="{{ total_price }}">
+    <input type="hidden" name="cart_id" value="{{ cart_id }}">
+    <button type="submit">Submit Payment</button>
+  </form>
+
+    </div>
+  </body>
+
 </html>
