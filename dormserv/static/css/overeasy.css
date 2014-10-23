@@ -299,6 +299,7 @@ button.input {
 
 .demo-container {
     width: 100%;
+    margin-top: -30px;
     max-width: 350px;
     margin-left: 0px;
 }
