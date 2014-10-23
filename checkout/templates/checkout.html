@@ -49,14 +49,14 @@
             </tr>
             {% endfor %}
             <tr>
-              <td></td>
               <td>Tax</td>
-              <td>{{ cart.get_tax }}</td>
+              <td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
+              <td>{{ cart.view_tax_in_usd }}</td>
             </tr>
             <tr>
-              <td></td>
               <td>Total</td>
-              <td>{{ cart.get_total_price_of_cart }}</td>
+              <td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
+              <td>{{ cart.view_order_total_in_usd }}</td>
             </tr>
           </table>
           <br>

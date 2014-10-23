@@ -72,7 +72,7 @@ class Cart(models.Model):
 		total = 0
 		for i in items:
 			total = total + i.item.price
-		tax = float(total) * .000075
+		tax = float(total) * .00075
 		return tax
 
 	def get_total_price_of_cart(self):
@@ -80,14 +80,27 @@ class Cart(models.Model):
 		total = 0
 		for i in items:
 			total = total + i.item.price
-		tax = float(total) * .075
+		tax = float(total) * .00075
 		return total + tax
+
+	def view_tax_in_usd(self):
+		items = CartItem.objects.filter(cart=self)
+		total = 0
+		for i in items:
+			total = total + i.item.price
+		tax = float(total) * .00075
+		self_str = str(tax)
+		cents = self_str[-2:]
+		dollars = self_str[:-2]
+		return "$" + dollars + "." + cents
 
 	def view_order_total_in_usd(self):
 		items = CartItem.objects.filter(cart=self)
 		total = 0
 		for i in items:
 			total = total + i.item.price
+		tax = float(total) * .00075
+		total = total + tax
 		self_str = str(total)
 		cents = self_str[-2:]
 		dollars = self_str[:-2]
