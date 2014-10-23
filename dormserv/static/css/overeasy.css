@@ -326,10 +326,16 @@ button.input {
   font-size: 18px;
 }
 
-#calendar-wrapper h2{
-  font-family: 'Abel', sans-serif;
-}
 
 #phys-menu-wrapper {
   margin-top: 40px;
+}
+
+#label-for-menu {
+  padding-left: 10px;
+  padding-right: 20px;
+}
+
+#label-for-menu h2{
+  font-family: 'Abel', sans-serif;
 }
