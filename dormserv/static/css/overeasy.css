@@ -150,6 +150,13 @@ img.center {
   margin-left: 40px;
 }
 
+#cart-header {
+  font-family: 'Abel', sans-serif;
+  font-size: 45px;
+  margin-top: -18px;
+  text-align: right;
+}
+
 #calendar-header h2{
   font-size: 45px;
 }
