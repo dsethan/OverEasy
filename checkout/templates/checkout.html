@@ -101,6 +101,46 @@
           <div class="col-md-5">
             <div class="card-wrapper"></div>
           </div>
+          <div class="col-md-5">
+            <div class="form-container active">
+              <form action="process_new_card/" method="POST" id="payment-form">
+                {% csrf_token %}
+
+                <span class="payment-errors"></span>
+
+                <div class="form-row">
+                  <label>
+                    <span>Card Number</span>
+                    <input type="text" name="number" class="form-control" data-stripe="number">
+                  </label>
+                </div>
+
+                <div class="form-row">
+                  <input placeholder="Full name" class="form-control" type="text" name="name">
+                </div>
+
+                <div class="form-row">
+                  <label>
+                    <span>Expiration (MM/YYYY)</span>
+                    <input type="text" size="2" data-stripe="exp-month"/>
+                  </label>
+                  <span> / </span>
+                  <input type="text" size="4" data-stripe="exp-year"/>
+                </div>
+
+                <div class="form-row">
+                  <input placeholder="CVC" type="text" class="form-control" name="cvc" data-stripe="cvc">
+                </div>
+
+                <input type="hidden" name="total_price" value="{{ total_price }}">
+                <input type="hidden" name="cart_id" value="{{ cart_id }}">
+                <button type="submit">Submit Payment</button>
+              </form>
+            </div>
+          </div>
+      </div>
+  </form>
+
 
 </div>
 
