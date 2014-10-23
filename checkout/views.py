@@ -42,6 +42,7 @@ def checkout(request):
 		return render_to_response(
 			'checkout.html',
 			{
+			'entry':entry,
 			'profile':profile,
 			'user':user,
 			'cart':cart,
