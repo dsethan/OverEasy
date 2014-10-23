@@ -311,3 +311,7 @@ input {
     margin: 10px auto;
     display: block;
 }
+
+.form-container input {
+  font-size: 18px;
+}
