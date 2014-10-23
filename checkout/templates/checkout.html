@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 
 {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'users/css/overeasy.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'users/css/bootstrap.min.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'css/card.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'css/overeasy.css' %}"/>
 
 <html lang="en">
 <head>
@@ -93,6 +94,13 @@
           </tr>
           {% endfor %}
         </table>
+
+      <h4><b>Add Card Information</b></h4>
+      <hr>
+      <div class="row">
+          <div class="col-md-5">
+            <div class="card-wrapper"></div>
+          </div>
 
 </div>
 
