@@ -36,7 +36,7 @@ def checkout(request):
 
 		attributes = []
 		for card in cards:
-			attributes_for_card = CardAttributes.objects.filter(card=card)
+			attributes_for_card = CardAttributes.objects.get(card=card)
 			attributes.append(attributes_for_card)
 
 		card_on_file = False
