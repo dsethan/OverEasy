@@ -304,11 +304,11 @@ button.input {
     margin-left: 0px;
 }
 
-form {
+.form-container form {
     margin-top: -50px;
     margin: 30px;
 }
-input {
+.form-container input {
     width: 200px;
     margin: 10px auto;
     display: block;

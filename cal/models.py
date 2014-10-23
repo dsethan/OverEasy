@@ -59,6 +59,7 @@ class Entry(models.Model):
 
 		return orders
 	'''
+
 	def orders_still_open(self):
 		if self.available == 0:
 			return False
