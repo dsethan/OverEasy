@@ -72,7 +72,7 @@ class Cart(models.Model):
 		total = 0
 		for i in items:
 			total = total + i.item.price
-		tax = float(total) * .075
+		tax = float(total) * .000075
 		return tax
 
 	def get_total_price_of_cart(self):
