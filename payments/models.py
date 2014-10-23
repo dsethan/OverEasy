@@ -20,3 +20,6 @@ class CardData(models.Model):
 	card = models.ForeignKey(Card)
 	company = models.CharField(max_length=15,choices=CARD_TYPES)
 	last_four = models.CharField(max_length=5, default="****")
+
+class CardAttributes(models.Model):
+	

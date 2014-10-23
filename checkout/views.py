@@ -34,15 +34,6 @@ def checkout(request):
 
 		cards = Card.objects.filter(user=user)
 
-		last_four = []
-
-		for card in cards:
-			cust = stripe.Customer.retrieve(card.customer)
-			return HttpResponse(dir(cust))
-			for cc in cust.cards:
-				last_four.append(cc.last4)
-
-
 		card_on_file = False
 		if len(cards) > 0:
 			card_on_file = True
@@ -118,6 +109,8 @@ def process_new_card(request):
 			customer=customer.id,
 			token=token,
 			)
+
+		return HttpResponse(customer.cards)
 
 		new_card.save()
 
