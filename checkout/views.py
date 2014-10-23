@@ -116,7 +116,7 @@ def process_new_card(request):
 		#	last_four = last_four
 		#	)
 
-		new_card_data.save()
+		#new_card_data.save()
 
 		stripe.Charge.create(
 			amount = int(total_price),
