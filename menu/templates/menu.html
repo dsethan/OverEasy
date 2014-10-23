@@ -186,7 +186,6 @@
 				<!--<input type="submit" name="submit" value="Add to Cart">-->
 				</form>
 				</div>
-				<hr>
 				</div>
 			</td>
 			<td>
@@ -240,12 +239,11 @@
 				<!--<input type="submit" name="submit" value="Add to Cart">-->
 				</form>
 				</div>
-				<hr>
 				</div>
 			</td>
 			<td>
 				<div class="menu_box">
-				<!--<img src="{% static "img/menu/yogurt.png"%}" style="  pointer-events:none; width:186px; height:100px;" class="center">-->
+				<img src="{% static "img/menu/singleline.png"%}" style="  pointer-events:none; width:186px; height:100px;" class="center">
 				
 
 				<form role="form" method="post" action="/menu/">
@@ -294,12 +292,11 @@
 				<!--<input type="submit" name="submit" value="Add to Cart">-->
 				</form>
 				</div>
-				<hr>
 				</div>
 			</td>
 			<td>
 				<div class="menu_box">
-				<!--<img src="{% static "img/menu/green.png"%}" style="  pointer-events:none; width:186px; height:100px;" class="center">-->
+				<img src="{% static "img/menu/singleline.png"%}" style="  pointer-events:none; width:186px; height:100px;" class="center">
 				
 
 				<form role="form" method="post" action="/menu/">
@@ -346,7 +343,77 @@
 				<!--<input type="submit" name="submit" value="Add to Cart">-->
 				</form>
 				</div>
-				<hr>
+				</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td>
+				<div class="menu_box">
+				<img src="{% static "img/menu/singleline.png"%}" style="  pointer-events:none; width:186px; height:100px;" class="center">
+				
+
+				<form role="form" method="post" action="/menu/">
+				{% csrf_token %}
+				<input type="hidden" name="item_id" value="16">
+				<input type="hidden" name="entry_id" value="{{ entry_id }}">
+				<!--<div class="cart_add_button">
+					<input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" />-->
+				</div>
+				<!--<input type="submit" name="submit" value="Add to Cart">-->
+				</form>
+				</div>
+				</div>
+			</td>
+			<td>
+				<div class="menu_box">
+				<!--<img src="{% static "img/menu/singleline.png"%}" style="  pointer-events:none; width:186px; height:100px;" class="center">-->
+				
+
+				<form role="form" method="post" action="/menu/">
+				{% csrf_token %}
+				<input type="hidden" name="item_id" value="{{ item.item.id }}">
+				<input type="hidden" name="entry_id" value="{{ entry_id }}">
+				<div class="cart_add_button">
+					<!--<input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" />-->
+				</div>
+				<!--<input type="submit" name="submit" value="Add to Cart">-->
+				</form>
+				</div>
+				</div>
+			</td>
+			<td>
+				<div class="menu_box">
+				<!--<img src="{% static "img/menu/yogurt.png"%}" style="  pointer-events:none; width:186px; height:100px;" class="center">-->
+				
+
+				<form role="form" method="post" action="/menu/">
+				{% csrf_token %}
+				<input type="hidden" name="item_id" value="{{ item.item.id }}">
+				<input type="hidden" name="entry_id" value="{{ entry_id }}">
+				<div class="cart_add_button">
+					<!--<input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" />-->
+				</div>
+				<!--<input type="submit" name="submit" value="Add to Cart">-->
+				</form>
+				</div>
+				</div>
+			</td>
+			<td>
+				<div class="menu_box">
+				<img src="{% static "img/menu/singleline.png"%}" style="  pointer-events:none; width:186px; height:100px;" class="center">
+				
+
+				<form role="form" method="post" action="/menu/">
+				{% csrf_token %}
+				<input type="hidden" name="item_id" value="24">
+				<input type="hidden" name="entry_id" value="{{ entry_id }}">
+				<div class="cart_add_button">
+					<!--<input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" />-->
+				</div>
+				<!--<input type="submit" name="submit" value="Add to Cart">-->
+				</form>
+				</div>
 				</div>
 			</td>
 		</tr>
