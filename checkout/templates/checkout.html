@@ -75,8 +75,9 @@
           {% for key, value in items_with_quantity.items %}
           <tr>
             <td></td>
-            <td>{{ value }}x {{ key }} &nbsp;</td>
-            <td>{{ key.price.get_total_price_of_cart }}</td>
+            <td>{{ value }}x {{ key }}</td>
+            <td>&nbsp; &nbsp;</td>
+            <td>{{ key.price.format_price_usd }}</td>
           </tr>
          
 
