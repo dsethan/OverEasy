@@ -96,7 +96,12 @@
         </div>
         <div class="col-md-5">        
           <div class="form-container active">
-            <form action="">
+            <form action="process_new_card/" method="POST" id="payment-form">
+
+                {% csrf_token %}   
+
+                <span class="payment-errors"></span>
+
                 <input placeholder="Card number" class="form-control" type="text" name="number" data-stripe="number">
                 <input placeholder="Full name" class="form-control" type="text" name="name">
                 <input placeholder="MM/YY" type="text" class="form-control" name="expiry" data-stripe="exp-year">
