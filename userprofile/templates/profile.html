@@ -14,9 +14,9 @@
             {{ profile.city }}, {{ profile.state }}<br>
             Phone: {{ profile.phone }}
           </h5>
-        </div>
-
         <a href="/profile"><input class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Change Address"></a>
+
+        </div>
 
        <div class="col-md-9">
        <h4><b>Your Orders</b></h4>
@@ -28,15 +28,21 @@
        <table>
        	<tr>
        		<td>Order Number</td>
+          <td>&nbsp;&nbsp;</td>
        		<td>When It's Coming</td>
+          <td>&nbsp;&nbsp;</td>
        		<td>Cost</td>
+          <td>&nbsp;&nbsp;</td>
        		<td>Order Status</td>
        	</tr>
        	{% for order in orders %}
        	<tr>
        		<td>{{ order.id }}</td>
+          <td>&nbsp;&nbsp;</td>
        		<td>{{ order.entry.full_date_and_time_string }}</td>
+          <td>&nbsp;&nbsp;</td>
        		<td>{{ order.view_order_total_in_usd}}</td>
+          <td>&nbsp;&nbsp;</td>
        		<td>{{ order.status }}</td>
        	</tr>
        {% endfor %}
