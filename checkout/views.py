@@ -55,7 +55,6 @@ def checkout(request):
 			'cards':cards,
 			'total_price':total_price,
 			'card_on_file':card_on_file,
-			'last_four':last_four,
 			},
 			context)
 
