@@ -95,8 +95,8 @@ def process_new_card(request):
 		total_price = request.POST.get('total_price')
 		token = request.POST.get('stripeToken')
 		stripe.api_key = settings.STRIPE
-		last_four = request.POST['last4']
-		brand = request.POST['brand']
+		last_four = request.POST.get('last4')
+		brand = request.POST.get('brand')
 
 		customer = stripe.Customer.create(
 			card=token,
