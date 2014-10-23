@@ -27,7 +27,6 @@
 			</td>
 			<td>&nbsp;</td>
 			{% endfor %}
-			<td><h4>Total: {{total }}</h4></td>
 			<td>
 				<form role="form" method="post" action="/checkout/">
 					{% csrf_token %}
@@ -41,6 +40,7 @@
 	</div>
 
 		<h2>MENU</h2>
+	<div id="phys-menu-wrapper">
 	<table>
 		<tr>
 			<td>
@@ -418,6 +418,7 @@
 			</td>
 		</tr>
 	</table>
+</div>
 
 </div>
 
