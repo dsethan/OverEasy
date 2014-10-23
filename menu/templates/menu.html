@@ -40,7 +40,9 @@
 	</div>
 
 		<h2>MENU</h2>
+	{% if cart_more_than_one %}
 	<div id="phys-menu-wrapper">
+	{% endif %}
 	<table>
 		<tr>
 			<td>
@@ -418,7 +420,9 @@
 			</td>
 		</tr>
 	</table>
+{% if_cart_more_than_one %}
 </div>
+{% endif %}
 
 </div>
 
