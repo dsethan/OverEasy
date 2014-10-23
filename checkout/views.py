@@ -90,6 +90,7 @@ def process_new_card(request):
 	user = request.user
 
 	if request.method == 'POST':
+		return HttpResponse(request)
 		cart_id = request.POST.get('cart_id')
 		total_price = request.POST.get('total_price')
 		token = request.POST['stripeToken']
