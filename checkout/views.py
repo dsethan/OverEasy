@@ -103,7 +103,7 @@ def process_new_card(request):
 			card=token,
 			description=user.username)
 
-		data = customer.cards.data
+		data = customer.cards.data[0]
 		exp_month = data["exp_month"]
 		exp_year = data["exp_year"]
 		brand = data["brand"]
