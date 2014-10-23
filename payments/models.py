@@ -19,4 +19,16 @@ class CardData(models.Model):
 		)
 	card = models.ForeignKey(Card)
 	company = models.CharField(max_length=15,choices=CARD_TYPES)
-	last_four = models.CharField(max_length=5, default="****")	
+	last_four = models.CharField(max_length=5, default="****")
+
+class CardAttributes(models.Model):
+	card = models.ForeignKey(Card)
+	brand = models.CharField(max_length=30)
+	exp_month = models.CharField(max_length=2)
+	exp_year = models.CharField(max_length=4)
+	last_four = models.CharField(max_length=4)
+
+	def get_expiration_string(self):
+		month = str(self.exp_month)
+		year = str(self.exp_year)
+		return month + "/" + year
