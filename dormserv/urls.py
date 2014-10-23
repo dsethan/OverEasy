@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^menu/', include('menu.urls')),
     url(r'^dashboard/', include('dashboard.urls')),
     url(r'^checkout/', include('checkout.urls')),
+    url(r'^profile/', include('userprofile.urls')),
 )
 
 if not settings.DEBUG:
