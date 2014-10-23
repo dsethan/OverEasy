@@ -16,11 +16,17 @@ def display_profile(request):
 	profile = UserProfile.objects.get(user=user)
 	orders = Order.objects.get(profile=profile)
 
+	no_orders_yet = False
+
+	if len(orders) == 0:
+		no_orders_yet = True
+
 	return render_to_response(
 		'profile.html',
 		{
 		'profile':profile,
 		'orders':orders,
+		'no_orders_yet':no_orders_yet,
 		},
 		context)
 

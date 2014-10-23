@@ -1,0 +1,50 @@
+{% extends 'cal_base.html' %}
+
+{% block content %}
+
+<div id="profile_header">
+	<h2><b>{{ profile.user.first_name }}'s Profile</b></h2>
+
+      <div class="row">
+        <div class="col-md-3">
+          <h4><b>Address<b></h4>
+          <h5>
+            {{ profile.user.first_name }} {{ profile.useruser.last_name }}<br>
+            {{ profile.address }}<br>
+            {{ profile.city }}, {{ profile.state }}<br>
+            Phone: {{ profile.phone }}
+          </h5>
+        </div>
+
+        <a href="/profile"><input class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Change Address"></a>
+
+       <div class="col-md-9">
+       <h4><b>Your Orders</b></h4>
+       <hr>
+
+       {% if no_orders_yet %}
+       You haven't yet placed any orders!
+       {% else %}
+       <table>
+       	<tr>
+       		<td>Order Number</td>
+       		<td>When It's Coming</td>
+       		<td>Cost</td>
+       		<td>Order Status</td>
+       	</tr>
+       	{% for order in orders %}
+       	<tr>
+       		<td>{{ order.id }}</td>
+       		<td>{{ order.entry.full_date_and_time_string }}</td>
+       		<td>{{ order.view_order_total_in_usd}}</td>
+       		<td>{{ order.status }}</td>
+       	</tr>
+       {% endfor %}
+       </table>
+       {% endif %}
+
+
+</div>
+
+
+{% endblock %}
