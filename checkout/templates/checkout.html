@@ -6,6 +6,7 @@
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   <title>Checkout</title>
  
+ 
   <!-- The required Stripe lib -->
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
  
@@ -48,6 +49,7 @@
       });
     });
   </script>
+
 {% endblock %}
 
 {% block content %}
@@ -219,7 +221,6 @@ Card:
  
     <div class="form-row">
       <label>
-        <span>Expiration (MM/YYYY)</span>
         <input type="text" size="2" data-stripe="exp-month"/>
       </label>
       <span> / </span>
