@@ -362,3 +362,11 @@ def homemenu(request):
 		'homemenu.html',
 		{},
 		context)
+
+def faq(request):
+	context = RequestContext(request)
+
+	return render_to_response(
+		'faq.html',
+		{},
+		context)

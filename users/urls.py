@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     url(r'^process_new_user', views.process_new_user, name='process_new_user'),
     url(r'^logout', views.user_logout, name='user_logout'),
     url(r'^homemenu', views.homemenu, name='homemenu'),
+    url(r'^faq', views.faq, name='faq'),
     )
