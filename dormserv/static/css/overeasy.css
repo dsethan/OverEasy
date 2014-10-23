@@ -298,7 +298,7 @@ button.input {
 }
 
 .col-md-4 h5{
-  font-size: 18px;
+  font-size: 22px;
 }
 
 .col-md-9 table {
@@ -317,8 +317,8 @@ button.input {
     margin: 30px;
 }
 .form-container input {
-    width: 90%;
-    margin: 10px auto;
+    width: 95%;
+    margin-top: -20px;
     display: block;
 }
 
