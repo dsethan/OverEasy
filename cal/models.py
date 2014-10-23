@@ -17,6 +17,12 @@ class Entry(models.Model):
 	shutoff_hour = models.IntegerField(default=2)
 	shutoff_min = models.IntegerField(default=0)
 
+
+	def full_date_and_time_string(self):
+		date = self.date.strftime("%A, %B %d, %Y")
+		time = self.time.strftime("%I:%M am")
+		return date + " " + time
+
 	def week_num(self):
 		iso = self.date.isocalendar()
 		return iso[1]
