@@ -130,7 +130,7 @@ def render_second_look_calendar(request):
 
 	days = [m, t, w, th, f]
 	
-	message = "Sorry! There is no more availability at that time."
+	message = "Aw, man! That time is no longer available."
 
 	return render_to_response(
 		'calendar.html',

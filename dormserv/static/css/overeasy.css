@@ -234,7 +234,8 @@ img.center {
 }
 
 #alert {
-  color: #800000;
+  margin-top: -10px;
+  color: #FF0000;
 }
 
 .button{
