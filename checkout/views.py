@@ -104,11 +104,10 @@ def process_new_card(request):
 			description=user.username)
 
 		data = customer.cards.data
-		return HttpResponse(data)
 		exp_month = data[exp_month]
-		exp_year = data.exp_year
-		brand = data.brand
-		last_four = data.last4
+		exp_year = data[exp_year]
+		brand = data[brand]
+		last_four = data[last4]
 
 		return HttpResponse(str(exp_month) + " " + str(exp_year))
 
