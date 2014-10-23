@@ -110,23 +110,11 @@ def process_new_card(request):
 
 		new_card.save()
 
-		company = ""
-		if brand == "Visa":
-			company = 'VIS'
-		elif brand == "MasterCard":
-			company = 'MCD'
-		elif brand == "American Express":
-			company = 'AME'
-		elif brand == "Discover":
-			company = 'DIS'
-		else:
-			brand = 'VIS'
-
-		new_card_data = CardData(
-			card = new_card,
-			company = company,
-			last_four = last_four
-			)
+		#new_card_data = CardData(
+		#	card = new_card,
+		#	company = company,
+		#	last_four = last_four
+		#	)
 
 		new_card_data.save()
 
