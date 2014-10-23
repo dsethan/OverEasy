@@ -74,8 +74,8 @@
         <table>
           {% for key, value in items_with_quantity.items %}
           <tr>
-            <td>{{ key }}x {{ value }}</td>
-            <td>{{ key.price }}</td>
+            <td>{{ value }}x {{ key }}</td>
+            <td>{{ value.price }}</td>
           </tr>
           <hr>
 
