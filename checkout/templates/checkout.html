@@ -86,33 +86,28 @@
         </table>
 
 
-                  <script src="{% static 'js/card.js' %}"></script>
-          <form>
-              <input type="text" name="number">
-              <input type="text" name="name"/>
-              <input type="text" name="expiry"/>
-              <input type="text" name="cvc"/>
-          </form>
-          <script>
-          // setting $.card.messages is one way to override
-          // the default field names
-          $.card.messages = {
-              validDate: 'expire\ndate',
-              monthYear: 'mm/yy'
-          }
 
-          $('form').card({
-              container: '.card-wrapper',
 
-              // passing in a messages object is another way to 
-              // override the default field names
-              messages: {
-                  validDate: 'expire\ndate',
-                  monthYear: 'mm/yy'
-              }
-          });
-          </script>
-      </div>
+    <div class="demo-container">
+        <div class="card-wrapper"></div>
+
+        <div class="form-container active">
+            <form action="">
+                <input placeholder="Card number" type="text" name="number">
+                <input placeholder="Full name" type="text" name="name">
+                <input placeholder="MM/YY" type="text" name="expiry">
+                <input placeholder="CVC" type="text" name="cvc">
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="{% static 'js/card.js' %}"></script>
+    <script>
+        $('.active form').card({
+            container: $('.card-wrapper')
+        })
+    </script>
     </div>
 
   </div>
