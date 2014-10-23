@@ -99,8 +99,8 @@ class Cart(models.Model):
 		total = 0
 		for i in items:
 			total = total + i.item.price
-		tax = float(total) * 7.5
-		total = total + tax
+		#tax = float(total) * 7.5
+		total = total #+ tax
 		self_str = str(total)
 		cents = self_str[-2:]
 		dollars = self_str[:-2]
