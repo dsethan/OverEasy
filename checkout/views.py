@@ -58,6 +58,7 @@ def checkout(request):
 			},
 			context)
 
+	return HttpResponse("You must first select some items from the cart!")
 
 @login_required
 def process_existing_card(request):
