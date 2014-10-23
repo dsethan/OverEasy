@@ -19,6 +19,7 @@ import stripe
 def checkout(request):
 	context = RequestContext(request)
 	user = request.user
+	profile = UserProfile.objects.get(user=user)
 
 	if request.method == 'POST':
 		entry_id = request.POST.get('entry_id')
@@ -37,6 +38,8 @@ def checkout(request):
 		return render_to_response(
 			'checkout.html',
 			{
+			'profile':profile,
+			'user':user,
 			'cart':cart,
 			'cart_id':cart_id,
 			'items_with_quantity':items_with_quantity,
