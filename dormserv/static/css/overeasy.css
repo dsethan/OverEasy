@@ -288,3 +288,7 @@ button.input {
   font-family: 'Abel', sans-serif;
   font-size: 13px;
 }
+
+.col-md-4 h5{
+  font-size: 13px;
+}
