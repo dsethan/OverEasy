@@ -32,6 +32,10 @@ def checkout(request):
 
 		cards = Card.objects.filter(user=user)
 
+		card_on_file = False
+		if len(cards) > 0:
+			card_on_file = True
+
 		total_price = cart.get_total_price_of_cart()
 		cart_id = cart.id
 
@@ -46,6 +50,7 @@ def checkout(request):
 			'entry':entry,
 			'cards':cards,
 			'total_price':total_price,
+			'card_on_file':card_on_file,
 			},
 			context)
 
