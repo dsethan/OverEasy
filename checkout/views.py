@@ -103,8 +103,6 @@ def process_new_card(request):
 		customer = stripe.Customer.create(
 			card=token,
 			description=user.username)
-
-		return HttpResponse(customer.cards)
 		
 		new_card = Card(
 			user = user,
