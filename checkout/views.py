@@ -44,7 +44,7 @@ def checkout(request):
 		return render_to_response(
 			'checkout.html',
 			{
-			'urls':urls,
+			#'urls':urls,
 			'entry':entry,
 			'profile':profile,
 			'user':user,
