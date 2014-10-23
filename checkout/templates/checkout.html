@@ -34,8 +34,8 @@
           <a href="/profile"><input class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Change Address"></a>
           <!--{% if card_on_file %}-->
           <h4><b>Payment<b></h4>
-          {% for card in last_four %}
-          {{ card }}
+          {% for attr in attributes %}
+          {{ attr.brand }} {{ attr.last_four }} Expiration: {{ attr.get_expiration_string }}
           {% endfor %}
           <!--{% endif %}-->
         </div>

@@ -8,7 +8,7 @@ from django.conf import settings
 from cal.models import Entry
 from users.models import UserProfile
 from cart.models import Cart, CartItem
-from payments.models import Card
+from payments.models import Card, CardAttributes
 from orders.models import Order, OrderItem
 
 import users.views
@@ -34,6 +34,11 @@ def checkout(request):
 
 		cards = Card.objects.filter(user=user)
 
+		attributes = []
+		for card in cards:
+			attributes_for_card = CardAttributes.objects.filter(card=card)
+			attributes.append(attributes_for_card)
+
 		card_on_file = False
 		if len(cards) > 0:
 			card_on_file = True
@@ -55,6 +60,7 @@ def checkout(request):
 			'cards':cards,
 			'total_price':total_price,
 			'card_on_file':card_on_file,
+			'attributes':attributes,
 			},
 			context)
 
@@ -126,7 +132,7 @@ def process_new_card(request):
 			)
 
 		new_card_attributes.save()
-		
+
 		stripe.Charge.create(
 			amount = int(total_price),
 			currency="usd",
