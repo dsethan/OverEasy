@@ -73,9 +73,11 @@ def process_existing_card(request):
 
 	if request.method == 'POST':
 		cart_id = request.POST.get('cart_id')
-		card = request.POST.get('card')
+		card_id = request.POST.get('card_id')
 		cart = Cart.objects.get(id=cart_id)
 		total_price = cart.get_total_price_of_cart()
+
+		card = Card.objects.get(id=card_id)
 
 		stripe.api_key = settings.STRIPE
 
