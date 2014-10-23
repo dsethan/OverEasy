@@ -104,13 +104,13 @@ def process_new_card(request):
 			card=token,
 			description=user.username)
 
+		return HttpResponse(customer.cards)
+		
 		new_card = Card(
 			user = user,
 			customer=customer.id,
 			token=token,
 			)
-
-		return HttpResponse(customer.cards)
 
 		new_card.save()
 
