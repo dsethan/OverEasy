@@ -93,6 +93,7 @@ def process_new_card(request):
 	if request.method == 'POST':
 		cart_id = request.POST.get('cart_id')
 		total_price = request.POST.get('total_price')
+		ident = request.POST.get('id')
 		token = request.POST['stripeToken']
 		stripe.api_key = settings.STRIPE
 		last_four = request.POST.get('last4')
