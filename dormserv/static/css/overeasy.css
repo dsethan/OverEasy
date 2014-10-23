@@ -313,12 +313,12 @@ button.input {
 }
 
 .form-container form {
-    margin-top: -50px;
-    margin: 30px;
+    margin-top: -90px;
+    margin: 10px;
 }
 .form-container input {
     width: 95%;
-    margin-top: -20px;
+    margin-top: 10px;
     display: block;
 }
 
