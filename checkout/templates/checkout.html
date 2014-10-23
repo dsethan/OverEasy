@@ -59,34 +59,8 @@
 
 
 <div id="wrap">
-  <h1>Charge</h1>
-
-  <h2> What you ordered: </h2>
-
-  <table>
-    <tr>
-      <td>Item</td>
-      <td>Quantity</td>
-      <td>Item Price</td>
-    </tr>
-  {% for item in order_items %}
-    <tr>
-      <td>{{ item.item.name }}</td>
-      <td>{{ item.quantity }}</td>
-      <td>{{ item.item.view_order_total_in_usd }}</td>
-    </tr>
-  {% endfor %}
-  </table>
-
   <br>
-  Total Order: {{ total_price_display }}
-  
-  <br><br>
-
-  <h2>For testing, use 4242424242424242 for card number, 05/15 for expiration date, and 050 for CVC code.</h2>
-
-  <br>
-  <form action="process/" method="POST" id="payment-form">
+  <form action="process_new_card/" method="POST" id="payment-form">
     {% csrf_token %}
     <span class="payment-errors"></span>
  
