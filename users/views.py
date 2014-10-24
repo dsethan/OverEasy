@@ -292,7 +292,7 @@ def verify_restaurant(start):
 		end = r.get_address_string()
 		try:
 			dirs = geo.directions(start, end)
-		except GoogleMapsError:
+		except:
 			wrong_addr = True
 			error = "Please enter a valid address."
 
