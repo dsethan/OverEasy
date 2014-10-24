@@ -86,6 +86,12 @@ def process_existing_card(request):
 		cart_id = request.POST.get('cart_id')
 		card_id = request.POST.get('card_id')
 		discount = request.POST.get('discount')
+
+		if discount == "False":
+			discount = False
+		if discount == "True":
+			discount = True
+
 		cart = Cart.objects.get(id=cart_id)
 		total_price = cart.get_total_price_of_cart()
 
@@ -120,6 +126,11 @@ def process_new_card(request):
 		token = request.POST['stripeToken']
 		#last_four = request.POST.get('last4')
 		#brand = request.POST.get('brand')
+
+		if discount == "False":
+			discount = False
+		if discount == "True":
+			discount = True
 
 		customer = stripe.Customer.create(
 			card=token,
@@ -165,7 +176,7 @@ def process_new_card(request):
 
 		return create_order(cart_id, user, context, discount)
 
-def create_order(cart_id, user, context):
+def create_order(cart_id, user, context, discount):
 	cart = Cart.objects.get(id=cart_id)
 	items = cart.get_items_and_quantities()
 	profile = users.views.return_associated_profile_type(user)
