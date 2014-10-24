@@ -197,6 +197,9 @@ def create_order(cart_id, user, context):
 	cart.cart_still_active = False
 	cart.delete()
 
+	profile = UserProfile.objects.get(user=user)
+	send_receipt_text(profile, new_order)
+
 	return render_to_response(
 		'successful_charge.html',
 		{
@@ -204,6 +207,15 @@ def create_order(cart_id, user, context):
 		},
 		context)
 
+def send_receipt_text(user, order):
+	account_sid = "ACa2d2fde5fb38917dc892c94654f345cd"
+	auth_token = "d5b72594bce3487a3dff812a08bc8265"
+	client = TwilioRestClient(account_sid, auth_token)
+	
+	msg = "Hey! Thanks for using Over Easy. We'll see you on " + order.entry.full_date_and_time_string_for_checkout + ". Your order details are on your profile. If you have any questions, email help@overeasyapp.com. See you in the morning!" 
+	message = client.messages.create(to=profile.phone, 
+		from_=settings.TWILIO_PHONE, 
+		body=msg)
 
 def get_url_for_item(item):
 	base_str_url = "/static/img/cart/"
