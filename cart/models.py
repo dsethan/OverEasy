@@ -79,7 +79,7 @@ class Cart(models.Model):
 
 	def get_tax_for_cart(self):
 		total = self.get_total_price_of_cart()
-		tax_raw = total_formatted * .075
+		tax_raw = total * .075
 		grand = (total + tax_raw) * .01
 		tax_rounded = round(grand, 2)
 		return tax_rounded
