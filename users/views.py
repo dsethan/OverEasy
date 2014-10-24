@@ -307,6 +307,24 @@ def verify_restaurant(start):
 		if dist < r.max_radius:
 			return (True, r)
 
+		components = start.split(" ")
+
+		blocked_addresses = ("Wannamaker", 
+			"Campus", 
+			"Chapel", 
+			"Towerview", 
+			"Keohane", 
+			"Union", 
+			"Kilgo", 
+			"Keohane", 
+			"Craven", 
+			"Few")
+
+		for bl in blocked_addresses:
+			if bl in components:
+				error = "Unfortunately, we are not yet delivering in your area."
+				return (False, error)
+
 	return (False, error)
 
 def verify_name(first, last):
@@ -332,25 +350,6 @@ def verify_address(address_string):
 		return (False, error)
 	split = str(result).split(",")
 	addr = split[0]
-	
-	components = addr.split(" ")
-
-	blocked_addresses = ("Wannamaker", 
-		"Campus", 
-		"Chapel", 
-		"Towerview", 
-		"Keohane", 
-		"Union", 
-		"Kilgo", 
-		"Keohane", 
-		"Craven", 
-		"Few")
-
-	for bl in blocked_addresses:
-		if bl in components:
-			error = "Please enter a valid address."
-			return (False, error)
-
 	city = split[1]
 	state = split[2]
 	return (True, addr, city, state)
