@@ -3,12 +3,16 @@ dj-database-url==0.3.0
 dj-static==0.0.6
 django-oauth2-provider==0.2.6.1
 django-toolbelt==0.0.1
+djangorestframework==2.4.3
 googlemaps==1.0.2
 gunicorn==19.1.1
+httplib2==0.9
 psycopg2==2.5.4
 pygeocoder==1.2.5
 requests==2.4.1
 shortuuid==0.4.2
+six==1.8.0
 static3==0.5.1
 stripe==1.19.0
+twilio==3.6.8
 wsgiref==0.1.2

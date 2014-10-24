@@ -16,6 +16,14 @@ class UserProfile(models.Model):
 	# Restaurant this UserProfile is mapped to
 	restaurant = models.ForeignKey(Restaurant)
 
+	def phone_just_digits(self):
+		digits = ""
+		for k in range(len(self.phone)):
+			if phone[k] == ('1' or '2' or '3' or '4' or '5' or '6' or '7' or '8' or '9' or '0'):
+				digits = digits + phone[k]
+
+		return digits
+
 	def get_address_string(self):
 		space = " "
 		address = str(self.address)
