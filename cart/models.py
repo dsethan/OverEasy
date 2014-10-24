@@ -102,6 +102,10 @@ class Cart(models.Model):
 		self_str = str(total)
 		cents = self_str[-2:]
 		dollars = self_str[:-2]
+		if len(dollars) == 0:
+			dollars = "0"
+		if len(cents) == 1:
+			cents = "0" + cents
 		return "$" + dollars + "." + cents
 
 	def get_tax_for_cart_in_usd(self):
