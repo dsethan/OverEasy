@@ -67,6 +67,7 @@ def checkout(request):
 			'total_price':total_price,
 			'card_on_file':card_on_file,
 			'attributes':attributes,
+			'entry_id':entry_id,
 			},
 			context)
 
