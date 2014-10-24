@@ -49,10 +49,13 @@ def checkout(request):
 		total_price = cart.get_total_price_of_cart()
 		cart_id = cart.id
 
+		referral_success = False
+
 		return render_to_response(
 			'checkout.html',
 			{
 			#'urls':urls,
+			'referral_success':referral_success,
 			'entry':entry,
 			'profile':profile,
 			'user':user,
@@ -183,6 +186,79 @@ def create_order(cart_id, user, context):
 		},
 		context)
 
+def process_discount(request):
+	context = RequestContext(request)
+	user = request.user
+
+	if request.method == 'POST':
+		stripe.api_key = settings.STRIPE
+		code = request.POST.get('code')
+		entry_id = request.POST.get('entry_id')
+		cart_id = request.POST.get('cart_id')
+		entry = Entry.objects.get(id=int(entry_id))
+		cart = Cart.objects.get(id=int(cart_id))
+		cart_items = cart.get_items()
+		items_with_quantity = cart.get_items_and_quantities()
+
+		#urls = get_url_for_item(cart_items)
+
+		cards = Card.objects.filter(user=user)
+
+		attributes = []
+		for card in cards:
+			attributes_for_card = CardAttributes.objects.get(card=card)
+			attributes.append(attributes_for_card)
+
+		card_on_file = False
+		if len(cards) > 0:
+			card_on_file = True
+
+		total_price = cart.get_total_price_of_cart()
+		cart_id = cart.id
+
+		# Check on TextReferral
+
+		text_referral = TextReferral.objects.get(code=code)
+
+		referral_success = False
+
+		discount_amount = ""
+
+		if user == text_referral.initiator and text_referral.active:
+			if cart.total > 1000:
+				cart.total = cart.total - 1000
+				cart.save()
+				discount_amount = "$10.00"
+			else:
+				discount_amount = cart.view_order_total_in_usd()
+				cart.total = 0
+				cart.save()
+
+			referral_success = True
+		
+		return render_to_response(
+			'checkout.html',
+			{
+			#'urls':urls,
+			'discount_amount':discount_amount,
+			'referral_success':referral_success,
+			'entry':entry,
+			'profile':profile,
+			'user':user,
+			'cart':cart,
+			'cart_id':cart_id,
+			'items_with_quantity':items_with_quantity,
+			'entry':entry,
+			'cards':cards,
+			'total_price':total_price,
+			'card_on_file':card_on_file,
+			'attributes':attributes,
+			},
+			context)
+
+
+	return HttpResponse("You must first select some items from the cart!")
+
 def process_referral(request):
 	context = RequestContext(request)
 	user = request.user
@@ -199,9 +275,8 @@ def process_referral(request):
 		#if not text_referral.is_target_in_system() and text_referral.verify_not_signed_up():
 		text_referral.save()
 		text_referral.send_text_to_target()
-		return redirect('/checkout')
-
-		#return redirect('/checkout')
+		return HttpResponse("Successful referral")
+	
 
 	return HttpResponse("This page is not accessible")
 
