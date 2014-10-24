@@ -108,7 +108,7 @@ def process_existing_card(request):
 			customer = card.customer
 			)
 
-		return create_order(cart_id, user, context)
+		return create_order(cart_id, user, context, discount)
 
 	return HttpResponse("Uh oh! Something went wrong :(")
 
