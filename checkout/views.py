@@ -217,7 +217,7 @@ def generate_invite_code():
 	invite_string = a1+a2+a3+a4+a5+a6
 
 	for r in TextReferral.objects.all():
-		if r.initiator_code == invite_string:
+		if r.initator_code == invite_string:
 			return generate_invite_code(self)
 
 	return invite_string
