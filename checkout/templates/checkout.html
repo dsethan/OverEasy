@@ -63,7 +63,7 @@
 
           <div class="row">
           {% if card_on_file %}
-          <div class="col-md-8">
+          <div class="col-md-5">
           <h4><b>Choose Payment Method<b></h4>
           <hr>
           <h5>
@@ -137,11 +137,17 @@
                 </form>
           {% endif %}
 
-            <div class="col-md-6">
+            <div class="col-md-4">
 
-            <h4><b>Want Free Breakfast</b></h4>
+            <h4><b>Want Free Breakfast?</b></h4>
                 <hr>
-                <h5>Simply refer a friend.</h5>
+                <h5 stype="text-size:20px">Simply refer a friend.</h5>
+                <form action="process_referral/" method="POST">
+                  <div class="form-row">
+                    <input placeholder="Phone Number" type="text" class="form-control" name="phone">
+                  </div>
+                  <input type="submit" class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Refer a Friend!">
+                </form>
 
             
             </div>
