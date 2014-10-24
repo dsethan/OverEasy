@@ -192,6 +192,7 @@ def create_order(cart_id, user, context):
 def process_discount(request):
 	context = RequestContext(request)
 	user = request.user
+	profile = UserProfile.objects.get(user=user)
 
 	if request.method == 'POST':
 		stripe.api_key = settings.STRIPE
