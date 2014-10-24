@@ -367,3 +367,7 @@ button.input {
   margin-top: -60px;
   margin-right: 30px;
 }
+
+.col-md-5 p{
+  font-size: 22px;
+}
