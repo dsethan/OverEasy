@@ -79,9 +79,9 @@ class Cart(models.Model):
 
 	def get_tax_for_cart(self):
 		total = self.get_total_price_of_cart()
-		total_formatted = total * .01
-		tax_raw = total_formatted * 7.5
-		tax_rounded = round(tax_raw, 2)
+		tax_raw = total_formatted * .075
+		grand = (total + tax_raw) * .01
+		tax_rounded = round(grand, 2)
 		return tax_rounded
 
 	def grand_total(self):
@@ -102,19 +102,19 @@ class Cart(models.Model):
 
 
 	def get_tax_for_cart_in_usd(self):
-		total = self.get_total_price_of_cart()
-		total_formatted = total * .01
-		tax_raw = total_formatted * 7.5
-		tax_rounded = round(tax_raw, 2)
-		total = tax_rounded * 100
-		self_str = str(total)
-		if len(str(total)) == 1:
-			return "$0.0" + str(total)
-		if len(str(total)) == 2:
-			return "$0." + str(total)
-		cents = self_str[-2:]
-		dollars = self_str[:-2]
+		tax = self.get_tax_for_cart()
+		self_str = str(tax)
+		split_tax = self.str.split(".")
+		dollars = split_tax[0]
+		cents = ""
+		if len(split_tax[1]) == 0:
+			cents = "00"
+		if len(split_tax[1]) == 1:
+			cents = split_tax[1] + "0"
+		if len(split_tax[1]) == 2:
+			cents = split_tax[1]
 		return "$" + dollars + "." + cents
+
 
 class CartItem(models.Model):
 	cart = models.ForeignKey(Cart)
