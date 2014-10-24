@@ -30,3 +30,15 @@ def display_profile(request):
 		},
 		context)
 
+def change_address(request):
+	user = request.user
+	profile = UserProfile.objects.get(user=user)
+
+
+	return render_to_response(
+		'change_address.html',
+		{
+		'profile':profile,
+		},
+		context)
+

@@ -1,0 +1,24 @@
+{% extends 'profile_base.html' %}
+
+{% block content %}
+
+<div id="profile-header">
+	<h2><b>{{ profile.user.first_name }}'s Profile</b></h2>
+
+          <h4><b>Prior Address<b></h4>
+          <h5>
+            {{ profile.user.first_name }} {{ profile.user.last_name }}<br>
+            {{ profile.address }}<br>
+            {{ profile.city }}, {{ profile.state }}<br>
+            Phone: {{ profile.phone }}
+          </h5>
+        <a href="/profile"><input class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Change Address"></a>
+
+        </div>
+
+
+
+</div>
+
+
+{% endblock %}
