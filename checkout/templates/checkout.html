@@ -141,6 +141,7 @@
 
             <h4><b>Want Free Breakfast?</b></h4>
                 <hr>
+                {% csrf_token %}
                 <h5 stype="text-size:20px">Simply refer a friend.</h5>
                 <form action="process_referral/" method="POST">
                   <div class="form-row">
