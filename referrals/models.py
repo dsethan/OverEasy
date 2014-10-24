@@ -37,7 +37,7 @@ class TextReferral(models.Model):
 		auth_token = "d5b72594bce3487a3dff812a08bc8265"
 		client = TwilioRestClient(account_sid, auth_token)
 		 
-		msg = "Hello there!" + str(self.initiator.first_name) + " " + str(self.initiator.last_name) + " has invited you to sign up for Over Easy! Go to overeasyapp.com to sign up. Put in code " + self.initiator_code + " for a free breakfast!"
+		msg = "Hello there!" + str(self.initiator.first_name) + " " + str(self.initiator.last_name) + " has invited you to sign up for Over Easy! Go to overeasyapp.com to sign up. Put in code " + self.initator_code + " for a free breakfast!"
 		message = client.messages.create(to=self.target_phone, 
 			from_=settings.TWILIO_PHONE, 
 			body=msg)
