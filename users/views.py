@@ -205,8 +205,12 @@ def gather_errors_for_template(first, last, username, address_string, phone,
 		num_errors.append(num[1])
 
 	if not res[0] and verify_address(address_string)[0]:
-		demand = demand_instance_found(first, last, username, address_string, phone, request)
-		return demand
+		if res[1] == "Please enter a valid address.":
+			res_errors.append(res[1])
+			
+		else:
+			demand = demand_instance_found(first, last, username, address_string, phone, request)
+			return demand
 
 	states = []
 
