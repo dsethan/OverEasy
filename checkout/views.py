@@ -239,9 +239,32 @@ def process_discount(request):
 				cart.total = 0
 				cart.save()
 
+			text_referral.delete()
 			referral_success = True
 		else:
 			referral_failure = True
+
+		profile_phone = phone_just_numbers(profile.phone)
+		text_referral_phone = phone_just_numbers(text_referral.target_phone)
+
+		if profile_phone == text_referral_phone:
+			if text_referral.active == True:
+				referral_success = False
+				referral_failure = True
+
+			else:
+				text_referral.active == True
+				text_referral.save()
+				if cart.total > 1000:
+					cart.total = cart.total - 1000
+					cart.save()
+					discount_amount = "$10.00"
+				else:
+					discount_amount = cart.view_order_total_in_usd()
+					cart.total = 0
+					cart.save()
+				referral_success = True
+				referral_failure = False
 		
 		return render_to_response(
 			'checkout.html',
@@ -266,6 +289,15 @@ def process_discount(request):
 
 
 	return HttpResponse("You must first select some items from the cart!")
+
+def phone_just_numbers(number):
+	to_return = ""
+
+	for k in range(len(number)):
+		if k == ('0' or '1' or '2' or '3' or '4' or '5' or '6' or '7' or '8' or '9'):
+			to_return = to_return + k
+
+	return to_return
 
 def process_referral(request):
 	context = RequestContext(request)
