@@ -356,3 +356,8 @@ button.input {
 .col-md-9 table tr td{
   font-weight: normal;
 }
+
+#card-errors {
+  font-size: 16px;
+  color: #FF0000;
+}

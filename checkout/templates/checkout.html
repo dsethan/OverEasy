@@ -93,7 +93,7 @@
             <input type="submit" class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Use this card">
           </form>
           <br><br>
-
+          </div>
           {% endfor %}
           </h5>
 
@@ -110,8 +110,9 @@
                 <form action="process_new_card/" method="POST" id="payment-form">
                   {% csrf_token %}
 
+                  <div id="card-errors">
                   <span class="payment-errors"></span>
-
+                  </div>
                   <div class="form-row">
                       <input placeholder="Card Number" type="text" name="number" class="form-control" data-stripe="number">
                   </div>
