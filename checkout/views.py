@@ -155,7 +155,7 @@ def process_new_card(request):
 		total_price = cart.grand_total()
 
 		stripe.Charge.create(
-			amount = grand_total,
+			amount = total_price,
 			currency="usd",
 			customer=new_card.customer,
 			)
