@@ -32,7 +32,25 @@
             Phone: {{ profile.phone }}
           </h5>
           <a href="/profile"><input class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Change Address"></a>
-          
+
+
+        <h4><b>Have A Code?</b></h4>
+        <hr>
+        <h5 style="text-size: 20px;">Enter it here.</h5>
+        <form action="/checkout/process_discount/" method="POST">
+            {% csrf_token %}
+
+            <div class="form-row">
+              <input placeholder="Input Referral Code" type="text" class="form-control" name="code">
+            </div>
+
+            <input type="hidden" name="entry_id" value="{{ entry_id }}">
+            <input type="hidden" name="total_price" value="{{ total_price }}">
+            <input type="hidden" name="cart_id" value="{{ cart_id }}">
+
+            <input type="submit" class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Refer a Friend!">
+          </form>
+    
         </div>
         <div class="col-md-9">
           {% if referral_failure %}
@@ -150,28 +168,7 @@
             </div>
           {% endif %}
 
-            <div class="col-md-4">
 
-              <h4><b>Have A Code?</b></h4>
-              <hr>
-              <h5 style="text-size: 20px;">Enter it here.</h5>
-              <form action="/checkout/process_discount/" method="POST">
-                  {% csrf_token %}
-
-                  <div class="form-row">
-                    <input placeholder="Input Referral Code" type="text" class="form-control" name="code">
-                  </div>
-
-                  <input type="hidden" name="entry_id" value="{{ entry_id }}">
-                  <input type="hidden" name="total_price" value="{{ total_price }}">
-                  <input type="hidden" name="cart_id" value="{{ cart_id }}">
-
-                  <input type="submit" class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Refer a Friend!">
-                </form>
-
-
-              </div>
-            </div>
           </div>
 
           <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
