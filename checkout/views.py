@@ -191,7 +191,7 @@ def process_referral(request):
 		phone = request.POST.get('phone')
 		code = generate_invite_code()
 		text_referral = TextReferral(
-			initator = user,
+			initiator = user,
 			target_phone = phone,
 			initator_code = code,
 			active = False)
