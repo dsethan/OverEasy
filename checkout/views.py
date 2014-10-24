@@ -50,12 +50,14 @@ def checkout(request):
 		cart_id = cart.id
 
 		referral_success = False
+		referral_failure = False
 
 		return render_to_response(
 			'checkout.html',
 			{
 			#'urls':urls,
 			'referral_success':referral_success,
+			'referral_failure':referral_failure,
 			'entry':entry,
 			'profile':profile,
 			'user':user,
@@ -222,6 +224,7 @@ def process_discount(request):
 		text_referral = TextReferral.objects.get(initator_code=code)
 
 		referral_success = False
+		referral_failure = True
 
 		discount_amount = ""
 
@@ -236,6 +239,8 @@ def process_discount(request):
 				cart.save()
 
 			referral_success = True
+		else:
+			referral_failure = True
 		
 		return render_to_response(
 			'checkout.html',
@@ -243,6 +248,7 @@ def process_discount(request):
 			#'urls':urls,
 			'discount_amount':discount_amount,
 			'referral_success':referral_success,
+			'referral_failure':referral_failure,
 			'entry':entry,
 			'profile':profile,
 			'user':user,

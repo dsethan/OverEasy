@@ -35,6 +35,9 @@
           
         </div>
         <div class="col-md-9">
+          {% if referral_failure %}
+          Your referral code is not valid.
+          {% endif %}
           <h4><b>Your Order for {{ entry.full_date_and_time_string }}<b></h4>
           <hr>
           <table>
