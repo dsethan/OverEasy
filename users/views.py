@@ -285,16 +285,24 @@ def store_user_data(un, pw, addr, num, nom, res, request):
 def verify_restaurant(start):
 	api_key = settings.GOOGLE_MAPS
 	geo = GoogleMaps(api_key)
+	error = "Unfortunately, we are not yet delivering in your area."
+	wrong_addr = False
 
 	for r in Restaurant.objects.all():
 		end = r.get_address_string()
-		dirs = geo.directions(start, end)
-		dist = dirs['Directions']['Distance']['meters']
+		try:
+			dirs = geo.directions(start, end)
+		except GoogleMapsError:
+			wrong_addr = True
+			error = "Please enter a valid address."
+
+		dist = float("inf")
+		if not wrong_addr:
+			dist = dirs['Directions']['Distance']['meters']
 
 		if dist < r.max_radius:
 			return (True, r)
 
-	error = "Unfortunately, we are not yet delivering in your area."
 	return (False, error)
 
 def verify_name(first, last):
