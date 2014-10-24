@@ -70,8 +70,8 @@ WSGI_APPLICATION = 'dormserv.wsgi.application'
 
 # API Keys
 GOOGLE_MAPS = "AIzaSyAUYyU_aUoW5iu_pZZ30U0V_bfdPHQMBQM"
-STRIPE = "sk_test_gii6sAzH4fvDd6xCENhAgb9j"
-TWILIO_SID = "ACa2d2fde5fb38917dc892c94654f345cd"
+STRIPE = "sk_live_dNlZsFMzrLL3XTBqJw1DRzCi"
+TWILIO_SID = "  "
 TWILIO_AUTH = "d5b72594bce3487a3dff812a08bc8265"
 TWILIO_PHONE = "+19195513279"
 
