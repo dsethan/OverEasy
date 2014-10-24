@@ -90,10 +90,11 @@ class Cart(models.Model):
 		tax_raw = total_formatted * 7.5
 		tax_rounded = round(tax_raw, 2)
 		total = tax_rounded * 100
-		if len(total) == 1:
-			return "$0.0" + total
-		if len(total) == 2:
-			return "$0." + total
+		self_str = str(total)
+		if len(str(total)) == 1:
+			return "$0.0" + str(total)
+		if len(str(total)) == 2:
+			return "$0." + str(total)
 		cents = self_str[-2:]
 		dollars = self_str[:-2]
 		return "$" + dollars + "." + cents
