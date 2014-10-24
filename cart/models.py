@@ -98,6 +98,7 @@ class Cart(models.Model):
 
 	def get_grand_total_in_usd(self):
 		total = self.grand_total()
+		total = int(total)
 		self_str = str(total)
 		cents = self_str[-2:]
 		dollars = self_str[:-2]
@@ -105,6 +106,7 @@ class Cart(models.Model):
 
 	def get_tax_for_cart_in_usd(self):
 		total = self.get_tax_for_cart()
+		total = int(total)
 		self_str = str(total)
 		cents = self_str[-2:]
 		dollars = self_str[:-2]
