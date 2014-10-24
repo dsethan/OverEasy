@@ -16,6 +16,7 @@ from orders.models import Order, OrderItem
 import users.views
 
 import stripe
+from twilio.rest import TwilioRestClient
 
 @login_required
 def checkout(request):
