@@ -361,3 +361,8 @@ button.input {
   font-size: 16px;
   color: #FF0000;
 }
+
+.bottom-menu h4 {
+  font-family: 'Abel', sans-serif;
+  margin-top: -15px;
+}
