@@ -97,7 +97,7 @@
           {{ attr.brand }} ending in {{ attr.last_four }} Exp. {{ attr.get_expiration_string }}<br>
           
           <br>
-          <form action="process_existing_card/" method="POST">
+          <form action="/checkout/process_existing_card/" method="POST">
             {% csrf_token %}   
             <input type="hidden" name="card_id" value="{{ attr.card.id }}">
             <input type="hidden" name="cart_id" value="{{ cart_id }}">
@@ -118,7 +118,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-container active">
-                <form action="process_new_card/" method="POST" id="payment-form">
+                <form action="/checkout/process_new_card/" method="POST" id="payment-form">
                   {% csrf_token %}
 
                   <div id="card-errors">
@@ -153,7 +153,7 @@
               <h4><b>Have A Code?</b></h4>
               <hr>
               <h5 style="text-size: 20px;">Enter it here.</h5>
-              <form action="process_discount/" method="POST">
+              <form action="/checkout/process_discount/" method="POST">
                   {% csrf_token %}
 
                   <div class="form-row">
