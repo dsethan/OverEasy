@@ -1,20 +1,22 @@
 {% extends 'checkout_base.html' %}
 
 {% block content %}
-<h1>Charge Successful!</h1>
-<h2>Want your next one free?</h2>
+<div id="calendar-header">
 
-<h4><b>Want Free Breakfast?</b></h4>
-    <hr>
-    <h5 style="text-size:20px;">Simply refer a friend.</h5>
-    <form action="/checkout/process_referral/" method="POST">
-      {% csrf_token %}
+	<h1>Charge Successful!</h1>
+	<h2>Want your next one free?</h2>
 
-      <div class="form-row">
-        <input placeholder="Phone Number" type="text" class="form-control" name="phone">
-      </div>
+	<h4><b>Want Free Breakfast?</b></h4>
+	    <hr>
+	    <h5 style="text-size:20px;">Simply refer a friend.</h5>
+	    <form action="/checkout/process_referral/" method="POST">
+	      {% csrf_token %}
 
-      <input type="submit" class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Refer a Friend!">
-    </form>
+	      <div class="form-row">
+	        <input placeholder="Phone Number" type="text" class="form-control" name="phone">
+	      </div>
+	      <input type="submit" class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Refer a Friend!">
+	    </form>
+</div>
 
 {% endblock %}
