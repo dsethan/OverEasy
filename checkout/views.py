@@ -28,6 +28,10 @@ def checkout(request):
 		entry_id = request.POST.get('entry_id')
 		cart_id = request.POST.get('cart_id')
 		entry = Entry.objects.get(id=int(entry_id))
+
+		if entry.open() == False or entry.orders_still_open == False:
+			return redirect('/cal/entry_not_avail/')
+
 		cart = Cart.objects.get(id=int(cart_id))
 		cart_items = cart.get_items()
 		items_with_quantity = cart.get_items_and_quantities()
