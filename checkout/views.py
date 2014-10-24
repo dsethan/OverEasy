@@ -194,10 +194,10 @@ def process_referral(request):
 			initator_code = code,
 			active = False)
 
-		if not text_referral.is_target_in_system() and text_referral.verify_not_signed_up():
-			text_referral.save()
-			text_referral.send_text_to_target()
-			return redirect('/checkout')
+		#if not text_referral.is_target_in_system() and text_referral.verify_not_signed_up():
+		text_referral.save()
+		text_referral.send_text_to_target()
+		return redirect('/checkout')
 
 		return redirect('/checkout')
 
