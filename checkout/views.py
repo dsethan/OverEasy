@@ -45,10 +45,10 @@ def checkout(request):
 		if len(cards) > 0:
 			card_on_file = True
 
-		total_price = cart.get_total_price_of_cart()
-		tax = cart.get_tax_for_cart_in_usd()
+		total_price = cart.grand_total()
+		tax = cart.get_tax_for_cart()
 
-		grand_total = cart.get_grand_total_in_usd()
+		grand_total = cart.grand_total()
 
 		cart_id = cart.id
 
