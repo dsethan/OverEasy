@@ -203,7 +203,7 @@ def process_referral(request):
 
 	return HttpResponse("This page is not accessible")
 
-def generate_invite_code(self):
+def generate_invite_code():
 	alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 	a1 = random.choice(alpha)
 	a2 = random.choice(alpha)
