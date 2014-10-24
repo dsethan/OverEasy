@@ -152,7 +152,7 @@ def process_new_card(request):
 		new_card_attributes.save()
 
 		cart = Cart.objects.get(id=int(cart_id))
-		total_price = grand_total()
+		total_price = cart.grand_total()
 
 		stripe.Charge.create(
 			amount = grand_total,
