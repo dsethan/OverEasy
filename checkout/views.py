@@ -222,39 +222,20 @@ def process_discount(request):
 
 		# Check on TextReferral
 
-		text_referral = TextReferral.objects.get(initator_code=code)
+		codes = []
+		for tr in TextReferral.objects.all():
+			codes.append(tr.initator_code)
 
-		referral_success = False
-		referral_failure = True
+		if code in codes:
 
-		discount_amount = ""
+			text_referral = TextReferral.objects.get(initator_code=code)
 
-		if user == text_referral.initiator and text_referral.active:
-			if cart.total > 1000:
-				cart.total = cart.total - 1000
-				cart.save()
-				discount_amount = "$10.00"
-			else:
-				discount_amount = cart.view_order_total_in_usd()
-				cart.total = 0
-				cart.save()
-
-			text_referral.delete()
-			referral_success = True
-		else:
+			referral_success = False
 			referral_failure = True
 
-		profile_phone = phone_just_numbers(profile.phone)
-		text_referral_phone = phone_just_numbers(text_referral.target_phone)
+			discount_amount = ""
 
-		if profile_phone == text_referral_phone:
-			if text_referral.active == True:
-				referral_success = False
-				referral_failure = True
-
-			else:
-				text_referral.active == True
-				text_referral.save()
+			if user == text_referral.initiator and text_referral.active:
 				if cart.total > 1000:
 					cart.total = cart.total - 1000
 					cart.save()
@@ -263,30 +244,78 @@ def process_discount(request):
 					discount_amount = cart.view_order_total_in_usd()
 					cart.total = 0
 					cart.save()
-				referral_success = True
-				referral_failure = False
-		
-		return render_to_response(
-			'checkout.html',
-			{
-			#'urls':urls,
-			'discount_amount':discount_amount,
-			'referral_success':referral_success,
-			'referral_failure':referral_failure,
-			'entry':entry,
-			'profile':profile,
-			'user':user,
-			'cart':cart,
-			'cart_id':cart_id,
-			'items_with_quantity':items_with_quantity,
-			'entry':entry,
-			'cards':cards,
-			'total_price':total_price,
-			'card_on_file':card_on_file,
-			'attributes':attributes,
-			},
-			context)
 
+				text_referral.delete()
+				referral_success = True
+			else:
+				referral_failure = True
+
+			profile_phone = phone_just_numbers(profile.phone)
+			text_referral_phone = phone_just_numbers(text_referral.target_phone)
+
+			if profile_phone == text_referral_phone:
+				if text_referral.active == True:
+					referral_success = False
+					referral_failure = True
+
+				else:
+					text_referral.active == True
+					text_referral.save()
+					if cart.total > 1000:
+						cart.total = cart.total - 1000
+						cart.save()
+						discount_amount = "$10.00"
+					else:
+						discount_amount = cart.view_order_total_in_usd()
+						cart.total = 0
+						cart.save()
+					referral_success = True
+					referral_failure = False
+			
+			return render_to_response(
+				'checkout.html',
+				{
+				#'urls':urls,
+				'discount_amount':discount_amount,
+				'referral_success':referral_success,
+				'referral_failure':referral_failure,
+				'entry':entry,
+				'profile':profile,
+				'user':user,
+				'cart':cart,
+				'cart_id':cart_id,
+				'items_with_quantity':items_with_quantity,
+				'entry':entry,
+				'cards':cards,
+				'total_price':total_price,
+				'card_on_file':card_on_file,
+				'attributes':attributes,
+				},
+				context)
+
+		else:
+			referral_success = False
+			referral_failure = True
+			return render_to_response(
+				'checkout.html',
+				{
+				#'urls':urls,
+				'discount_amount':discount_amount,
+				'referral_success':referral_success,
+				'referral_failure':referral_failure,
+				'entry':entry,
+				'profile':profile,
+				'user':user,
+				'cart':cart,
+				'cart_id':cart_id,
+				'items_with_quantity':items_with_quantity,
+				'entry':entry,
+				'cards':cards,
+				'total_price':total_price,
+				'card_on_file':card_on_file,
+				'attributes':attributes,
+				},
+				context)
 
 	return HttpResponse("You must first select some items from the cart!")
 
