@@ -342,6 +342,11 @@ button.input {
   font-size: 50px;
 }
 
+#label-for-menu h3{
+  font-family: 'Abel', sans-serif;
+  font-size: 30px;
+}
+
 .card_info {
   font-size: 16px;
 }
