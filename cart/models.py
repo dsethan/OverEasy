@@ -104,7 +104,7 @@ class Cart(models.Model):
 	def get_tax_for_cart_in_usd(self):
 		tax = self.get_tax_for_cart()
 		self_str = str(tax)
-		split_tax = self.str.split(".")
+		split_tax = self_str.split(".")
 		dollars = split_tax[0]
 		cents = ""
 		if len(split_tax[1]) == 0:
