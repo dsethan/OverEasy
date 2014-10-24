@@ -256,8 +256,6 @@ def process_discount(request):
 
 			if user == text_referral.initiator and text_referral.active:
 				discount_amount = "$10.00"
-
-			elif:
 				amt = cart.get_total_price_of_cart()
 				if amt > 1000:
 					amt = amt - 1000
@@ -270,10 +268,6 @@ def process_discount(request):
 				discount_present = False
 				referral_success = True
 				referral_failure = False
-
-			else:
-				discount_present = False
-
 				
 				return render_to_response(
 					'checkout.html',
@@ -298,32 +292,31 @@ def process_discount(request):
 					},
 					context)
 
-		else:
-			referral_success = False
-			referral_failure = True
-			discount_present = False
-			return render_to_response(
-				'checkout.html',
-				{
-				#'urls':urls,
-				'discount_amount':discount_amount,
-				'referral_success':referral_success,
-				'referral_failure':referral_failure,
-				'entry':entry,
-				'profile':profile,
-				'user':user,
-				'cart':cart,
-				'cart_id':cart_id,
-				'items_with_quantity':items_with_quantity,
-				'entry':entry,
-				'cards':cards,
-				'total_price':total_price,
-				'card_on_file':card_on_file,
-				'attributes':attributes,
-				'discount_present':discount_present,
+		referral_success = False
+		referral_failure = True
+		discount_present = False
+		return render_to_response(
+			'checkout.html',
+			{
+			#'urls':urls,
+			'discount_amount':discount_amount,
+			'referral_success':referral_success,
+			'referral_failure':referral_failure,
+			'entry':entry,
+			'profile':profile,
+			'user':user,
+			'cart':cart,
+			'cart_id':cart_id,
+			'items_with_quantity':items_with_quantity,
+			'entry':entry,
+			'cards':cards,
+			'total_price':total_price,
+			'card_on_file':card_on_file,
+			'attributes':attributes,
+			'discount_present':discount_present,
 
-				},
-				context)
+			},
+			context)
 
 	return HttpResponse("You must first select some items from the cart!")
 
