@@ -96,7 +96,7 @@ def remove_from_cart(request):
 
 		return display_menu(request, entry_id)
 
-	return redirect('/cal')
+	return redirect('/cal/')
 
 
 def get_url_for_item(item):
