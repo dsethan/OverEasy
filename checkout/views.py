@@ -199,7 +199,7 @@ def process_referral(request):
 		text_referral.send_text_to_target()
 		return redirect('/checkout')
 
-		return redirect('/checkout')
+		#return redirect('/checkout')
 
 	return HttpResponse("This page is not accessible")
 
