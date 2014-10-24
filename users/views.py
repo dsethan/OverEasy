@@ -326,11 +326,31 @@ def verify_phone(phone):
 def verify_address(address_string):
 	geo = Geocoder()
 	result = Geocoder.geocode(address_string)
+
 	if not result.valid_address:
 		error = "Please enter a valid address."
 		return (False, error)
 	split = str(result).split(",")
 	addr = split[0]
+	
+	components = addr.split(" ")
+
+	blocked_addresses = ("Wannamaker", 
+		"Campus", 
+		"Chapel", 
+		"Towerview", 
+		"Keohane", 
+		"Union", 
+		"Kilgo", 
+		"Keohane", 
+		"Craven", 
+		"Few")
+
+	for bl in blocked_addresses:
+		if bl in components:
+			error = "Please enter a valid address."
+			return (False, error)
+
 	city = split[1]
 	state = split[2]
 	return (True, addr, city, state)
