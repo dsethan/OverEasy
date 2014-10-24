@@ -12,7 +12,6 @@ from users.models import UserProfile
 from cart.models import Cart, CartItem
 from payments.models import Card, CardAttributes
 from orders.models import Order, OrderItem
-from referrals.models import TextReferral
 
 import users.views
 
@@ -51,16 +50,10 @@ def checkout(request):
 
 		cart_id = cart.id
 
-		referral_success = False
-		referral_failure = False
-		discount_present = False
-
 		return render_to_response(
 			'checkout.html',
 			{
 			#'urls':urls,
-			'referral_success':referral_success,
-			'referral_failure':referral_failure,
 			'tax':tax,
 			'entry':entry,
 			'profile':profile,
@@ -74,7 +67,6 @@ def checkout(request):
 			'card_on_file':card_on_file,
 			'attributes':attributes,
 			'entry_id':entry_id,
-			'discount_present':discount_present,
 			},
 			context)
 
@@ -88,12 +80,6 @@ def process_existing_card(request):
 	if request.method == 'POST':
 		cart_id = request.POST.get('cart_id')
 		card_id = request.POST.get('card_id')
-		discount = request.POST.get('discount')
-
-		if discount == "False":
-			discount = False
-		if discount == "True":
-			discount = True
 
 		cart = Cart.objects.get(id=cart_id)
 		total_price = cart.get_total_price_of_cart()
@@ -109,7 +95,7 @@ def process_existing_card(request):
 			customer = card.customer
 			)
 
-		return create_order(cart_id, user, context, discount)
+		return create_order(cart_id, user, context)
 
 	return HttpResponse("Uh oh! Something went wrong :(")
 
@@ -123,15 +109,9 @@ def process_new_card(request):
 	if request.method == 'POST':
 		cart_id = request.POST.get('cart_id')
 		total_price = request.POST.get('total_price')
-		discount = request.POST.get('discount')
 		token = request.POST['stripeToken']
 		#last_four = request.POST.get('last4')
 		#brand = request.POST.get('brand')
-
-		if discount == "False":
-			discount = False
-		if discount == "True":
-			discount = True
 
 		customer = stripe.Customer.create(
 			card=token,
@@ -173,9 +153,9 @@ def process_new_card(request):
 
 		cart_id = int(cart_id)
 
-		return create_order(cart_id, user, context, discount)
+		return create_order(cart_id, user, context)
 
-def create_order(cart_id, user, context, discount):
+def create_order(cart_id, user, context):
 	cart = Cart.objects.get(id=cart_id)
 	items = cart.get_items_and_quantities()
 	profile = users.views.return_associated_profile_type(user)
@@ -216,23 +196,6 @@ def create_order(cart_id, user, context, discount):
 		},
 		context)
 
-
-def generate_invite_code():
-	alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-	a1 = random.choice(alpha)
-	a2 = random.choice(alpha)
-	a3 = random.choice(alpha)
-	a4 = random.choice(alpha)
-	a5 = random.choice(alpha)
-	a6 = random.choice(alpha)
-
-	invite_string = a1+a2+a3+a4+a5+a6
-
-	for r in TextReferral.objects.all():
-		if r.initator_code == invite_string:
-			return generate_invite_code(self)
-
-	return invite_string
 
 def get_url_for_item(item):
 	base_str_url = "/static/img/cart/"
