@@ -77,7 +77,7 @@ class Cart(models.Model):
 		dollars = self_str[:-2]
 		return "$" + dollars + "." + cents
 
-	def get_tax_for_cart_formatted(self):
+	def get_tax_for_cart(self):
 		total = self.get_total_price_of_cart()
 		tax_raw = total * 7.5
 		grand = (tax_raw) * .0001
