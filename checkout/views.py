@@ -48,6 +48,8 @@ def checkout(request):
 		total_price = cart.get_total_price_of_cart()
 		tax = cart.get_tax_for_cart_in_usd()
 
+		grand_total = cart.get_grand_total_in_usd()
+
 		cart_id = cart.id
 
 		return render_to_response(
@@ -67,6 +69,7 @@ def checkout(request):
 			'card_on_file':card_on_file,
 			'attributes':attributes,
 			'entry_id':entry_id,
+			'grand_total': grand_total,
 			},
 			context)
 
