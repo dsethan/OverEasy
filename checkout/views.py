@@ -219,7 +219,7 @@ def process_discount(request):
 
 		# Check on TextReferral
 
-		text_referral = TextReferral.objects.get(code=code)
+		text_referral = TextReferral.objects.get(initator_code=code)
 
 		referral_success = False
 
