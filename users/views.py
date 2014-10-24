@@ -295,6 +295,24 @@ def verify_restaurant(start):
 	error = "Unfortunately, we are not yet delivering in your area."
 	wrong_addr = False
 
+	components = start.split(" ")
+
+	blocked_addresses = ("Wannamaker", 
+		"Campus", 
+		"Chapel", 
+		"Towerview", 
+		"Keohane", 
+		"Union", 
+		"Kilgo", 
+		"Keohane", 
+		"Craven", 
+		"Few")
+
+	for bl in blocked_addresses:
+		if bl in components:
+			error = "Unfortunately, we are not yet delivering to these addresses."
+			return (False, error)
+
 	for r in Restaurant.objects.all():
 		end = r.get_address_string()
 		try:
@@ -309,24 +327,6 @@ def verify_restaurant(start):
 
 		if dist < r.max_radius:
 			return (True, r)
-
-		components = start.split(" ")
-
-		blocked_addresses = ("Wannamaker", 
-			"Campus", 
-			"Chapel", 
-			"Towerview", 
-			"Keohane", 
-			"Union", 
-			"Kilgo", 
-			"Keohane", 
-			"Craven", 
-			"Few")
-
-		for bl in blocked_addresses:
-			if bl in components:
-				error = "Unfortunately, we are not yet delivering to these addresses."
-				return (False, error)
 
 	return (False, error)
 
