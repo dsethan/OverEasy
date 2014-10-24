@@ -207,7 +207,9 @@ def gather_errors_for_template(first, last, username, address_string, phone,
 	if not res[0] and verify_address(address_string)[0]:
 		if res[1] == "Please enter a valid address.":
 			res_errors.append(res[1])
-			
+		if res[1] == "Unfortunately, we are not yet delivering to these addresses.":
+			demand = demand_instance_found(first, last, username, address_string, phone, request)
+			return demand
 		else:
 			demand = demand_instance_found(first, last, username, address_string, phone, request)
 			return demand
@@ -322,7 +324,7 @@ def verify_restaurant(start):
 
 		for bl in blocked_addresses:
 			if bl in components:
-				error = "Unfortunately, we are not yet delivering in your area."
+				error = "Unfortunately, we are not yet delivering to these addresses."
 				return (False, error)
 
 	return (False, error)
