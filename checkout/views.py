@@ -213,7 +213,7 @@ def send_receipt_text(user, order):
 	auth_token = "d5b72594bce3487a3dff812a08bc8265"
 	client = TwilioRestClient(account_sid, auth_token)
 	
-	msg = "Hey! Thanks for using Over Easy. We'll see you on " + order.entry.full_date_and_time_string_for_checkout + ". Your order details are on your profile. If you have any questions, email help@overeasyapp.com. See you in the morning!" 
+	msg = "Hey! Thanks for using Over Easy. We'll see you on " + order.entry.full_date_and_time_string_for_checkout() + ". Your order details are on your profile. If you have any questions, email help@overeasyapp.com. See you in the morning!" 
 	message = client.messages.create(to=profile.phone, 
 		from_=settings.TWILIO_PHONE, 
 		body=msg)
