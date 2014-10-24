@@ -208,7 +208,7 @@ def create_order(cart_id, user, context):
 		},
 		context)
 
-def send_receipt_text(user, order):
+def send_receipt_text(profile, order):
 	account_sid = "ACa2d2fde5fb38917dc892c94654f345cd"
 	auth_token = "d5b72594bce3487a3dff812a08bc8265"
 	client = TwilioRestClient(account_sid, auth_token)
