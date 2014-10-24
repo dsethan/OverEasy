@@ -52,9 +52,6 @@
     
         </div>
         <div class="col-md-9">
-          {% if referral_failure %}
-          Your referral code is not valid.
-          {% endif %}
           <h4><b>Your Order for {{ entry.full_date_and_time_string }}<b></h4>
           <hr>
           <table>
@@ -72,20 +69,6 @@
               <td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
               <td>{{ cart.view_tax_in_usd }}</td>
             </tr>
-            {% if referral_success %}
-            <tr>
-              <td></td>
-              <td>Discount</td>
-              <td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
-              <td>{{ discount_amount }}</td>
-            </tr>
-            <tr>
-              <td></td>
-              <td>Total</td>
-              <td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
-              <td>{{ amt }}</td>
-            </tr>
-            {% else %}
             <tr>
               <td></td>
               <td>Total</td>
@@ -125,7 +108,6 @@
               {% csrf_token %}   
               <input type="hidden" name="card_id" value="{{ attr.card.id }}">
               <input type="hidden" name="cart_id" value="{{ cart_id }}">
-              <input type="hidden" name="discount" value="{{ discount_present }}">
 
               <input type="submit" class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Use this card">
             </form>
@@ -169,7 +151,6 @@
 
                   <input type="hidden" name="total_price" value="{{ total_price }}">
                   <input type="hidden" name="cart_id" value="{{ cart_id }}">
-                  <input type="hidden" name="discount" value="{{ discount_present }}">
 
                   <input type="submit" class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Submit Payment">
 

@@ -165,8 +165,6 @@ def create_order(cart_id, user, context):
 
 	tax = cart.get_tax_for_cart()
 
-
-
 	new_order = Order(
 		profile=profile,
 		total=total + tax,
