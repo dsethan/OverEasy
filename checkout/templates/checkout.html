@@ -78,14 +78,21 @@
               <td>Discount</td>
               <td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
               <td>{{ discount_amount }}</td>
-            </tr> 
-            {% endif %}
+            </tr>
+            <tr>
+              <td></td>
+              <td>Total</td>
+              <td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
+              <td>{{ amt }}</td>
+            </tr>
+            {% else %}
             <tr>
               <td></td>
               <td>Total</td>
               <td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
               <td>{{ cart.view_order_total_in_usd }}</td>
             </tr>
+            {% endif %}
           </table>
           <br>
 

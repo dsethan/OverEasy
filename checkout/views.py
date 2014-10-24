@@ -150,7 +150,10 @@ def process_new_card(request):
 		new_card_attributes.save()
 
 		if discount == True:
-			total_price = total_price = 1000
+			if total_price > 1000:
+				total_price = total_price = 1000
+			else:
+				total_price = 0
 
 		stripe.Charge.create(
 			amount = int(total_price),
@@ -171,7 +174,10 @@ def create_order(cart_id, user, context):
 	total = cart.get_total_price_of_cart()
 
 	if discount == True:
-		total = total - 1000
+		if total > 1000:
+			total = total - 1000
+		else:
+			total = 0
 
 	new_order = Order(
 		profile=profile,
@@ -249,14 +255,16 @@ def process_discount(request):
 			discount_amount = ""
 
 			if user == text_referral.initiator and text_referral.active:
-				if cart.total > 1000:
-					cart.total = cart.total - 1000
-					cart.save()
-					discount_amount = "$10.00"
+				discount_amount = "$10.00"
+
 				else:
-					discount_amount = cart.view_order_total_in_usd()
-					cart.total = 0
-					cart.save()
+					amt = cart.get_total_price_of_cart()
+					if amt > 1000:
+						amt = amt - 1000
+					else:
+						amt = 0
+
+					amt = view_order_total_in_usd(amt)
 
 				text_referral.delete()
 				discount_present = False
@@ -271,6 +279,7 @@ def process_discount(request):
 					'checkout.html',
 					{
 					#'urls':urls,
+					'amt':amt,
 					'discount_amount':discount_amount,
 					'referral_success':referral_success,
 					'referral_failure':referral_failure,
@@ -317,6 +326,19 @@ def process_discount(request):
 				context)
 
 	return HttpResponse("You must first select some items from the cart!")
+
+def view_order_total_in_usd(amount):
+	total = amount
+	self_str = str(total)
+	cents = self_str[-2:]
+	dollars = self_str[:-2]
+	if len(self_str) == 0:
+		return "$0.00"
+	if len(self_str) == 1:
+		return "$0.0" + self_str
+	if len(self_str) == 2:
+		return "$0." + self_str
+	return "$" + dollars + "." + cents
 
 def phone_just_numbers(number):
 	to_return = ""
