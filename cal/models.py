@@ -18,6 +18,12 @@ class Entry(models.Model):
 	shutoff_min = models.IntegerField(default=0)
 
 
+	def full_date_and_time_string_for_checkout(self):
+		date = self.date.strftime("%A, %B %d")
+		time = self.time.strftime("%I:%M am")
+		end_time = self.end_time().strftime("%I:%M am")
+		return date + " between " + time + " and " + end_time
+
 	def full_date_and_time_string(self):
 		date = self.date.strftime("%A, %B %d, %Y")
 		time = self.time.strftime("%I:%M am")
