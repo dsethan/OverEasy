@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response, HttpResponseRedirect
@@ -10,6 +10,7 @@ from users.models import UserProfile
 from cart.models import Cart, CartItem
 from payments.models import Card, CardAttributes
 from orders.models import Order, OrderItem
+from referrals.models import TextReferral
 
 import users.views
 
@@ -179,6 +180,45 @@ def create_order(cart_id, user, context):
 		{
 		},
 		context)
+
+def process_referral(request):
+	context = RequestContext(request)
+	user = request.user
+
+	if request.method == 'POST':
+		phone = request.POST.get('phone')
+		code = generate_invite_code()
+		text_referral = TextReferral(
+			initator = user,
+			target_phone = phone,
+			initator_code = code,
+			active = False)
+
+		if not text_referral.is_target_in_system() and text_referral.verify_not_signed_up():
+			text_referral.save()
+			text_referral.send_text_to_target()
+			return redirect('/checkout')
+
+		return redirect('/checkout')
+
+	return HttpResponse("This page is not accessible")
+
+def generate_invite_code(self):
+	alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+	a1 = random.choice(alpha)
+	a2 = random.choice(alpha)
+	a3 = random.choice(alpha)
+	a4 = random.choice(alpha)
+	a5 = random.choice(alpha)
+	a6 = random.choice(alpha)
+
+	invite_string = a1+a2+a3+a4+a5+a6
+
+	for r in TextReferral.objects.all():
+		if r.initiator_code == invite_string:
+			return generate_invite_code(self)
+
+	return invite_string
 
 def get_url_for_item(item):
 	base_str_url = "/static/img/cart/"

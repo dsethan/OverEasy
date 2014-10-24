@@ -32,23 +32,6 @@ class TextReferral(models.Model):
 
 		return True
 
-	def generate_invite_code(self):
-		alpha = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-		a1 = random.choice(alpha)
-		a2 = random.choice(alpha)
-		a3 = random.choice(alpha)
-		a4 = random.choice(alpha)
-		a5 = random.choice(alpha)
-		a6 = random.choice(alpha)
-
-		invite_string = a1+a2+a3+a4+a5+a6
-
-		for r in Referral.objects.all():
-			if r.initiator_code == invite_string:
-				return generate_invite_code(self)
-
-		return invite_string
-
 	def send_text_to_target(self):
 		account_sid = "ACa2d2fde5fb38917dc892c94654f345cd"
 		auth_token = "d5b72594bce3487a3dff812a08bc8265"
