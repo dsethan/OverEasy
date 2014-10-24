@@ -94,7 +94,7 @@ class Cart(models.Model):
 	def grand_total(self):
 		subtotal = self.get_total_price_of_cart()
 		tax = self.get_tax_for_cart()
-		return subtotal + tax
+		return int(subtotal + tax)
 
 	def get_grand_total_in_usd(self):
 		total = self.grand_total()
