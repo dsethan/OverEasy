@@ -28,11 +28,14 @@ def checkout(request):
 		entry_id = request.POST.get('entry_id')
 		cart_id = request.POST.get('cart_id')
 		entry = Entry.objects.get(id=int(entry_id))
+		cart = Cart.objects.get(id=int(cart_id))
 
 		if entry.open() == False or entry.orders_still_open == False:
 			return redirect('/cal/entry_not_avail/')
 
-		cart = Cart.objects.get(id=int(cart_id))
+		if cart.cart_still_active == False:
+			return redirect('/cal/entry_not_avail')
+
 		cart_items = cart.get_items()
 		items_with_quantity = cart.get_items_and_quantities()
 
@@ -149,11 +152,10 @@ def process_new_card(request):
 		new_card_attributes.save()
 
 		cart = Cart.objects.get(id=int(cart_id))
-		total_price = get_total_price_of_cart()
-		tax = get_tax_for_cart()
+		total_price = grand_total()
 
 		stripe.Charge.create(
-			amount = total_price + tax,
+			amount = grand_total,
 			currency="usd",
 			customer=new_card.customer,
 			)
