@@ -77,7 +77,7 @@
               <td></td>
               <td>Discount</td>
               <td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
-              <td>{{discount_amount}}</td>
+              <td>{{ discount_amount }}</td>
             </tr> 
             {% endif %}
             <tr>
@@ -118,6 +118,8 @@
             {% csrf_token %}   
             <input type="hidden" name="card_id" value="{{ attr.card.id }}">
             <input type="hidden" name="cart_id" value="{{ cart_id }}">
+            <input type="hidden" name="cart_id" value="{{ discount_present }}">
+
             <input type="submit" class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Use this card">
           </form>
           <br><br>
@@ -160,6 +162,8 @@
 
                   <input type="hidden" name="total_price" value="{{ total_price }}">
                   <input type="hidden" name="cart_id" value="{{ cart_id }}">
+                  <input type="hidden" name="cart_id" value="{{ discount_present }}">
+
                   <input type="submit" class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Submit Payment">
 
                 </form>

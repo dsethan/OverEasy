@@ -51,6 +51,7 @@ def checkout(request):
 
 		referral_success = False
 		referral_failure = False
+		discount_present = False
 
 		return render_to_response(
 			'checkout.html',
@@ -70,6 +71,7 @@ def checkout(request):
 			'card_on_file':card_on_file,
 			'attributes':attributes,
 			'entry_id':entry_id,
+			'discount_present':discount_present,
 			},
 			context)
 
@@ -83,8 +85,12 @@ def process_existing_card(request):
 	if request.method == 'POST':
 		cart_id = request.POST.get('cart_id')
 		card_id = request.POST.get('card_id')
+		discount = request.POST.get('discount')
 		cart = Cart.objects.get(id=cart_id)
 		total_price = cart.get_total_price_of_cart()
+
+		if discount == True:
+			total_price = total_price = 1000
 
 		card = Card.objects.get(id=card_id)
 
@@ -110,6 +116,7 @@ def process_new_card(request):
 	if request.method == 'POST':
 		cart_id = request.POST.get('cart_id')
 		total_price = request.POST.get('total_price')
+		discount = request.POST.get('discount')
 		token = request.POST['stripeToken']
 		#last_four = request.POST.get('last4')
 		#brand = request.POST.get('brand')
@@ -142,6 +149,9 @@ def process_new_card(request):
 
 		new_card_attributes.save()
 
+		if discount == True:
+			total_price = total_price = 1000
+
 		stripe.Charge.create(
 			amount = int(total_price),
 			currency="usd",
@@ -150,7 +160,7 @@ def process_new_card(request):
 
 		cart_id = int(cart_id)
 
-		return create_order(cart_id, user, context)
+		return create_order(cart_id, user, context, discount)
 
 def create_order(cart_id, user, context):
 	cart = Cart.objects.get(id=cart_id)
@@ -158,11 +168,14 @@ def create_order(cart_id, user, context):
 	profile = users.views.return_associated_profile_type(user)
 	entry = cart.entry
 
-	
+	total = cart.get_total_price_of_cart()
+
+	if discount == True:
+		total = total - 1000
 
 	new_order = Order(
 		profile=profile,
-		total=cart.get_total_price_of_cart(),
+		total=total,
 		entry=entry,
 		status='PDG',
 		)
@@ -246,56 +259,40 @@ def process_discount(request):
 					cart.save()
 
 				text_referral.delete()
+				discount_present = False
 				referral_success = True
+				referral_failure = False
+
 			else:
-				referral_failure = True
+				discount_present = False
 
-			profile_phone = phone_just_numbers(profile.phone)
-			text_referral_phone = phone_just_numbers(text_referral.target_phone)
-
-			if profile_phone == text_referral_phone:
-				if text_referral.active == True:
-					referral_success = False
-					referral_failure = True
-
-				else:
-					text_referral.active == True
-					text_referral.save()
-					if cart.total > 1000:
-						cart.total = cart.total - 1000
-						cart.save()
-						discount_amount = "$10.00"
-					else:
-						discount_amount = cart.view_order_total_in_usd()
-						cart.total = 0
-						cart.save()
-					referral_success = True
-					referral_failure = False
-			
-			return render_to_response(
-				'checkout.html',
-				{
-				#'urls':urls,
-				'discount_amount':discount_amount,
-				'referral_success':referral_success,
-				'referral_failure':referral_failure,
-				'entry':entry,
-				'profile':profile,
-				'user':user,
-				'cart':cart,
-				'cart_id':cart_id,
-				'items_with_quantity':items_with_quantity,
-				'entry':entry,
-				'cards':cards,
-				'total_price':total_price,
-				'card_on_file':card_on_file,
-				'attributes':attributes,
-				},
-				context)
+				
+				return render_to_response(
+					'checkout.html',
+					{
+					#'urls':urls,
+					'discount_amount':discount_amount,
+					'referral_success':referral_success,
+					'referral_failure':referral_failure,
+					'entry':entry,
+					'profile':profile,
+					'user':user,
+					'cart':cart,
+					'cart_id':cart_id,
+					'items_with_quantity':items_with_quantity,
+					'entry':entry,
+					'cards':cards,
+					'total_price':total_price,
+					'card_on_file':card_on_file,
+					'attributes':attributes,
+					'discount_present':discount_present,
+					},
+					context)
 
 		else:
 			referral_success = False
 			referral_failure = True
+			discount_present = False
 			return render_to_response(
 				'checkout.html',
 				{
@@ -314,6 +311,8 @@ def process_discount(request):
 				'total_price':total_price,
 				'card_on_file':card_on_file,
 				'attributes':attributes,
+				'discount_present':discount_present,
+
 				},
 				context)
 
