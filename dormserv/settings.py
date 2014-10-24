@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'payments',
     'orders',
     'home',
+    'referrals',
     'userprofile',
 )
 
