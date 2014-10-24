@@ -257,14 +257,14 @@ def process_discount(request):
 			if user == text_referral.initiator and text_referral.active:
 				discount_amount = "$10.00"
 
+			elif:
+				amt = cart.get_total_price_of_cart()
+				if amt > 1000:
+					amt = amt - 1000
 				else:
-					amt = cart.get_total_price_of_cart()
-					if amt > 1000:
-						amt = amt - 1000
-					else:
-						amt = 0
+					amt = 0
 
-					amt = view_order_total_in_usd(amt)
+				amt = view_order_total_in_usd(amt)
 
 				text_referral.delete()
 				discount_present = False
