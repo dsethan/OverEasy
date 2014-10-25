@@ -126,7 +126,7 @@ def user_login(request):
 		if ptype == 2:
 			return redirect('driver', user=user)
 		if ptype == 3:
-			return redirect('kitchen', user=user)
+			return redirect('/kitchen')
 
 	if request.method == 'POST':
 		un = request.POST['username']

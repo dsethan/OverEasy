@@ -37,6 +37,9 @@ class Order(models.Model):
 		dollars = self_str[:-2]
 		return "$" + dollars + "." + cents
 
+	def get_all_items_for_order(self):
+		return OrderItem.objects.filter(order=self)
+
 class OrderItem(models.Model):
 	item = models.ForeignKey(Item)
 	order = models.ForeignKey(Order)
