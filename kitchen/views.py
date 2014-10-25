@@ -22,7 +22,11 @@ def view_kitchen(request):
 	if able_to_access:
 
 		today = datetime.today().date()
-		orders_to_display = Order.objects.filter(entry.date=today)
+
+		orders_to_display = []
+		for order in Order.objects.all():
+			if order.entry.date == today:
+				orders_to_display.append(order)
 
 		return render_to_response(
 			"kitchen.html",
