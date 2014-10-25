@@ -1,5 +1,5 @@
 from django.contrib import admin
-from users.models import UserProfile
+from users.models import UserProfile, DriverProfile, StaffProfile
 
 class UserProfileAdmin(admin.ModelAdmin):
 	list_display = ('user', 'address', 'city', 'state', 'phone')
