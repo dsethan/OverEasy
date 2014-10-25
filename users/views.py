@@ -205,10 +205,11 @@ def gather_errors_for_template(first, last, username, address_string, phone,
 	if not num[0]:
 		num_errors.append(num[1])
 
+	if verify_address(address_string)[1] == "Unfortunately, we are not yet delivering to these addresses.":
+		demand = demand_instance_found(first, last, username, address_string, phone, request)
+		return demand
+
 	if not res[0] and verify_address(address_string)[0]:
-		if res[1] == "Unfortunately, we are not yet delivering to these addresses.":
-			demand = demand_instance_found(first, last, username, address_string, phone, request)
-			return demand
 		if res[1] == "Please enter a valid address.":
 			res_errors.append(res[1])
 		else:
@@ -295,24 +296,6 @@ def verify_restaurant(start):
 	error = "Unfortunately, we are not yet delivering in your area."
 	wrong_addr = False
 
-	components = start.split(" ")
-
-	blocked_addresses = ("Wannamaker", 
-		"Campus", 
-		"Chapel", 
-		"Towerview", 
-		"Keohane", 
-		"Union", 
-		"Kilgo", 
-		"Keohane", 
-		"Craven", 
-		"Few")
-
-	for bl in blocked_addresses:
-		if bl in components:
-			error = "Unfortunately, we are not yet delivering to these addresses."
-			return (False, error)
-
 	for r in Restaurant.objects.all():
 		end = r.get_address_string()
 		try:
@@ -349,10 +332,28 @@ def verify_address(address_string):
 	geo = Geocoder()
 	result = Geocoder.geocode(address_string)
 
+	components = address_string.split(" ")
+
+	blocked_addresses = ["Wannamaker", 
+		"Campus", 
+		"Chapel", 
+		"Towerview", 
+		"Keohane", 
+		"Union", 
+		"Kilgo", 
+		"Keohane", 
+		"Craven", 
+		"Few"]
+
+	for bl in blocked_addresses:
+		if bl in components:
+			error = "Unfortunately, we are not yet delivering to these addresses."
+			return (False, error)
+
 	if not result.valid_address:
 		error = "Please enter a valid address."
 		return (False, error)
-		
+
 	split = str(result).split(",")
 	addr = split[0]
 	city = split[1]
