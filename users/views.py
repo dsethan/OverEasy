@@ -124,7 +124,7 @@ def user_login(request):
 		if ptype == 1:
 			return redirect('/cal')
 		if ptype == 2:
-			return redirect('driver', user=user)
+			return redirect('/driver')
 		if ptype == 3:
 			return redirect('/kitchen')
 
@@ -175,9 +175,9 @@ def user_type_redirect_manager(user, request):
 		if ptype == 1:
 			return redirect('/cal/')
 		if ptype == 2:
-			return redirect('driver')
+			return redirect('/driver')
 		if ptype == 3:
-			return redirect('kitchen')
+			return redirect('/kitchen')
 
 	return redirect('user_login')
 
