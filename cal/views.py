@@ -25,9 +25,9 @@ def render_first_look_calendar(request):
 	weekday = today.isocalendar()[2]
 	mon = today - timedelta(days=weekday-1)
 
-	if '(weekday == 5) or (weekday == 6) or '(weekday == 7):
-		week = week + 1
-		mon = mon + timedelta(days=7)
+	#if (weekday == 5) or (weekday == 6) or (weekday == 7):
+	#	week = week + 1
+	#	mon = mon + timedelta(days=7)
 
 	m, t, w, th, f, s, su = [], [], [], [], [], [], []
 
@@ -91,9 +91,9 @@ def render_second_look_calendar(request):
 	weekday = today.isocalendar()[2]
 	mon = today - timedelta(days=weekday-1)
 
-	if (weekday == 6) or (weekday == 7):
-		week = week + 1
-		mon = mon + timedelta(days=7)
+	#if (weekday == 5) (weekday == 6) or (weekday == 7):
+	#	week = week + 1
+	#	mon = mon + timedelta(days=7)
 
 	m, t, w, th, f, s, su = [], [], [], [], [], [], []
 
