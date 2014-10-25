@@ -1,0 +1,17 @@
+{% extends 'cal_base.html' %}
+
+{% block content %}
+
+<table>
+{% for order in orders_to_display %}
+<tr>
+	<td>{{ order.entry.date }}</td>
+	<td>{{ order.entry.time }}</td>
+	<td>{{ order.id }}</td>
+	<td>{{ order.view_order_total_in_usd }}</td>
+	<td>{{ order.get_all_items_for_order }}</td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}
