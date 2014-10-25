@@ -30,9 +30,14 @@ def view_kitchen(request):
 			if order.entry.date == today:
 				orders_to_display.append(order)
 
+		no_orders = False
+		if len(orders_to_display) == 0:
+			no_orders = True
+
 		return render_to_response(
 			"kitchen.html",
 			{
+			'no_orders':no_orders,
 			'orders_to_display':orders_to_display,
 			},
 			context)
