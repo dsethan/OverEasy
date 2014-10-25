@@ -322,7 +322,8 @@ def verify_restaurant(start):
 			error = "Please enter a valid address."
 
 		dist = float("inf")
-		if wrong_addr:
+
+		if not wrong_addr:
 			dist = dirs['Directions']['Distance']['meters']
 
 		if dist < r.max_radius:
