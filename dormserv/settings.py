@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'zko6y7!iue(ik_o5$9d@4moqh8swk$_n+o0sur!qm708aab$6#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = True
 
@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'home',
     'referrals',
     'userprofile',
+    'kitchen',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -206,11 +206,11 @@ def gather_errors_for_template(first, last, username, address_string, phone,
 		num_errors.append(num[1])
 
 	if not res[0] and verify_address(address_string)[0]:
-		if res[1] == "Please enter a valid address.":
-			res_errors.append(res[1])
 		if res[1] == "Unfortunately, we are not yet delivering to these addresses.":
 			demand = demand_instance_found(first, last, username, address_string, phone, request)
 			return demand
+		if res[1] == "Please enter a valid address.":
+			res_errors.append(res[1])
 		else:
 			demand = demand_instance_found(first, last, username, address_string, phone, request)
 			return demand
@@ -352,6 +352,7 @@ def verify_address(address_string):
 	if not result.valid_address:
 		error = "Please enter a valid address."
 		return (False, error)
+		
 	split = str(result).split(",")
 	addr = split[0]
 	city = split[1]
