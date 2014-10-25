@@ -118,7 +118,7 @@ def user_login(request):
 	ptype = get_profile_type(user)
 
 	if user.is_superuser:
-		return redirect('/dashboard')
+		return redirect('/admin')
 
 	if user.is_active:
 		if ptype == 1:
