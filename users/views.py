@@ -335,7 +335,7 @@ def verify_address(address_string):
 
 	components = address_string.split(" ")
 
-	blocked_addresses = ["Wannamaker", 
+	blocked_addresses = ["Wanamaker", 
 		"Campus", 
 		"Chapel", 
 		"Towerview", 
@@ -344,7 +344,10 @@ def verify_address(address_string):
 		"Kilgo", 
 		"Keohane", 
 		"Craven", 
-		"Few"]
+		"Few",
+		"Crowell",
+		"Edens",
+		"Wannamaker"]
 
 	for bl in blocked_addresses:
 		if bl in components:
