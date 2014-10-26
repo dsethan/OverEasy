@@ -52,7 +52,6 @@ def process_new_user(request):
 		num = verify_phone(phone)
 		nom = verify_name(first, last)
 		res = verify_restaurant(address_string)
-		print un, pw, addr, num, nom, res
 
 		if un[0] and pw[0] and addr[0] and num[0] and nom[0] and res[0]:
 			success = store_user_data(un, pw, addr, address2, num, nom, res, request)
@@ -351,7 +350,7 @@ def verify_address(address_string):
 			return (False, error)
 
 	if not result.valid_address:
-		error = "Please enter a valid address."
+		error = "Please enter a very valid address."
 		return (False, error)
 
 	split = str(result).split(",")
