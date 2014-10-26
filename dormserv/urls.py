@@ -12,6 +12,8 @@ urlpatterns = patterns('',
     url(r'^checkout/', include('checkout.urls')),
     url(r'^profile/', include('userprofile.urls')),
     url(r'^kitchen/', include('kitchen.urls')),
+    url(r'^driver/', include('driver.urls')),
+
 )
 
 if not settings.DEBUG:
