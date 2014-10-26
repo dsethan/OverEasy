@@ -350,12 +350,13 @@ def verify_address(address_string):
 			return (False, error)
 
 	start = "902 Sedgefield Street, Durham, NC"
-	
+
 	try:
 		directions = gmaps.directions(address_string, start)
 	except:
 		error = "Please enter a valid address."
-		return (False, error)
+		#return (False, error)
+		return HttpResponse("Error here")
 
 	split = str(result).split(",")
 	addr = split[0]
