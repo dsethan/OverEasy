@@ -355,8 +355,7 @@ def verify_address(address_string):
 		directions = gmaps.directions(address_string, start)
 	except:
 		error = "Please enter a valid address."
-		#return (False, error)
-		return HttpResponse("Error here")
+		return (False, error)
 
 	split = str(result).split(",")
 	addr = split[0]
