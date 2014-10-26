@@ -55,7 +55,7 @@ def process_new_user(request):
 		print un, pw, addr, num, nom, res
 
 		if un[0] and pw[0] and addr[0] and num[0] and nom[0] and res[0]:
-			success = store_user_data(un, pw, addr, num, nom, res, request)
+			success = store_user_data(un, pw, addr, address2, num, nom, res, request)
 			return success
 
 		else:
@@ -251,12 +251,12 @@ def demand_instance_found(first, last, username, address_string, phone, request)
 		{},
 		context)
 
-def store_user_data(un, pw, addr, num, nom, res, request):
+def store_user_data(un, pw, addr, addr2, num, nom, res, request):
 	context = RequestContext(request)
 
 	username = un[1]
 	password = pw[1]
-	address = addr[1]
+	address = addr[1] + addr2
 	city = addr[2]
 	state = addr[3]
 	phone = num[1]
@@ -386,8 +386,8 @@ def verify_username(username):
 def get_address_string(address1, address2, city, state):
 	space = " "
 	comma = ", "
-	if len(address2) > 0:
-		return address1 + space + address2 + comma + city + comma + state
+	#if len(address2) > 0:
+	#	return address1 + space + address2 + comma + city + comma + state
 
 	return address1 + comma + city + comma + state
 
