@@ -352,7 +352,7 @@ def verify_address(address_string):
 		error = "Please enter a valid address."
 		return (False, error)
 
-	split = str(result).split(",")
+	split = str(address_string).split(",")
 	addr = split[0]
 	city = split[1]
 	state = split[2]
