@@ -53,6 +53,7 @@ INSTALLED_APPS = (
     'referrals',
     'userprofile',
     'kitchen',
+    'drivers',
 )
 
 MIDDLEWARE_CLASSES = (
