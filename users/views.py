@@ -328,8 +328,8 @@ def verify_phone(phone):
 	return (True, phone)
 
 def verify_address(address_string):
-	geo = Geocoder()
-	result = Geocoder.geocode(address_string)
+	api_key = settings.GOOGLE_MAPS
+	geo = GoogleMaps(api_key)
 
 	components = address_string.split(" ")
 
@@ -349,8 +349,12 @@ def verify_address(address_string):
 			error = "Unfortunately, we are not yet delivering to these addresses."
 			return (False, error)
 
-	if not result.valid_address:
-		error = "Please enter a very valid address."
+	start = "902 Sedgefield Street, Durham, NC"
+	
+	try:
+		directions = gmaps.directions(address_string, start)
+	except:
+		error = "Please enter a valid address."
 		return (False, error)
 
 	split = str(result).split(",")
