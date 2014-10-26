@@ -297,16 +297,9 @@ def verify_restaurant(start):
 
 	for r in Restaurant.objects.all():
 		end = r.get_address_string()
-		try:
-			dirs = geo.directions(start, end)
-		except:
-			wrong_addr = True
-			error = "Please enter a valid address."
+		dirs = geo.directions(start, end)
 
-		dist = float("inf")
-
-		if not wrong_addr:
-			dist = dirs['Directions']['Distance']['meters']
+		dist = dirs['Directions']['Distance']['meters']
 
 		if dist < r.max_radius:
 			return (True, r)
