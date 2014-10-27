@@ -11,6 +11,7 @@
 <h2>Today's Orders</h2>
 <table>
 {% for order in orders_to_display %}
+{% if order.entry.get_start_time_string == "07:30" %}
 <tr>
 	<td>{{ order.entry.date }}</td>
 	<td>{{ order.entry.time }}</td>
@@ -18,8 +19,87 @@
 	<td>{{ order.view_order_total_in_usd }}</td>
 	<td>{{ order.get_all_items_for_order }}</td>
 </tr>
+{% endif %}
+{% endfor %}
+{% for order in orders_to_display %}
+{% if order.entry.get_start_time_string == "07:50" %}
+<tr>
+	<td>{{ order.entry.date }}</td>
+	<td>{{ order.entry.time }}</td>
+	<td>{{ order.id }}</td>
+	<td>{{ order.view_order_total_in_usd }}</td>
+	<td>{{ order.get_all_items_for_order }}</td>
+</tr>
+{% endif %}
+{% endfor %}
+{% for order in orders_to_display %}
+{% if order.entry.get_start_time_string == "08:10" %}
+<tr>
+	<td>{{ order.entry.date }}</td>
+	<td>{{ order.entry.time }}</td>
+	<td>{{ order.id }}</td>
+	<td>{{ order.view_order_total_in_usd }}</td>
+	<td>{{ order.get_all_items_for_order }}</td>
+</tr>
+{% endif %}
+{% endfor %}
+{% for order in orders_to_display %}
+{% if order.entry.get_start_time_string == "08:30" %}
+<tr>
+	<td>{{ order.entry.date }}</td>
+	<td>{{ order.entry.time }}</td>
+	<td>{{ order.id }}</td>
+	<td>{{ order.view_order_total_in_usd }}</td>
+	<td>{{ order.get_all_items_for_order }}</td>
+</tr>
+{% endif %}
+{% endfor %}
+{% for order in orders_to_display %}
+{% if order.entry.get_start_time_string == "08:50" %}
+<tr>
+	<td>{{ order.entry.date }}</td>
+	<td>{{ order.entry.time }}</td>
+	<td>{{ order.id }}</td>
+	<td>{{ order.view_order_total_in_usd }}</td>
+	<td>{{ order.get_all_items_for_order }}</td>
+</tr>
+{% endif %}
+{% endfor %}
+{% for order in orders_to_display %}
+{% if order.entry.get_start_time_string == "09:10" %}
+<tr>
+	<td>{{ order.entry.date }}</td>
+	<td>{{ order.entry.time }}</td>
+	<td>{{ order.id }}</td>
+	<td>{{ order.view_order_total_in_usd }}</td>
+	<td>{{ order.get_all_items_for_order }}</td>
+</tr>
+{% endif %}
+{% endfor %}
+{% for order in orders_to_display %}
+{% if order.entry.get_start_time_string == "09:30" %}
+<tr>
+	<td>{{ order.entry.date }}</td>
+	<td>{{ order.entry.time }}</td>
+	<td>{{ order.id }}</td>
+	<td>{{ order.view_order_total_in_usd }}</td>
+	<td>{{ order.get_all_items_for_order }}</td>
+</tr>
+{% endif %}
+{% endfor %}
+{% for order in orders_to_display %}
+{% if order.entry.get_start_time_string == "09:50" %}
+<tr>
+	<td>{{ order.entry.date }}</td>
+	<td>{{ order.entry.time }}</td>
+	<td>{{ order.id }}</td>
+	<td>{{ order.view_order_total_in_usd }}</td>
+	<td>{{ order.get_all_items_for_order }}</td>
+</tr>
+{% endif %}
 {% endfor %}
 </table>
+
 {% endif %}
 
 {% if no_orders_tomorrow %}
