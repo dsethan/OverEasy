@@ -337,7 +337,7 @@ def verify_address(address_string):
 
 	blocked_addresses = ["Wanamaker", 
 		"Campus", 
-		"Chapel", 
+		"Chapel",
 		"Towerview", 
 		"Keohane", 
 		"Union", 
