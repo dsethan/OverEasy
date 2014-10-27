@@ -40,6 +40,12 @@ class Order(models.Model):
 	def get_all_items_for_order(self):
 		return OrderItem.objects.filter(order=self)
 
+	def get_all_item_names_for_order(self):
+		ors = []
+		for o in OrderItem.objects.filter(order=self):
+			ors.append(o.item.name)
+		return ors
+
 class OrderItem(models.Model):
 	item = models.ForeignKey(Item)
 	order = models.ForeignKey(Order)

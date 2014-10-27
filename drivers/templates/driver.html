@@ -4,9 +4,11 @@
 
 {% if no_orders %}
 
-<h2> There are currently no orders at this time.</h2>
+<h2>There are currently no orders at this time.</h2>
 
 {% else %}
+
+<h2>Today's Orders</h2>
 <table>
 {% for order in orders_to_display %}
 <tr>
@@ -25,6 +27,8 @@
 <h2> There are currently no orders for tomorrow at this time.</h2>
 
 {% else %}
+
+<h2>Tomorrow's Orders</h2>
 <table>
 {% for order in orders_for_tomorrow %}
 <tr>
