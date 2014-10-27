@@ -28,7 +28,7 @@ def view_kitchen(request):
 
 		orders_to_display = []
 
-		for entry in Entry.objects.filter(date=today):
+		for entry in Entry.objects.filter(date=today).order_by('time'):
 			for order in Order.objects.filter(entry=entry):
 				orders_to_display.append(order)
 
@@ -40,7 +40,7 @@ def view_kitchen(request):
 
 		orders_for_tomorrow = []
 
-		for entry in Entry.objects.filter(date=tomorrow):
+		for entry in Entry.objects.filter(date=tomorrow).order_by('time'):
 			for order in Order.objects.filter(entry=entry):
 				orders_for_tomorrow.append(order)
 
