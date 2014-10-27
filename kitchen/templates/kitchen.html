@@ -16,7 +16,13 @@
 	<td>{{ order.entry.time }}</td>
 	<td>{{ order.id }}</td>
 	<td>{{ order.view_order_total_in_usd }}</td>
-	<td>{{ order.get_all_item_names_for_order }}</td>
+	<td>
+		{% for item in order.get_all_item_names_for_order %}
+		
+		{{ item }}
+
+		{% endfor %}
+	</td>
 </tr>
 {% endfor %}
 </table>
@@ -36,7 +42,13 @@
 	<td>{{ order.entry.time }}</td>
 	<td>{{ order.id }}</td>
 	<td>{{ order.view_order_total_in_usd }}</td>
-	<td>{{ order.get_all_item_names_for_order }}</td>
+	<td>
+		{% for item in order.get_all_item_names_for_order %}
+
+		{{ item }}
+
+		{% endfor %}
+	</td>
 </tr>
 {% endfor %}
 </table>
