@@ -37,9 +37,9 @@ def view_kitchen(request):
 		tomorrow = today + timedelta(days=1)
 
 		orders_for_tomorrow = []
-		for do in Order.objects.all():
-			if do.order.entry.date == tomorrow:
-				orders_for_tomorrow.append(do)
+		for order in Order.objects.all():
+			if order.entry.date == tomorrow:
+				orders_for_tomorrow.append(order)
 
 		no_orders_tomorrow = False
 
