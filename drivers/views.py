@@ -39,11 +39,25 @@ def view_driver(request):
 		if len(orders_to_display) == 0:
 			no_orders = True
 
+		tomorrow = today + timedelta(days=1)
+
+		orders_for_tomorrow = []
+		for do in DriverOrder.objects.filter(driver=driver):
+			if do.order.entry.date == tomorrow:
+				orders_for_tomorrow.append(do)
+
+		no_orders_tomorrow = False
+
+		if len(orders_for_tomorrow) == 0:
+			no_orders_tomorrow = True
+
 		return render_to_response(
 			"driver_home.html",
 			{
 			'no_orders':no_orders,
+			'no_orders_tomorrow':no_orders_tomorrow,
 			'orders_to_display':orders_to_display,
+			'orders_for_tomorrow':orders_for_tomorrow,
 			},
 			context)
 
