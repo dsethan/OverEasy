@@ -46,7 +46,7 @@ def view_kitchen(request):
 
 		no_orders_tomorrow = False
 
-		if len(no_orders_tomorrow) == 0:
+		if len(orders_for_tomorrow) == 0:
 			no_orders_tomorrow = True
 
 		return render_to_response(

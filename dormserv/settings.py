@@ -81,6 +81,7 @@ TWILIO_PHONE = "+19195513279"
 
 US_STATES = (
     ('North_Carolina', 'NC'),
+    ('NC', 'NC'),
 )
 
 # Categories of Items that we offer:
