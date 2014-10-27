@@ -31,9 +31,10 @@ def view_driver(request):
 		today = datetime.today().date()
 
 		orders_to_display = []
-		for do in DriverOrder.objects.filter(driver=driver):
-			if do.order.entry.date == today:
-				orders_to_display.append(do)
+		for entry in Entry.objects.filter(date=today).order_by('time'):
+			for do in DriverOrder.objects.filter(driver=driver):
+				if do.order.entry == entry:
+					orders_to_display.append(do.order)
 
 		no_orders = False
 
@@ -43,9 +44,10 @@ def view_driver(request):
 		tomorrow = today + timedelta(days=1)
 
 		orders_for_tomorrow = []
-		for do in DriverOrder.objects.filter(driver=driver):
-			if do.order.entry.date == tomorrow:
-				orders_for_tomorrow.append(do)
+		for entry in Entry.objects.filter(date=tomorrow).order_by('time'):
+			for do in DriverOrder.objects.filter(driver=driver):
+				if do.order.entry == entry:
+					orders_to_display.append(do.order)
 
 		no_orders_tomorrow = False
 
@@ -55,7 +57,7 @@ def view_driver(request):
 		entries = Entry.objects.all()
 
 		return render_to_response(
-			"driver_home.html",
+			"driver.html",
 			{
 			'today':today,
 			'no_orders':no_orders,
