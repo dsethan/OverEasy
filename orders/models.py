@@ -44,7 +44,7 @@ class Order(models.Model):
 		ors = []
 		for o in OrderItem.objects.filter(order=self):
 			str_to_pass = str(o.item.name) + " Qty: " + str(o.item.quantity)
-			ors.append(o.item.name)
+			ors.append(str_to_pass)
 		return ors
 
 class OrderItem(models.Model):
