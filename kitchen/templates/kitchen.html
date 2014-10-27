@@ -20,4 +20,23 @@
 </table>
 {% endif %}
 
+{% if no_orders_tomorrow %}
+
+<h2> There are currently no orders for tomorrow at this time.</h2>
+
+{% else %}
+<table>
+{% for order in orders_for_tomorrow %}
+<tr>
+	<td>{{ order.entry.date }}</td>
+	<td>{{ order.entry.time }}</td>
+	<td>{{ order.id }}</td>
+	<td>{{ order.view_order_total_in_usd }}</td>
+	<td>{{ order.get_all_items_for_order }}</td>
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+
+
 {% endblock %}
