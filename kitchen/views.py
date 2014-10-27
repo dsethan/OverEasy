@@ -36,15 +36,6 @@ def view_kitchen(request):
 		if len(orders_to_display) == 0:
 			no_orders = True
 
-		items_for_today = {}
-
-		for order in orders_to_display:
-			items = OrderItem.objects.filter(order=order)
-			for item in items:
-				if items_for_today[item.item] in items_for_today.keys():
-					items_for_today[item.item] = items_for_today[item.item] + 1
-				else:
-					items_for_today[item.item] = 1
 
 		tomorrow = today + timedelta(days=1)
 
@@ -59,17 +50,6 @@ def view_kitchen(request):
 		if len(orders_for_tomorrow) == 0:
 			no_orders_tomorrow = True
 
-		items_for_tomorrow = {}
-
-		for order in orders_to_display:
-			items = OrderItem.objects.filter(order=order)
-			for item in items:
-				if items_for_tomorrow[item.item] in items_for_tomorrow.keys():
-					items_for_tomorrow[item.item] = items_for_tomorrow[item.item] + 1
-				else:
-					items_for_tomorrow[item.item] = 1
-
-
 		return render_to_response(
 			"kitchen.html",
 			{
@@ -77,8 +57,6 @@ def view_kitchen(request):
 			'no_orders_tomorrow':no_orders_tomorrow,
 			'orders_to_display':orders_to_display,
 			'orders_for_tomorrow':orders_for_tomorrow,
-			'items_for_today':items_for_today,
-			'items_for_tomorrow':items_for_tomorrow,
 			},
 			context)
 
