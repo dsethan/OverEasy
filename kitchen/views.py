@@ -11,6 +11,7 @@ from users.models import UserProfile, DriverProfile, StaffProfile
 from restaurants.models import Restaurant
 
 from orders.models import Order, OrderItem
+from cal.models import Entry
 
 def view_kitchen(request):
 	context = RequestContext(request)
@@ -25,20 +26,29 @@ def view_kitchen(request):
 
 		today = datetime.today().date()
 
-		orders_to_display = []
-		for order in Order.objects.all():
-			if order.entry.date == today:
-				orders_to_display.append(order)
+		today_entries = Entry.objects.filter(date=tomorrow)
 
-		no_orders = False
-		if len(orders_to_display) == 0:
-			no_orders = True
+		orders_for_today = []
+
+		for entry in today_entries:
+			orders = entry.get_all_orders_for_entry():
+			for order in orders:
+				orders_for_today.append(order)
+
+		no_orders_today = False
+
+		if len(no_orders_today) == 0:
+			no_orders_today = True
 
 		tomorrow = today + timedelta(days=1)
 
+		tomorrow_entries = Entry.objects.filter(date=tomorrow)
+
 		orders_for_tomorrow = []
-		for order in Order.objects.all():
-			if order.entry.date == tomorrow:
+
+		for entry in tomorrow_entries:
+			orders = entry.get_all_orders_for_entry():
+			for order in orders:
 				orders_for_tomorrow.append(order)
 
 		no_orders_tomorrow = False

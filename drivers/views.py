@@ -12,6 +12,7 @@ from restaurants.models import Restaurant
 
 from orders.models import Order, OrderItem
 from drivers.models import DriverOrder
+from cal.models import Entry
 
 def view_driver(request):
 	context = RequestContext(request)
@@ -51,9 +52,12 @@ def view_driver(request):
 		if len(orders_for_tomorrow) == 0:
 			no_orders_tomorrow = True
 
+		entries = Entry.objects.all()
+
 		return render_to_response(
 			"driver_home.html",
 			{
+			'today':today,
 			'no_orders':no_orders,
 			'no_orders_tomorrow':no_orders_tomorrow,
 			'orders_to_display':orders_to_display,
