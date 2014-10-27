@@ -11,6 +11,22 @@
 {% else %}
 
 {% for order in orders_to_display %}
+<tr>
+	<td>{{ order.entry.date }}</td>
+	<td>&nbsp; &nbsp; </td>
+	<td>{{ order.entry.time }}</td>
+	<td>&nbsp; &nbsp; </td>
+	<td>
+		{% for item in order.get_all_item_names_for_order %}
+		
+		{{ item }} &nbsp;
+
+		{% endfor %}
+	</td>
+</tr>
+{% endfor %}
+
+{% for order in orders_to_display %}
 	
 	Time: <b>{{ order.entry.time }}</b><br>
 	Order Id: {{ order.id }}<br>
@@ -22,7 +38,7 @@
 	Items:
 	{% for item in order.get_all_item_names_for_order %}
 	{{ item }}, 
-	{% endfor %}<br><br>
+	{% endfor %}<br><br><hr>
 
 {% endfor %}
 
@@ -35,6 +51,23 @@
 <h2> There are currently no orders for tomorrow at this time.</h2>
 
 {% else %}
+
+{% for order in orders_for_tomorrow %}
+<tr>
+	<td>{{ order.entry.date }}</td>
+	<td>&nbsp; &nbsp; </td>
+	<td>{{ order.entry.time }}</td>
+	<td>&nbsp; &nbsp; </td>
+	<td>
+		{% for item in order.get_all_item_names_for_order %}
+		
+		{{ item }} &nbsp;
+
+		{% endfor %}
+	</td>
+</tr>
+{% endfor %}
+
 
 {% for order in orders_for_tomorrow %}
 
