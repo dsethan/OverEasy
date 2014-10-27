@@ -41,10 +41,10 @@ def view_kitchen(request):
 		for order in orders_to_display:
 			items = OrderItem.objects.filter(order=order)
 			for item in items:
-				if items_for_today[item] in items_for_today.keys():
-					items_for_today[item] = items_for_today[item] + 1
+				if items_for_today[item.item] in items_for_today.keys():
+					items_for_today[item.item] = items_for_today[item.item] + 1
 				else:
-					items_for_today[item] = 1
+					items_for_today[item.item] = 1
 
 		tomorrow = today + timedelta(days=1)
 
@@ -64,10 +64,10 @@ def view_kitchen(request):
 		for order in orders_to_display:
 			items = OrderItem.objects.filter(order=order)
 			for item in items:
-				if items_for_tomorrow[item] in items_for_tomorrow.keys():
-					items_for_tomorrow[item] = items_for_tomorrow[item] + 1
+				if items_for_tomorrow[item.item] in items_for_tomorrow.keys():
+					items_for_tomorrow[item.item] = items_for_tomorrow[item.item] + 1
 				else:
-					items_for_tomorrow[item] = 1
+					items_for_tomorrow[item.item] = 1
 
 
 		return render_to_response(
