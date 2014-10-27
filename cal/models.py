@@ -4,7 +4,6 @@ from django.db import models
 from django.utils import timezone
 
 from restaurants.models import Restaurant
-from orders.models import Order
 #from orders.models import Order
 
 class Entry(models.Model):
@@ -95,8 +94,6 @@ class Entry(models.Model):
 
 		return num
 
-	def get_all_orders_for_entry(self):
-		return Order.objects.filter(entry=self):
 
 	def __unicode__(self):
 		return "Entry id:" + str(self.id)

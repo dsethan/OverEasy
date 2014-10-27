@@ -26,34 +26,27 @@ def view_kitchen(request):
 
 		today = datetime.today().date()
 
-		today_entries = Entry.objects.filter(date=tomorrow)
+		orders_to_display = []
 
-		orders_for_today = []
+		for entry in Entry.objects.filter(date=today):
+			for order in Order.objects.filter(entry=entry):
+				orders_to_display.append(order)
 
-		for entry in today_entries:
-			orders = entry.get_all_orders_for_entry():
-			for order in orders:
-				orders_for_today.append(order)
-
-		no_orders_today = False
-
-		if len(no_orders_today) == 0:
-			no_orders_today = True
+		no_orders = False
+		if len(orders_to_display) == 0:
+			no_orders = True
 
 		tomorrow = today + timedelta(days=1)
 
-		tomorrow_entries = Entry.objects.filter(date=tomorrow)
-
 		orders_for_tomorrow = []
 
-		for entry in tomorrow_entries:
-			orders = entry.get_all_orders_for_entry():
-			for order in orders:
+		for entry in Entry.objects.filter(date=tomorrow):
+			for order in Order.objects.filter(entry=entry):
 				orders_for_tomorrow.append(order)
 
 		no_orders_tomorrow = False
 
-		if len(orders_for_tomorrow) == 0:
+		if len(no_orders_tomorrow) == 0:
 			no_orders_tomorrow = True
 
 		return render_to_response(
