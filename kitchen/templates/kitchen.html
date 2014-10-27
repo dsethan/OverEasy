@@ -10,14 +10,13 @@
 
 {% else %}
 
-<table>
 {% for order in orders_to_display %}
 	
-	Time: <b>{{ order.entry.time }}</b>
+	Time: <b>{{ order.entry.time }}</b><br>
 	Order Id: {{ order.id }}<br>
 	Name: {{ order.profile.user.first_name }} {{ order.profile.user.last_name}}<br>
-	Address: {{ order.profile.get_address_string }}
-	Distance: {{ order.profile.dist_to_restaurant }} Est Time: {{ order.profile.time_to_user_profile }}<br>
+	Phone: {{ order.profile.phone }}<br>
+	Address: {{ order.profile.get_address_string }}<br>
 	Date: {{ order.entry.date }}<br>
 	Total: {{ order.view_order_total_in_usd }}<br>
 	Items:
@@ -26,7 +25,7 @@
 	{% endfor %}<br>
 
 {% endfor %}
-</table>
+
 {% endif %}
 
 <h2>Tomorrow's Orders</h2>
@@ -37,23 +36,21 @@
 
 {% else %}
 
-<table>
 {% for order in orders_for_tomorrow %}
 
 	Time: <b>{{ order.entry.time }}</b>
 	Order Id: {{ order.id }}<br>
 	Name: {{ order.profile.user.first_name }} {{ order.profile.user.last_name}}<br>
 	Address: {{ order.profile.get_address_string }}
-	Distance: {{ order.profile.dist_to_restaurant }} Est Time: {{ order.profile.time_to_user_profile }}<br>
 	Date: {{ order.entry.date }}<br>
 	Total: {{ order.view_order_total_in_usd }}<br>
 	Items:
 	{% for item in order.get_all_item_names_for_order %}
 	{{ item }}, 
 	{% endfor %}<br>
-	
+
 {% endfor %}
-</table>
+
 {% endif %}
 
 
