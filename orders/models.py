@@ -43,8 +43,8 @@ class Order(models.Model):
 	def get_all_item_names_for_order(self):
 		ors = []
 		for o in OrderItem.objects.filter(order=self):
-			str_to_pass = str(o.item.name) + " Qty: " + str(o.item.quantity)
-			ors.append(str_to_pass)
+			str_to_return = str(o.item.name) + " Qty: " + str(o.quantity)
+			ors.append(str_to_return)
 		return ors
 
 class OrderItem(models.Model):
