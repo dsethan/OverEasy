@@ -96,4 +96,4 @@ class Entry(models.Model):
 
 
 	def __unicode__(self):
-		return "Entry id:" + str(self.id)
+		return "Entry:" + str(self.time) + " " + str(self.date)
