@@ -27,7 +27,7 @@
 			<td>&nbsp;</td>
 			{% endfor %}
 			<td>
-				{% if total_price >= 300 %}
+				{% if total_price >= 600 %}
 				<form role="form" method="post" action="/checkout/">
 					{% csrf_token %}
 					<input type="hidden" name="entry_id" value="{{ entry_id }}">
