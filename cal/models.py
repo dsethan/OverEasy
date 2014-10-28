@@ -96,4 +96,4 @@ class Entry(models.Model):
 
 
 	def __unicode__(self):
-		return "Entry:" + str(self.time) + " " + str(self.date)
+		return self.full_date_and_time_string_for_checkout()
