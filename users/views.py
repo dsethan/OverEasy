@@ -336,7 +336,6 @@ def verify_address(address_string):
 	components = address_string.split(" ")
 
 	blocked_addresses = ["Wanamaker", 
-		"Campus", 
 		"Chapel",
 		"Towerview", 
 		"Keohane", 
