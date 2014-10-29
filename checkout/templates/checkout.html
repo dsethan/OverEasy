@@ -79,6 +79,17 @@
           <br>
 
           <div class="row">
+          {% if cart.get_total_price_of_cart == 0 %}
+            <form action="/checkout/oatmeal_day_special/" method="POST" id="payment-form">
+              {% csrf_token %}
+              <input type="hidden" name="total_price" value="{{ total_price }}">
+              <input type="hidden" name="cart_id" value="{{ cart_id }}">
+
+              <input type="submit" class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5; font-style: bold;" value="Get Me My Free Food!">
+
+            </form>
+
+          {% endif %}
           {% if card_on_file %}
           <div class="col-md-5">
             <h4><b>Choose Payment Method<b></h4>

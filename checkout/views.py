@@ -165,6 +165,25 @@ def process_new_card(request):
 
 		return create_order(cart_id, user, context)
 
+@login_required
+def oatmeal_day_special(request):
+	context = RequestContext(request)
+	user = request.user
+
+	if request.method == 'POST':
+		cart_id = request.POST.get('cart_id')
+		total_price = request.POST.get('total_price')
+		#last_four = request.POST.get('last4')
+		#brand = request.POST.get('brand')
+
+		cart = Cart.objects.get(id=int(cart_id))
+
+		total_price = cart.grand_total()
+
+		cart_id = int(cart_id)
+
+		return create_order(cart_id, user, context)
+
 def create_order(cart_id, user, context):
 	cart = Cart.objects.get(id=cart_id)
 	items = cart.get_items_and_quantities()
