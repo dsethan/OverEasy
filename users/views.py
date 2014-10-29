@@ -311,6 +311,7 @@ def verify_restaurant(start):
 			dist = dirs['Directions']['Distance']['meters']
 
 		if dist < r.max_radius:
+			return HttpResponse("Error 1")
 			return (True, r)
 
 	return (False, error)
@@ -358,8 +359,7 @@ def verify_address(address_string):
 		directions = geo.directions(address_string, start)
 	except:
 		error = "Please enter a valid address."
-		return HttpResponse("stupid ethan")
-		#return (False, error)
+		return (False, error)
 
 	split = str(address_string).split(",")
 	addr = split[0]
