@@ -111,6 +111,22 @@ def process_existing_card(request):
 	return HttpResponse("Uh oh! Something went wrong :(")
 
 @login_required
+def oatmeal_day_special(request):
+	context = RequestContext(request)
+	user = request.user
+
+	if request.method == 'POST':
+		cart_id = request.POST.get('cart_id')
+
+		cart = Cart.objects.get(id=cart_id)
+		total_price = cart.get_total_price_of_cart()
+		tax = cart.get_tax_for_cart()
+
+		return create_order(cart_id, user, context)
+
+	return HttpResponse("Uh oh! Something went wrong :(")
+
+@login_required
 def process_new_card(request):
 	context = RequestContext(request)
 	user = request.user
