@@ -336,8 +336,6 @@ def verify_address(address_string):
 	components = address_string.split(" ")
 
 	blocked_addresses = ["Wanamaker", 
-		"Campus", 
-		"Chapel",
 		"Towerview", 
 		"Keohane", 
 		"Union", 
@@ -360,7 +358,8 @@ def verify_address(address_string):
 		directions = geo.directions(address_string, start)
 	except:
 		error = "Please enter a valid address."
-		return (False, error)
+		return HttpResponse("stupid ethan")
+		#return (False, error)
 
 	split = str(address_string).split(",")
 	addr = split[0]
