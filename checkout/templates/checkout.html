@@ -80,7 +80,8 @@
           <div class="row">
           
           {% if cart.get_total_price_of_cart == 0 %}
-          <form action="/checkout/oatmeal_day_special/" method="POST" id="payment-form">
+          
+          <form action="/checkout/oatmeal_day_special/" method="POST">
               {% csrf_token %}
               <input type="hidden" name="total_price" value="{{ total_price }}">
               <input type="hidden" name="cart_id" value="{{ cart_id }}">
