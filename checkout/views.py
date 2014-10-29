@@ -109,7 +109,8 @@ def process_existing_card(request):
 		return create_order(cart_id, user, context)
 
 	return HttpResponse("Uh oh! Something went wrong :(")
-'''
+
+
 @login_required
 def oatmeal_day_special(request):
 	context = RequestContext(request)
@@ -125,7 +126,7 @@ def oatmeal_day_special(request):
 		return create_order(cart_id, user, context)
 
 	return HttpResponse("Uh oh! Something went wrong :(")
-'''
+
 
 @login_required
 def process_new_card(request):
