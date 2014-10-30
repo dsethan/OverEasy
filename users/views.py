@@ -315,7 +315,7 @@ def verify_restaurant(start):
 		start_split = start.split(" ")
 
 		for radius in good_radii:
-			if word in start_split:
+			if radius in start_split:
 				return (True, r)
 
 		if dist < r.max_radius:
