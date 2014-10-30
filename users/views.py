@@ -310,6 +310,20 @@ def verify_restaurant(start):
 		if not wrong_addr:
 			dist = dirs['Directions']['Distance']['meters']
 
+		good_radii = [
+		'LaSalle',
+		'lasalle',
+		'laSalle',
+		'LaSalle',
+		'Morrene']
+
+		start_split = start.split(" ")
+
+		for radius in good_radii:
+			for word in start_split:
+				if word == radius:
+					return (True, r)
+
 		if dist < r.max_radius:
 			return (True, r)
 
