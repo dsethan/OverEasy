@@ -199,8 +199,7 @@ def gather_errors_for_template(first, last, username, address_string, phone,
 
 	if not addr[0]:
 		addr_errors.append(addr[1])
-
-
+ 
 	if not num[0]:
 		num_errors.append(num[1])
 
