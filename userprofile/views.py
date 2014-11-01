@@ -91,10 +91,12 @@ def process_phone_number(request):
 			auth_token = "d5b72594bce3487a3dff812a08bc8265"
 			client = TwilioRestClient(account_sid, auth_token)
 			
-			msg = "Hey! Your friend " + user.first_name + " " + user.last_name + " is inviting you to Over Easy, the new breakfast delivery service! Simply go to overeasyapp.com and when you checkout put in code " + referral_code + "."
+			msg = "Hey! Your friend " + user.first_name + " " + user.last_name + " is inviting you to Over Easy, the new breakfast delivery service! Simply go to overeasyapp.com and when you checkout, put in code " + referral_code + "."
 			message = client.messages.create(to=number_good[1], 
 				from_=settings.TWILIO_PHONE, 
 				body=msg)
+
+	return redirect('/profile')
 
 
 def verify_phone(phone):
