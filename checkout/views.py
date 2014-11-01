@@ -12,6 +12,7 @@ from users.models import UserProfile
 from cart.models import Cart, CartItem
 from payments.models import Card, CardAttributes
 from orders.models import Order, OrderItem
+from refer.models import Referral
 
 import users.views
 
@@ -60,6 +61,28 @@ def checkout(request):
 
 		cart_id = cart.id
 
+		exists_message = False
+
+		pk = settings.STRIPE_PK
+
+		referral = None
+		for r in Referral.objects.all():
+			if r.profile == profile:
+				referral = r
+
+		credits = 0
+		if referral != None:
+			credits = referral.credits
+
+		discount_amount = compute_discount(credits, grand_total)
+		print discount_amount
+
+		amount_to_charge = grand_total - discount_amount
+
+		show_discount = False
+		if discount_amount > 0:
+			show_discount = True
+
 		return render_to_response(
 			'checkout.html',
 			{
@@ -78,10 +101,118 @@ def checkout(request):
 			'attributes':attributes,
 			'entry_id':entry_id,
 			'grand_total': grand_total,
+			'exists_message':exists_message,
+			'pk':pk,
+			'amount_to_charge':amount_to_charge,
+			'discount_amount':discount_amount,
+			'show_discount':show_discount,
 			},
 			context)
 
 	return HttpResponse("You must first select some items from the cart!")
+
+
+def compute_discount(credits, grand_total):
+	if credits > grand_total:
+		return grand_total
+
+	if credits < grand_total:
+		return credits
+
+	if credits == grand_total:
+		return 0
+
+@login_required
+def checkout_from_referral(request, entry_id, cart_id, message):
+	context = RequestContext(request)
+	user = request.user
+	profile = UserProfile.objects.get(user=user)
+
+	if request.method == 'POST':
+		stripe.api_key = settings.STRIPE
+		entry = Entry.objects.get(id=int(entry_id))
+		cart = Cart.objects.get(id=int(cart_id))
+
+		if entry.open() == False or entry.orders_still_open == False:
+			return redirect('/cal/entry_not_avail/')
+
+		if cart.cart_still_active == False:
+			return redirect('/cal/entry_not_avail')
+
+		cart_items = cart.get_items()
+		items_with_quantity = cart.get_items_and_quantities()
+
+		#urls = get_url_for_item(cart_items)
+
+		cards = Card.objects.filter(user=user)
+
+		attributes = []
+		for card in cards:
+			attributes_for_card = CardAttributes.objects.get(card=card)
+			attributes.append(attributes_for_card)
+
+		card_on_file = False
+		if len(cards) > 0:
+			card_on_file = True
+
+		total_price = cart.grand_total()
+		tax = cart.get_tax_for_cart()
+
+		grand_total = cart.grand_total()
+
+		cart_id = cart.id
+
+		exists_message = True
+		
+		pk = settings.STRIPE_PK
+
+		referral = None
+		for r in Referral.objects.all():
+			if r.profile == profile:
+				referral = r
+
+		credits = 0
+		if referral != None:
+			credits = referral.credits
+
+		amount_to_charge = compute_discount(credits, grand_total)
+
+		discount_amount = grand_total - amount_to_charge
+
+		show_discount = False
+		if discount_amount > 0:
+			show_discount = True
+
+		return render_to_response(
+			'checkout.html',
+			{
+			#'urls':urls,
+			'tax':tax,
+			'entry':entry,
+			'profile':profile,
+			'user':user,
+			'cart':cart,
+			'cart_id':cart_id,
+			'items_with_quantity':items_with_quantity,
+			'entry':entry,
+			'cards':cards,
+			'total_price':total_price,
+			'card_on_file':card_on_file,
+			'attributes':attributes,
+			'entry_id':entry_id,
+			'grand_total': grand_total,
+			'message':message,
+			'exists_message':exists_message,
+			'pk':pk,
+			'amount_to_charge':amount_to_charge,
+			'discount_amount':discount_amount,
+			'show_discount':show_discount,
+			},
+			context)
+
+	return HttpResponse("You must first select some items from the cart!")
+
+
 
 @login_required
 def process_existing_card(request):
@@ -100,8 +231,26 @@ def process_existing_card(request):
 
 		stripe.api_key = settings.STRIPE
 
+		profile = UserProfile.objects.get(user=user)
+
+		referral = None
+		for r in Referral.objects.all():
+			if r.profile == profile:
+				referral = r
+
+		credits = 0
+
+		if referral != None:
+			credits = referral.credits
+		
+		amount_to_subtract = compute_discount(credits, total_price)
+
+		if referral != None:
+			referral.credits = referral.credits - amount_to_subtract
+			referral.save()
+
 		stripe.Charge.create(
-			amount = int(total_price + tax),
+			amount = int(total_price + tax)-amount_to_subtract,
 			currency = "usd",
 			customer = card.customer
 			)
@@ -120,8 +269,17 @@ def oatmeal_day_special(request):
 		cart_id = request.POST.get('cart_id')
 
 		cart = Cart.objects.get(id=cart_id)
-		total_price = cart.get_total_price_of_cart()
+		total_price = cart.grand_total()
 		tax = cart.get_tax_for_cart()
+
+		profile = UserProfile.objects.get(user=user)
+		referral = Referral.objects.get(profile=profile)
+		credits = referral.credits
+
+		amount_to_subtract = compute_discount(credits, total_price)
+
+		referral.credits = referral.credits - amount_to_subtract
+		referral.save()
 
 		return create_order(cart_id, user, context)
 
@@ -173,8 +331,26 @@ def process_new_card(request):
 		cart = Cart.objects.get(id=int(cart_id))
 		total_price = cart.grand_total()
 
+		profile = UserProfile.objects.get(user=user)
+
+		referral = None
+		for r in Referral.objects.all():
+			if r.profile == profile:
+				referral = r
+
+		credits = 0
+
+		if referral != None:
+			credits = referral.credits
+		
+		amount_to_subtract = compute_discount(credits, total_price)
+
+		if referral != None:
+			referral.credits = referral.credits - amount_to_subtract
+			referral.save()
+
 		stripe.Charge.create(
-			amount = total_price,
+			amount = total_price-amount_to_subtract,
 			currency="usd",
 			customer=new_card.customer,
 			)

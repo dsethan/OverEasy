@@ -6,12 +6,29 @@
 	<h1>Thanks for using Over Easy. We'll see you on {{ entry.full_date_and_time_string_for_checkout }}.</h1>
 	<h4>Your order will be stored in your profile.<br>In case you have any questions send an email to <a href="mailto:help@overeasyapp.com?Subject=Over%20Easy" target="_top">help@overeasyapp.com</a> and we’ll answer you promptly.</h4>
 
+	<h4>Have a Referral Code?</h4>
+	    <form action="/refer/process_referral" method="POST">
+	      {% csrf_token %}
+
+	        <div class="form-row">
+	          <input placeholder="Input Referral Code" type="text" class="form-control" style="width:200px;" name="code">
+	        </div>
+
+	         <input type="hidden" name="entry_id" value="{{ entry_id }}">
+	          
+	          <input type="hidden" name="total_price" value="{{ total_price }}">
+	          
+	          <input type="hidden" name="cart_id" value="{{ cart_id }}">
+	         
+	         <input type="submit" class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Activate Code">
+
+	    </form>
+
 	<br>
 	<center>
  	<a href="/cal/"><input class="btn btn-default" style="width:200px; height: 70%; color:#000000; background-color:#E3ECFD; border-color: #7E95F5" value="Place Another Order"></a>
  	</center>
 
-	
 
 	<!--<h4><b>Want Free Breakfast?</b></h4>
 	    <hr>

@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^profile/', include('userprofile.urls')),
     url(r'^kitchen/', include('kitchen.urls')),
     url(r'^driver/', include('drivers.urls')),
+    url(r'^refer/', include('refer.urls')),
 
 )
 

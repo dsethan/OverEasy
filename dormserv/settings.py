@@ -26,6 +26,8 @@ TEMPLATE_DEBUG = True
 
 LOCAL = False
 
+PAY_TEST = False
+
 ALLOWED_HOSTS = []
 
 
@@ -54,6 +56,7 @@ INSTALLED_APPS = (
     'userprofile',
     'kitchen',
     'drivers',
+    'refer',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -73,12 +76,14 @@ WSGI_APPLICATION = 'dormserv.wsgi.application'
 # API Keys
 GOOGLE_MAPS = "AIzaSyAUYyU_aUoW5iu_pZZ30U0V_bfdPHQMBQM"
 STRIPE = "sk_live_dNlZsFMzrLL3XTBqJw1DRzCi"
+STRIPE_PK = "pk_live_4NE8xTSIb9kJlfXpfXzZU0t4"
 TWILIO_SID = "  "
 TWILIO_AUTH = "d5b72594bce3487a3dff812a08bc8265"
 TWILIO_PHONE = "+19195513279"
 
-if DEBUG:
+if PAY_TEST:
     STRIPE = "sk_test_jgfCdVp0nTuGAydNucnl9rjT"
+    STRIPE_PK = "pk_test_SuIKPOjVOLx6pJhqOp74inWw"
 
 # States in the USA that we are currently delivering to.
 
