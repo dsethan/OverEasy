@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 
 from users.models import UserProfile
 from orders.models import Order, OrderItem
-from refer.models import Referral
+from promotion.models import Referral
 
 def display_profile(request):
 	context = RequestContext(request)
