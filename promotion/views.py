@@ -31,7 +31,13 @@ def process_referral(request):
 		referral_user_profile = find_user_for_code(code)
 
 		if referral_user_profile == False:
-			return HttpResponse("Sorry, that code is not in our system.")
+			message = "Sorry, that code is not in our system."
+			return render_to_response(
+				"refer_response.html",
+				{
+				'message':message,
+				},
+				context) 
 
 		orders = Order.objects.filter(profile=user_profile)
 
