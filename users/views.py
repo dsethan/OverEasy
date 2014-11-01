@@ -342,24 +342,6 @@ def verify_address(address_string):
 
 	components = address_string.split(" ")
 
-	blocked_addresses = ["Wanamaker", 
-		"Chapel",
-		"Towerview", 
-		"Keohane", 
-		"Union", 
-		"Kilgo", 
-		"Keohane", 
-		"Craven", 
-		"Few",
-		"Crowell",
-		"Edens",
-		"Wannamaker"]
-
-	for bl in blocked_addresses:
-		if bl in components:
-			error = "Unfortunately, we are not yet delivering to these addresses."
-			return (False, error)
-
 	start = "902 Sedgefield Street, Durham, NC"
 
 	try:

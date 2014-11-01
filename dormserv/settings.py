@@ -24,7 +24,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-LOCAL = False
+LOCAL = True
 
 ALLOWED_HOSTS = []
 
@@ -77,6 +77,9 @@ TWILIO_SID = "  "
 TWILIO_AUTH = "d5b72594bce3487a3dff812a08bc8265"
 TWILIO_PHONE = "+19195513279"
 
+if DEBUG:
+    STRIPE = "sk_test_jgfCdVp0nTuGAydNucnl9rjT"
+    
 # States in the USA that we are currently delivering to.
 
 US_STATES = (
