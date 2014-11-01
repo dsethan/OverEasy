@@ -6,4 +6,5 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 	url(r'^$', views.display_profile, name='display_profile'),
+	url(r'^process_phone_number', views.process_phone_number, name="process_phone_number"),
     )
