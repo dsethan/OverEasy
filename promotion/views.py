@@ -12,7 +12,7 @@ from users.models import UserProfile
 from cart.models import Cart, CartItem
 from payments.models import Card, CardAttributes
 from orders.models import Order, OrderItem
-from refer.models import Referral, ReferralMatches
+from promotion.models import Referral, ReferralMatches
 
 import users.views
 import checkout.views
