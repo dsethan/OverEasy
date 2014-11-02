@@ -269,17 +269,23 @@ def store_user_data(un, pw, addr, addr2, num, nom, res, request):
 		last_name=last,
 		username=username)
 
+	try:
+		_user_profile = UserProfile(
+			user=_user,
+			address=address,
+			city=city,
+			state=state,
+			phone=phone,
+			restaurant=restaurant)
+	except:
+		return render_to_response(
+			"error.html",
+			{},
+			context)
+
 	_user.set_password(password)
 
 	_user.save()
-
-	_user_profile = UserProfile(
-		user=_user,
-		address=address,
-		city=city,
-		state=state,
-		phone=phone,
-		restaurant=restaurant)
 
 	_user_profile.save()
 
