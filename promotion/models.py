@@ -7,6 +7,18 @@ class Referral(models.Model):
 	referral_code = models.CharField(max_length=20)
 	credits = models.IntegerField(default=0)
 
+	def get_credits_in_usd(self):
+		total = self.credits
+		total = int(total)
+		self_str = str(total)
+		cents = self_str[-2:]
+		dollars = self_str[:-2]
+		if len(dollars) == 0:
+			dollars = "0"
+		if len(cents) == 1:
+			cents = "0" + cents
+		return "$" + dollars + "." + cents
+
 	def get_num_referrals(self):
 		return ReferralMatches.objects.filter(referrer=profile)
 

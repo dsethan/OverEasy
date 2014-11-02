@@ -47,7 +47,7 @@ def manage_drivers(request):
 
 	all_drivers = DriverProfile.objects.all()
 
-	today = datetime.today().date()
+	today = datetime.today().date() + timedelta(days=2)
 
 	orders_to_display = []
 	for entry in Entry.objects.filter(date=today).order_by('time'):

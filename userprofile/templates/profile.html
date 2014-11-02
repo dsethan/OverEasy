@@ -17,7 +17,7 @@
         <!--<a href="/profile"><input class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Change Address"></a>-->
         <h4><b>Your Referral Code</b></h4>
         <h5>{{ referral.referral_code }}</h5>
-        <h5>Balance: {{ referral.credits }}</h5>
+        <h5>Balance: {{ referral.get_credits_in_usd }}</h5>
         <hr>
         <h4><b>Get Free Breakfast!</b></h4>
         <h5>Put in a friend's number below! When they place their first order, you will get a $10.00 credit! It's that easy...</h5>
