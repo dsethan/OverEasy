@@ -67,7 +67,7 @@ def process_referral(request):
 				context) 
 
 		if match_already_in:
-			message = "Sorry, you cannot use referral codes more than once."
+			message = "Sorry, you cannot use a referral code more than once."
 			return render_to_response(
 				"refer_response.html",
 				{
@@ -85,7 +85,7 @@ def process_referral(request):
 			referral_match.save()
 			referral.credits = referral.credits + 1000 # inc by 10 dollars
 			referral.save()
-			message = "Your referral has been successfully supplied!"
+			message = "You just gave your friend a free $10 credit! Go to your profile to send your referral code to receive your own credits."
 
 			return render_to_response(
 				"refer_response.html",

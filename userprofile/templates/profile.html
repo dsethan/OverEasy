@@ -16,7 +16,7 @@
           </h5>
         <!--<a href="/profile"><input class="btn btn-default" style="width:200px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5" value="Change Address"></a>-->
         <h4><b>Your Referral Code</b></h4>
-        <h5>{{ referral.referral_code }}</h5>
+        <h4>{{ referral.referral_code }}</h4>
         <h5>Balance: {{ referral.get_credits_in_usd }}</h5>
         <hr>
         <h4><b>Get Free Breakfast!</b></h4>
@@ -24,7 +24,8 @@
         <form action="/profile/process_phone_number/" method="POST">
           {% csrf_token %}
 
-          <input type="text" name="phone" style="width: 200px; height: 100%; font-size: 18px">
+          <input placeholder="Input Phone Number" type="text" class="form-control" style="width:200px; height: 70%;" name="phone">
+
           <input type="submit" class="btn btn-default" style="width: 200px; height: 70%; background-color:#E3ECFD; border-color: #7E95F5" value="Invite a friend!">
 
         </form>
