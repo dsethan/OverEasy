@@ -82,6 +82,23 @@ def process_phone_number(request):
 	if request.method == 'POST':
 		phone = request.POST.get('phone')
 		profile = UserProfile.objects.get(user=user)
+
+
+		referral = None
+
+		for r in Referral.objects.all():
+			if r.profile == profile:
+				referral = r
+
+		if referral == None:
+			new_referral = Referral(
+				profile=profile,
+				referral_code=generate_referral_code(),
+				)
+
+			new_referral.save()
+			referral = new_referral
+			
 		referral_code = Referral.objects.get(profile=profile).referral_code
 
 		number_good = verify_phone(phone)
