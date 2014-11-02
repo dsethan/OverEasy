@@ -83,6 +83,9 @@ def checkout(request):
 		if discount_amount > 0:
 			show_discount = True
 
+		discount_amount_in_usd = get_value_in_usd(discount_amount)
+		amount_to_charge_in_usd = get_value_in_usd(amount_to_charge)
+
 		return render_to_response(
 			'checkout.html',
 			{
@@ -106,6 +109,8 @@ def checkout(request):
 			'amount_to_charge':amount_to_charge,
 			'discount_amount':discount_amount,
 			'show_discount':show_discount,
+			'discount_amount_in_usd':discount_amount_in_usd,
+			'amount_to_charge_in_usd':amount_to_charge_in_usd,
 			},
 			context)
 
@@ -121,6 +126,17 @@ def compute_discount(credits, grand_total):
 
 	if credits == grand_total:
 		return 0
+
+def get_value_in_usd(total):
+		total = int(total)
+		self_str = str(total)
+		cents = self_str[-2:]
+		dollars = self_str[:-2]
+		if len(dollars) == 0:
+			dollars = "0"
+		if len(cents) == 1:
+			cents = "0" + cents
+		return "$" + dollars + "." + cents
 
 @login_required
 def checkout_from_referral(request, entry_id, cart_id, message):
@@ -183,6 +199,9 @@ def checkout_from_referral(request, entry_id, cart_id, message):
 		if discount_amount > 0:
 			show_discount = True
 
+		discount_amount_in_usd = get_value_in_usd(discount_amount)
+		amount_to_charge_in_usd = get_value_in_usd(amount_to_charge)
+
 		return render_to_response(
 			'checkout.html',
 			{
@@ -207,6 +226,8 @@ def checkout_from_referral(request, entry_id, cart_id, message):
 			'amount_to_charge':amount_to_charge,
 			'discount_amount':discount_amount,
 			'show_discount':show_discount,
+			'discount_amount_in_usd':discount_amount_in_usd,
+			'amount_to_charge_in_usd':amount_to_charge_in_usd,
 			},
 			context)
 
