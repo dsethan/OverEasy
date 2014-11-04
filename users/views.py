@@ -345,9 +345,16 @@ def verify_phone(phone):
 		return (False, error)
 
 	to_pass_back = ""
+
+	print phone
+
+	digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 	for digit in phone:
-		if digit == ("1" or "2" or "3" or "4" or "5" or "6" or "7" or "8" or "9" or "0"):
+		print digit
+		if digit in digits:
 			to_pass_back = to_pass_back + digit
+
+	print to_pass_back
 
 	return (True, to_pass_back)
 
