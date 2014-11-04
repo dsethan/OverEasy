@@ -25,9 +25,11 @@ def manage_drivers(request):
 		order_id = request.POST.get('order_id')
 
 		driver = DriverProfile.objects.get(id=driver_id)
-		order = DriverProfile.objects.get(id=order_id)
+		order = Order.objects.get(id=order_id)
 
-		if DriverOrder.objects.get(order=order) != None:
+		driver_order = get_driver_order(order)
+
+		if driver_order != None:
 			driver_order_to_delete = DriverOrder.objects.get(order=order)
 			driver_order_to_delete.delete()
 
@@ -47,23 +49,13 @@ def manage_drivers(request):
 
 	all_drivers = DriverProfile.objects.all()
 
-	today = datetime.today().date() + timedelta(days=2)
+	today = datetime.today().date() + timedelta(days=1)
 
 	orders_to_display = []
 	for entry in Entry.objects.filter(date=today).order_by('time'):
 		for order in Order.objects.filter(entry=entry):
 			print order
 			orders_to_display.append(order)
-
-	order_driver_match = {}
-	for order in orders_to_display:
-		found_do = False
-		for do in DriverOrder.objects.all():
-			if do.order == order:
-				order_driver_match[order] = do
-				found_do = True
-		if not found_do:
-			order_driver_match[order] = None
 
 	no_orders_today = False
 	if len(orders_to_display) == 0:
@@ -77,25 +69,12 @@ def manage_drivers(request):
 		for order in Order.objects.filter(entry=entry):
 			orders_for_tomorrow.append(order)
 
-	tomorrow_driver_match = {}
-	for order in orders_for_tomorrow:
-		found_do = False
-		for do in DriverOrder.objects.all():
-			if do.order == order:
-				tomorrow_driver_match[order] = do
-				found_do = True
-		if not found_do:
-			tomorrow_driver_match[order] = None
-
-
-
 	no_orders_tomorrow = False
 	if len(orders_for_tomorrow) == 0:
 		no_orders_tomorrow = True
 
-
 	return render_to_response(
-		"manage_drivers.html",
+		"drivermgmt.html",
 		{
 		'user':user,
 		'all_drivers':all_drivers,
@@ -105,9 +84,22 @@ def manage_drivers(request):
 		'no_orders_tomorrow':no_orders_tomorrow,
 		'today':today,
 		'tomorrow':tomorrow,
-		'order_driver_match':order_driver_match,
-		'tomorrow_driver_match':tomorrow_driver_match,
-		})
+		},
+		context)
+
+def get_driver_order(order):
+	exists = False
+	driver_order = ""
+
+	for do in DriverOrder.objects.all():
+		if do.order == order:
+			exists = True
+			driver_order = do
+
+	if not exists:
+		return None
+
+	return driver_order
 
 def view_driver(request):
 	context = RequestContext(request)
@@ -123,7 +115,7 @@ def view_driver(request):
 
 	if able_to_access:
 
-		today = datetime.today().date()
+		today = datetime.today().date() + timedelta(days=1)
 
 		orders_to_display = []
 		for entry in Entry.objects.filter(date=today).order_by('time'):

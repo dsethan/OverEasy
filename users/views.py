@@ -343,7 +343,13 @@ def verify_phone(phone):
 	if not re.match(r"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", phone):
 		error = "Please provide a valid phone number."
 		return (False, error)
-	return (True, phone)
+
+	to_pass_back = ""
+	for digit in phone:
+		if digit == ("1" or "2" or "3" or "4" or "5" or "6" or "7" or "8" or "9" or "0"):
+			to_pass_back = to_pass_back + digit
+
+	return (True, to_pass_back)
 
 def verify_address(address_string):
 	api_key = settings.GOOGLE_MAPS

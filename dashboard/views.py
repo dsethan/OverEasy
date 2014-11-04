@@ -10,6 +10,7 @@ from cal.models import Entry
 from restaurants.models import Restaurant
 from item.models import Item, ItemCategory
 
+
 def set_menu(request):
 	context = RequestContext(request)
 	user = request.user
