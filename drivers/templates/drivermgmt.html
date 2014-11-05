@@ -15,7 +15,17 @@ Order: {{ order.id }}<br>
 {{ order.entry.time }}<br>
 Name: {{ order.profile.user.first_name }} {{ order.profile.user.last_name }}<br>
 Address: {{ order.profile.get_address_string }}<br>
-Driver: {{ order.get_associated_driver_order }}<br>
+Driver:
+
+{% for do in all_driver_orders %}
+
+{% if do.order == order %}
+
+
+
+{% endif %}
+
+{% endfor %}
 
 Change Driver:
 
