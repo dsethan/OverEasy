@@ -383,6 +383,7 @@ button.input {
 }
 
 .product_desc {
+  margin-top: -10px;
   font-family: Helvetica;
   font-weight: lighter;
   font-size: 12px;
