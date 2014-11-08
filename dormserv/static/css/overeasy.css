@@ -392,7 +392,19 @@ button.input {
   margin-top: 50px;
   margin-bottom: 80px;
   z-index: 4;
+}
 
+#menurectangle {
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  box-shadow: 20px 34.641px 79.8px 4.2px rgba(0, 0, 0, 0.46);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  z-index: 4;
 }
 
 }
