@@ -56,6 +56,47 @@
 	<div id="phys-menu-wrapper">
 	{% endif %}
 
+	<div class="row">
+  		<div class="col-md-3">
+
+  			<div class="menu_box">
+				<div class="category_title">
+					CLASSIC
+				</div>
+			</div>
+
+			<div class="menu_box">
+				<div class="product_title">
+  					<p class="alignleft">BURRITO #1</p>
+  					<p class="alignright">$7</p>
+				</div>
+				<div style="clear: both;"></div>
+				
+				<div class="product_desc">
+					Scrambled eggs, carmelized peppers and onions, cheddar, crispy potatoes, and chipotle aioli.
+				</div>
+				
+				<form role="form" method="post" action="/menu/">
+					{% csrf_token %}
+					<input type="hidden" name="item_id" value="3">
+					<input type="hidden" name="entry_id" value="{{ entry_id }}">
+				
+					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
+					<!--<input type="submit" name="submit" value="Add to Cart">-->
+				</form>
+			</div>
+
+
+  		</div>
+
+  		<div class="col-md-3">.col-md-4</div>
+  		<div class="col-md-3">.col-md-4</div>
+  		<div class="col-md-3">.col-md-4</div>
+
+
+	</div>
+
+
 	<table>
 		<tr>
 			<td>
