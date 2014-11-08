@@ -380,7 +380,7 @@ button.input {
   font-size: 16px;
 }
 
-@media all and (max-width: 500px) {
+@media all and (max-width: 1061px) {
  body {
   background-color: #FFFFFF !important;
   background-image: none;
