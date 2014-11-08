@@ -380,7 +380,7 @@ button.input {
   font-size: 16px;
 }
 
-@media all and (max-width: 1061px) {
+@media all and (max-width: 900px) {
  body {
   background-color: #FFFFFF !important;
   background-image: none;
@@ -400,6 +400,21 @@ button.input {
   z-index: 4;
 }
 
+.logo{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 0 auto;
+
+}
+
+.login-form-wrapper {
+  font-family: 'PT Sans', sans-serif;
+  font-size: 17px;
+  padding-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
 
 
 }
