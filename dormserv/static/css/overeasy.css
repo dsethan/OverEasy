@@ -386,13 +386,20 @@ button.input {
   background-image: none;
  }
 
- .reg-rectangle {
+.reg-rectangle {
+  border-style: none;
+  border-width: none;
+  border-color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  box-shadow: none;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 50px;
-  margin-bottom: 80px;
+  margin-top: 5px;
+  margin-bottom: 8px;
   z-index: 4;
-
 }
+
+
 
 }
