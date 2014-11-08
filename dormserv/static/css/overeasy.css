@@ -1,3 +1,5 @@
+{% load static %}
+
 * {
   -webkit-border-radius: 0 !important;
      -moz-border-radius: 0 !important;
@@ -9,6 +11,14 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background-image={% static "img/overeasy-background.jpeg" %}
+}
+
+@media all and (max-width: 500px) {
+ body {
+  background-color: #000000 !important;
+  background-image: none;
+ }
 }
 
 .login-form-wrapper {
@@ -376,11 +386,4 @@ button.input {
 
 .col-md-5 p{
   font-size: 16px;
-}
-
-@media all and (max-width: 480px) {
- body {
-  background-color: #000000 !important;
-  background-image: none;
- }
 }
