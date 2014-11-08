@@ -109,6 +109,10 @@ img.center {
   pointer-events:none;
 }
 
+.center_text img{
+  width: 300px;
+}
+
 #button {
   margin-top: 30px;
 }
@@ -435,6 +439,10 @@ button.input {
   margin-bottom: 5px;
   width: 90%;
   pointer-events:none;
+}
+
+.center_text img{
+  width: 100%;
 }
 
 
