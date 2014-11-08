@@ -416,5 +416,11 @@ button.input {
   width: 90%;
 }
 
+#center_text {
+  margin-top: 0px;
+  margin-bottom: 5px;
+  pointer-events:none;
+}
+
 
 }
