@@ -83,7 +83,13 @@
 		<tr>
 			<td>
 				<div class="menu_box">
-				<img src="{% static "img/menu/burrito1.png"%}" style="  pointer-events:none; width:186px; height:100px;" class="center">
+				{% for item in all_items %}
+				{% if item.id == 3 %}
+				<b>{{ item.name }}</b>
+				Scrambled eggs, carmelized peppers and onions, cheddar, crispy potatoes, and chipotle aioli.
+
+				{% endif %}
+				{% endfor %}
 				
 
 				<form role="form" method="post" action="/menu/">

@@ -63,9 +63,12 @@ def display_menu(request, entry_id=False):
 
 	total_price = user_cart.get_total_price_of_cart()
 
+	all_items = Item.objects.all()
+
 	return render_to_response(
 		'menu.html',
 		{
+		'all_items':all_items,
 		'entry':entry,
 		'entry_id':entry_id,
 		'user':user,
