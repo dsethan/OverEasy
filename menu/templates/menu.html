@@ -5,57 +5,51 @@
 {% block content %}
 
 <div id="calendar_wrapper">
+	<div id="cart-header">
+		{% if cart_more_than_one %}
 
-	<div class="row">
-		<div class="col-md-3">
-			<div id="label-for-menu">
-				<h2>MENU</h2>
-				<h3>No delivery fee, no tip, no problem.</h3>
-			</div>
-		</div>
-		<div class="col-md-9">
-			<div id="cart-header">
-				{% if cart_more_than_one %}
+		<table>
+			{% for key, value in item_urls.items %}
+			<td>
 
-				<table>
-					{% for key, value in item_urls.items %}
-					<td>
+				<img src={{ value }} style="pointer-events:none; width:60px; height:60px;" class="center">
 
-						<img src={{ value }} style="pointer-events:none; width:60px; height:60px;" class="center">
+				<form role="form" method="post" action="/menu/remove_from_cart/">
+				{% csrf_token %}
+				<input type="hidden" name="cart_item_id" value="{{key}}">
+				<input type="hidden" name="entry_id" value="{{ entry_id }}">
+				<div class="cart_remove_button">
+					<input type="image" src="{% static "img/menu/button-remove.png"%}" alt="Remove from cart" />
+				</div>
+				</form>
 
-						<form role="form" method="post" action="/menu/remove_from_cart/">
-						{% csrf_token %}
-						<input type="hidden" name="cart_item_id" value="{{key}}">
-						<input type="hidden" name="entry_id" value="{{ entry_id }}">
-						<div class="cart_remove_button">
-							<input type="image" src="{% static "img/menu/button-remove.png"%}" alt="Remove from cart" />
-						</div>
-						</form>
-
-					</td>
-					<td>&nbsp;</td>
-					{% endfor %}
-					<td>
-						{% if total_price >= 300 %}
-						<form role="form" method="post" action="/checkout/">
-							{% csrf_token %}
-							<input type="hidden" name="entry_id" value="{{ entry_id }}">
-							<input type="hidden" name="cart_id" value="{{ cart_id }}">
-							<input type="submit" class="btn btn-default" style="width:120px; height: 40px; color:#000000; margin-right: 15px; background-color:#FFE0C2; margin-top: -65px; border-color: #FF9000" value="Checkout">
-						</form>
-						{% else %}
-						<form role="form" method="post" action="/checkout/">
-							{% csrf_token %}
-							<input type="hidden" name="entry_id" value="{{ entry_id }}">
-							<input type="hidden" name="cart_id" value="{{ cart_id }}">
-							<input type="submit" class="btn btn-default" style="width:120px; height: 40px; color:#000000; margin-right: 15px; background-color:#C0C0C0; margin-top: -65px; border-color: #FF9000" value="  $3 Order Minimum." disabled>
-						</form>
-						{% endif %}
-					</td>
-				</table>
+			</td>
+			<td>&nbsp;</td>
+			{% endfor %}
+			<td>
+				{% if total_price >= 300 %}
+				<form role="form" method="post" action="/checkout/">
+					{% csrf_token %}
+					<input type="hidden" name="entry_id" value="{{ entry_id }}">
+					<input type="hidden" name="cart_id" value="{{ cart_id }}">
+					<input type="submit" class="btn btn-default" style="width:120px; height: 40px; color:#000000; margin-right: 15px; background-color:#FFE0C2; margin-top: -65px; border-color: #FF9000" value="Checkout">
+				</form>
+				{% else %}
+				<form role="form" method="post" action="/checkout/">
+					{% csrf_token %}
+					<input type="hidden" name="entry_id" value="{{ entry_id }}">
+					<input type="hidden" name="cart_id" value="{{ cart_id }}">
+					<input type="submit" class="btn btn-default" style="width:120px; height: 40px; color:#000000; margin-right: 15px; background-color:#C0C0C0; margin-top: -65px; border-color: #FF9000" value="  $3 Order Minimum." disabled>
+				</form>
 				{% endif %}
-			</div>
-		</div>
+			</td>
+		</table>
+		{% endif %}
+	</div>
+
+	<div id="label-for-menu">
+	<h2>MENU</h2>
+	<h3>No delivery fee, no tip, no problem.</h3>
 	</div>
 
 	{% if cart_more_than_one %}
@@ -135,7 +129,7 @@
 					<!--<input type="submit" name="submit" value="Add to Cart">-->
 				</form>
 			</div>
-			<img src="{% static "img/menu/singleline.png"%}" style="  pointer-events:none; margin-top: -60px; margin-left: 40px; margin-bottom: -60px; width:200px;">
+					<img src="{% static "img/menu/singleline.png"%}" style="  pointer-events:none; margin-top: -60px; margin-left: 40px; margin-bottom: -60px; width:200px;">
 			<div class="menu_box">
 				<div class="product_title">
   					<p class="alignleft">BURRITO #1</p>
@@ -156,291 +150,14 @@
 					<!--<input type="submit" name="submit" value="Add to Cart">-->
 				</form>
 			</div>
+
+
+
   		</div>
 
-  		<div class="col-md-3">
-
-  			<div class="category_box">
-				<div class="category_title">
-					CLASSIC
-				</div>
-
-			</div>
-
-			<img src="{% static "img/menu/singleline.png"%}" style="  pointer-events:none; margin-top: -60px; margin-left: 40px; margin-bottom: -60px; width:200px;">
-			<div class="menu_box">
-				<div class="product_title">
-  					<p class="alignleft">BURRITO #1</p>
-  					<p class="alignright">$7</p>
-				</div>
-				<div style="clear: both;"></div>
-				
-				<div class="product_desc">
-					Scrambled eggs, carmelized peppers and onions, cheddar, crispy potatoes, and chipotle aioli.
-				</div>
-				
-				<form role="form" method="post" action="/menu/">
-					{% csrf_token %}
-					<input type="hidden" name="item_id" value="3">
-					<input type="hidden" name="entry_id" value="{{ entry_id }}">
-				
-					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
-					<!--<input type="submit" name="submit" value="Add to Cart">-->
-				</form>
-			</div>
-			<img src="{% static "img/menu/singleline.png"%}" style="  pointer-events:none; margin-top: -60px; margin-left: 40px; margin-bottom: -60px; width:200px;">
-			<div class="menu_box">
-				<div class="product_title">
-  					<p class="alignleft">BURRITO #1</p>
-  					<p class="alignright">$7</p>
-				</div>
-				<div style="clear: both;"></div>
-				
-				<div class="product_desc">
-					Scrambled eggs, carmelized peppers and onions, cheddar, crispy potatoes, and chipotle aioli.
-				</div>
-				
-				<form role="form" method="post" action="/menu/">
-					{% csrf_token %}
-					<input type="hidden" name="item_id" value="3">
-					<input type="hidden" name="entry_id" value="{{ entry_id }}">
-				
-					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
-					<!--<input type="submit" name="submit" value="Add to Cart">-->
-				</form>
-			</div>
-			<img src="{% static "img/menu/singleline.png"%}" style="  pointer-events:none; margin-top: -60px; margin-left: 40px; margin-bottom: -60px; width:200px;">
-			<div class="menu_box">
-				<div class="product_title">
-  					<p class="alignleft">BURRITO #1</p>
-  					<p class="alignright">$7</p>
-				</div>
-				<div style="clear: both;"></div>
-				
-				<div class="product_desc">
-					Scrambled eggs, carmelized peppers and onions, cheddar, crispy potatoes, and chipotle aioli.
-				</div>
-				
-				<form role="form" method="post" action="/menu/">
-					{% csrf_token %}
-					<input type="hidden" name="item_id" value="3">
-					<input type="hidden" name="entry_id" value="{{ entry_id }}">
-				
-					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
-					<!--<input type="submit" name="submit" value="Add to Cart">-->
-				</form>
-			</div>
-			<img src="{% static "img/menu/singleline.png"%}" style="  pointer-events:none; margin-top: -60px; margin-left: 40px; margin-bottom: -60px; width:200px;">
-			<div class="menu_box">
-				<div class="product_title">
-  					<p class="alignleft">BURRITO #1</p>
-  					<p class="alignright">$7</p>
-				</div>
-				<div style="clear: both;"></div>
-				
-				<div class="product_desc">
-					Scrambled eggs, carmelized peppers and onions, cheddar, crispy potatoes, and chipotle aioli.
-				</div>
-				
-				<form role="form" method="post" action="/menu/">
-					{% csrf_token %}
-					<input type="hidden" name="item_id" value="3">
-					<input type="hidden" name="entry_id" value="{{ entry_id }}">
-				
-					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
-					<!--<input type="submit" name="submit" value="Add to Cart">-->
-				</form>
-			</div>
-  		</div>
-  		<div class="col-md-3">
-
-  			<div class="category_box">
-				<div class="category_title">
-					CLASSIC
-				</div>
-
-			</div>
-
-			<img src="{% static "img/menu/singleline.png"%}" style="  pointer-events:none; margin-top: -60px; margin-left: 40px; margin-bottom: -60px; width:200px;">
-			<div class="menu_box">
-				<div class="product_title">
-  					<p class="alignleft">BURRITO #1</p>
-  					<p class="alignright">$7</p>
-				</div>
-				<div style="clear: both;"></div>
-				
-				<div class="product_desc">
-					Scrambled eggs, carmelized peppers and onions, cheddar, crispy potatoes, and chipotle aioli.
-				</div>
-				
-				<form role="form" method="post" action="/menu/">
-					{% csrf_token %}
-					<input type="hidden" name="item_id" value="3">
-					<input type="hidden" name="entry_id" value="{{ entry_id }}">
-				
-					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
-					<!--<input type="submit" name="submit" value="Add to Cart">-->
-				</form>
-			</div>
-			<img src="{% static "img/menu/singleline.png"%}" style="  pointer-events:none; margin-top: -60px; margin-left: 40px; margin-bottom: -60px; width:200px;">
-			<div class="menu_box">
-				<div class="product_title">
-  					<p class="alignleft">BURRITO #1</p>
-  					<p class="alignright">$7</p>
-				</div>
-				<div style="clear: both;"></div>
-				
-				<div class="product_desc">
-					Scrambled eggs, carmelized peppers and onions, cheddar, crispy potatoes, and chipotle aioli.
-				</div>
-				
-				<form role="form" method="post" action="/menu/">
-					{% csrf_token %}
-					<input type="hidden" name="item_id" value="3">
-					<input type="hidden" name="entry_id" value="{{ entry_id }}">
-				
-					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
-					<!--<input type="submit" name="submit" value="Add to Cart">-->
-				</form>
-			</div>
-			<img src="{% static "img/menu/singleline.png"%}" style="  pointer-events:none; margin-top: -60px; margin-left: 40px; margin-bottom: -60px; width:200px;">
-			<div class="menu_box">
-				<div class="product_title">
-  					<p class="alignleft">BURRITO #1</p>
-  					<p class="alignright">$7</p>
-				</div>
-				<div style="clear: both;"></div>
-				
-				<div class="product_desc">
-					Scrambled eggs, carmelized peppers and onions, cheddar, crispy potatoes, and chipotle aioli.
-				</div>
-				
-				<form role="form" method="post" action="/menu/">
-					{% csrf_token %}
-					<input type="hidden" name="item_id" value="3">
-					<input type="hidden" name="entry_id" value="{{ entry_id }}">
-				
-					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
-					<!--<input type="submit" name="submit" value="Add to Cart">-->
-				</form>
-			</div>
-			<img src="{% static "img/menu/singleline.png"%}" style="  pointer-events:none; margin-top: -60px; margin-left: 40px; margin-bottom: -60px; width:200px;">
-			<div class="menu_box">
-				<div class="product_title">
-  					<p class="alignleft">BURRITO #1</p>
-  					<p class="alignright">$7</p>
-				</div>
-				<div style="clear: both;"></div>
-				
-				<div class="product_desc">
-					Scrambled eggs, carmelized peppers and onions, cheddar, crispy potatoes, and chipotle aioli.
-				</div>
-				
-				<form role="form" method="post" action="/menu/">
-					{% csrf_token %}
-					<input type="hidden" name="item_id" value="3">
-					<input type="hidden" name="entry_id" value="{{ entry_id }}">
-				
-					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
-					<!--<input type="submit" name="submit" value="Add to Cart">-->
-				</form>
-			</div>
-  		</div>
-  		<div class="col-md-3">
-
-  			<div class="category_box">
-				<div class="category_title">
-					CLASSIC
-				</div>
-
-			</div>
-
-			<img src="{% static "img/menu/singleline.png"%}" style="  pointer-events:none; margin-top: -60px; margin-left: 40px; margin-bottom: -60px; width:200px;">
-			<div class="menu_box">
-				<div class="product_title">
-  					<p class="alignleft">BURRITO #1</p>
-  					<p class="alignright">$7</p>
-				</div>
-				<div style="clear: both;"></div>
-				
-				<div class="product_desc">
-					Scrambled eggs, carmelized peppers and onions, cheddar, crispy potatoes, and chipotle aioli.
-				</div>
-				
-				<form role="form" method="post" action="/menu/">
-					{% csrf_token %}
-					<input type="hidden" name="item_id" value="3">
-					<input type="hidden" name="entry_id" value="{{ entry_id }}">
-				
-					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
-					<!--<input type="submit" name="submit" value="Add to Cart">-->
-				</form>
-			</div>
-			<img src="{% static "img/menu/singleline.png"%}" style="  pointer-events:none; margin-top: -60px; margin-left: 40px; margin-bottom: -60px; width:200px;">
-			<div class="menu_box">
-				<div class="product_title">
-  					<p class="alignleft">BURRITO #1</p>
-  					<p class="alignright">$7</p>
-				</div>
-				<div style="clear: both;"></div>
-				
-				<div class="product_desc">
-					Scrambled eggs, carmelized peppers and onions, cheddar, crispy potatoes, and chipotle aioli.
-				</div>
-				
-				<form role="form" method="post" action="/menu/">
-					{% csrf_token %}
-					<input type="hidden" name="item_id" value="3">
-					<input type="hidden" name="entry_id" value="{{ entry_id }}">
-				
-					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
-					<!--<input type="submit" name="submit" value="Add to Cart">-->
-				</form>
-			</div>
-			<img src="{% static "img/menu/singleline.png"%}" style="  pointer-events:none; margin-top: -60px; margin-left: 40px; margin-bottom: -60px; width:200px;">
-			<div class="menu_box">
-				<div class="product_title">
-  					<p class="alignleft">BURRITO #1</p>
-  					<p class="alignright">$7</p>
-				</div>
-				<div style="clear: both;"></div>
-				
-				<div class="product_desc">
-					Scrambled eggs, carmelized peppers and onions, cheddar, crispy potatoes, and chipotle aioli.
-				</div>
-				
-				<form role="form" method="post" action="/menu/">
-					{% csrf_token %}
-					<input type="hidden" name="item_id" value="3">
-					<input type="hidden" name="entry_id" value="{{ entry_id }}">
-				
-					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
-					<!--<input type="submit" name="submit" value="Add to Cart">-->
-				</form>
-			</div>
-			<img src="{% static "img/menu/singleline.png"%}" style="  pointer-events:none; margin-top: -60px; margin-left: 40px; margin-bottom: -60px; width:200px;">
-			<div class="menu_box">
-				<div class="product_title">
-  					<p class="alignleft">BURRITO #1</p>
-  					<p class="alignright">$7</p>
-				</div>
-				<div style="clear: both;"></div>
-				
-				<div class="product_desc">
-					Scrambled eggs, carmelized peppers and onions, cheddar, crispy potatoes, and chipotle aioli.
-				</div>
-				
-				<form role="form" method="post" action="/menu/">
-					{% csrf_token %}
-					<input type="hidden" name="item_id" value="3">
-					<input type="hidden" name="entry_id" value="{{ entry_id }}">
-				
-					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
-					<!--<input type="submit" name="submit" value="Add to Cart">-->
-				</form>
-			</div>
-  		</div>
-
+  		<div class="col-md-3">.col-md-4</div>
+  		<div class="col-md-3">.col-md-4</div>
+  		<div class="col-md-3">.col-md-4</div>
 
 
 	</div>
