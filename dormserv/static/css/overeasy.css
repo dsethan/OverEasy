@@ -159,7 +159,7 @@ img.center {
   font-size: 45px;
   position: absolute;
   right: 10px;
-  margin-top: -15px;
+  margin-top: 0px;
 }
 
 #calendar-header h2{
@@ -350,7 +350,7 @@ button.input {
 #label-for-menu {
   padding-left: 40px;
   padding-right: 20px;
-  padding-bottom: -10px;
+  padding-bottom: 10px;
 }
 
 #label-for-menu h2{
