@@ -385,4 +385,14 @@ button.input {
   background-color: #FFFFFF !important;
   background-image: none;
  }
+
+ #reg-rectangle {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  margin-bottom: 80px;
+  z-index: 4;
+
+}
+
 }
