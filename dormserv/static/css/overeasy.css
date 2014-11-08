@@ -390,8 +390,14 @@ button.input {
 
 .product_title {
   font-family: 'Cabin', sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 17px;
+}
+
+.category_title {
+  font-family: 'Cabin', sans-serif;
+  font-weight: 600;
+  font-size: 25px;
 }
 
 @media all and (max-width: 900px) {
