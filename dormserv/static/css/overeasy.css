@@ -381,5 +381,6 @@ button.input {
 @media all and (max-width: 480px) {
  body {
   background-color: #000000 !important;
+  background-image: none;
  }
 }
