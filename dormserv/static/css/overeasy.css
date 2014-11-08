@@ -385,6 +385,7 @@ button.input {
 .product_desc {
   font-family: Helvetica;
   font-weight: lighter;
+  font-size: 12px;
 }
 
 @media all and (max-width: 900px) {
