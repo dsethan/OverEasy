@@ -388,6 +388,12 @@ button.input {
   font-size: 12px;
 }
 
+.product_title {
+  font-family: 'Cabin', sans-serif;
+  font-weight: lighter;
+  font-size: 17px;
+}
+
 @media all and (max-width: 900px) {
  body {
   background-color: #FFFFFF !important;
