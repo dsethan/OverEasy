@@ -400,6 +400,13 @@ button.input {
   font-size: 25px;
 }
 
+.alignleft {
+  float: left;
+}
+.alignright {
+  float: right;
+}
+
 @media all and (max-width: 900px) {
  body {
   background-color: #FFFFFF !important;
