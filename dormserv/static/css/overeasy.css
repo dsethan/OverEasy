@@ -109,7 +109,7 @@ img.center {
   pointer-events:none;
 }
 
-.center_text img{
+img.center_text {
   width: 300px;
 }
 
@@ -441,7 +441,7 @@ button.input {
   pointer-events:none;
 }
 
-.center_text img{
+img.center_text {
   width: 100%;
 }
 
