@@ -233,11 +233,21 @@ img.center {
 }
 
 .menu_box {
+  margin-top: 0px;
   font-family: 'Abel', sans-serif;
   padding-left: 40px;
   border: 1px;
   font-size: 20px;
-  height: 150px;
+  height: 100px;
+}
+
+.category_box {
+  margin-top: 0px;
+  font-family: 'Abel', sans-serif;
+  padding-left: 40px;
+  border: 1px;
+  font-size: 20px;
+  height: 40px;
 }
 
 .menu_box_item {
