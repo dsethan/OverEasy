@@ -158,9 +158,9 @@ def user_cart_no_longer_active(request):
 
 def cart_exists(user, entry):
 	profile = users.views.return_associated_profile_type(user)
-
-	for c in Cart.objects.all():
-		if (c.profile == profile) and (c.entry == entry):
+	to_filter = Cart.objects.filter(profile=profile)
+	for c in to_filter:
+		if c.entry == entry:
 			return c
 
 	return False
