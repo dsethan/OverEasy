@@ -5,7 +5,7 @@
 <h2>Today's Orders</h2>
 
 {% if no_orders_today == True %}
-<h2>There are no orders today</h2>
+<h2>There are no orders today.</h2>
 
 {% else %}
 
@@ -54,5 +54,57 @@ Change Driver:
 
 {% endif %}
 
+
+<h2>Tomorrow's Orders</h2>
+
+{% if no_orders_tomorrow == True %}
+<h2>There are no orders tomorrow.</h2>
+
+{% else %}
+
+{% for order in orders_for_tomorrow %}
+	
+Order: {{ order.id }}<br>
+{{ order.entry.time }}<br>
+Name: {{ order.profile.user.first_name }} {{ order.profile.user.last_name }}<br>
+Address: {{ order.profile.get_address_string }}<br>
+Driver:
+
+{% for do in all_driver_orders_tomorrow %}
+
+{% if do.order == order %}
+
+<b>{{ do.driver.user.first_name }} {{ do.driver.user.last_name }}</b>
+
+{% endif %}
+
+{% endfor %}
+
+<br>
+
+Change Driver:
+
+         <form action="/driver/manage_drivers/" method="POST">
+             
+         {% csrf_token %}
+
+			{% for driver in all_drivers %}
+			<input type="radio" name="driver_id" value="{{ driver.id }}">{{ driver.user.first_name }} {{ driver.user.last_name }}<br>
+			{% endfor %}
+
+			
+			<input type="hidden" name="order_id" value="{{ order.id }}">
+			{% if order.status != "DVD" %}
+            <input type="submit" class="btn btn-default" style="width:300px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5; font-style: bold;" value="Change Driver">
+            {% else %}
+            <input type="submit" class="btn btn-default" style="width:300px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5; font-style: bold;" value="Already Delivered" disabled />
+            {% endif %}
+            </form>
+
+<br><br>
+{% endfor %}
+
+
+{% endif %}
 
 {% endblock %}
