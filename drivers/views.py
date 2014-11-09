@@ -41,7 +41,14 @@ def process_arrival(request):
 
 		send_text(profile, driver)
 
-		return HttpResponse("Finished text")
+		order.date_delivered = date.today()
+		order.time_delivered = datetime.now().time()
+		order.status = 'DVD'
+
+		order.save()
+
+
+		return redirect('/driver')
 
 
 
