@@ -10,6 +10,8 @@ class Order(models.Model):
 	DELIVERED = 'DVD'
 	DATE = date(2000, 1, 1)
 	TIME = time(12, 00)
+	DATE_NOW = date.today()
+	TIME_NOW = datetime.now().time()
 
 	STATUS = (
 		(PENDING, 'PDG'),
@@ -21,8 +23,8 @@ class Order(models.Model):
 	total = models.IntegerField(default=0)
 	entry = models.ForeignKey(Entry)
 
-	date_placed = models.DateField(auto_now=True)
-	time_placed = models.TimeField(auto_now=True)
+	date_placed = models.DateField(auto_now=False, default=DATE_NOW)
+	time_placed = models.TimeField(auto_now=False, default=TIME_NOW)
 
 	date_delivered = models.DateField(auto_now=False, default=DATE)
 	time_delivered = models.TimeField(auto_now=False, default=TIME)
