@@ -57,6 +57,13 @@ def manage_drivers(request):
 			print order
 			orders_to_display.append(order)
 
+
+	all_driver_orders = []
+
+	for order in DriverOrder.objects.all():
+		if order.order.entry.date == today:
+			all_driver_orders.append(order)
+
 	no_orders_today = False
 	if len(orders_to_display) == 0:
 		no_orders_today = True
@@ -84,6 +91,7 @@ def manage_drivers(request):
 		'no_orders_tomorrow':no_orders_tomorrow,
 		'today':today,
 		'tomorrow':tomorrow,
+		'all_driver_orders':all_driver_orders,
 		},
 		context)
 
