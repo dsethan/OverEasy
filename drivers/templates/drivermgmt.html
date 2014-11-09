@@ -21,11 +21,13 @@ Driver:
 
 {% if do.order == order %}
 
-{{ do.driver.user.first_name }}
+<b>{{ do.driver.user.first_name }} {{ do.driver.user.last_name }}</b>
 
 {% endif %}
 
 {% endfor %}
+
+<br>
 
 Change Driver:
 
