@@ -14,6 +14,7 @@
 
 {% for order in orders_to_display %}
 
+{% if order.status != "DVD" %}
 <b>{{ order.entry.time }}</b> {{ order.entry.date }}<br>
 {{ order.profile.user.first_name }} {{ order.profile.user.last_name}}<br>
 {{ order.profile.address }}<br>
@@ -42,6 +43,7 @@ Total: {{ order.total }}<br>
 
             </form>
 
+{% endif %}
 
 {% endfor %}
 {% endif %}
