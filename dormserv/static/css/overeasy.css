@@ -399,13 +399,13 @@ button.input {
   font-family: Helvetica;
   font-weight: lighter;
   font-size: 12px;
-  height: 50px;
+  height: 58px;
 }
 
 .product_title {
   font-family: 'Cabin', sans-serif;
   font-size: 17px;
-  height: 20px;
+  height: 12px;
 }
 
 .product_button {
