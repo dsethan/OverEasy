@@ -127,6 +127,7 @@ def add_item_to_cart(request):
 			return user_cart_no_longer_active(request)
 
 		if user_cart == False:
+
 			return redirect('/cal')
 
 		else:
@@ -136,7 +137,10 @@ def add_item_to_cart(request):
 				qty=1)
 			cart_item_to_add.save()
 
-			return display_menu(request, entry_id)
+			redirect_string = "/cal/" + str(entry_id) + "/"
+
+			return redirect(redirect_string)
+
 
 	return redirect('/menu')
 
