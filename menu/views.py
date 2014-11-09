@@ -36,25 +36,15 @@ def display_menu(request, entry_id=False):
 	if not user_cart.is_active():
 		return user_cart_no_longer_active(request)
 
-	items_by_cat = {}
-
-	cart_items = CartItem.objects.filter(cart=user_cart)
-
-	items_with_quantity = user_cart.get_items_and_quantities()
-
 	item_urls = {}
 	for item in user_cart.get_cart_items():
 		item_urls[item.id] = get_url_for_item(item.item)
 
 	item_names = []
 
-	for cat in settings.ITEM_CATEGORIES:
-		name = cat[0].upper()
-		items_by_cat[name] = ItemCategory.objects.filter(category=cat[1])
-
 	cart_more_than_one = False
 
-	if len(items_with_quantity.keys()) > 0:
+	if len(user_cart.get_items()) > 0:
 		cart_more_than_one = True
 
 	cart_id = user_cart.id
@@ -73,9 +63,6 @@ def display_menu(request, entry_id=False):
 		'entry_id':entry_id,
 		'user':user,
 		'profile':profile,
-		'items_by_cat':items_by_cat,
-		'cart_items':cart_items,
-		'items_with_quantity':items_with_quantity,
 		'cart_id':cart_id,
 		'cart_more_than_one':cart_more_than_one,
 		'item_urls':item_urls,
