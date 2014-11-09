@@ -21,7 +21,7 @@
 Total: {{ order.total }}<br>
 
 
-		{% for item in order.get_all_item_names_for_order() %}
+		{% for item in order.get_all_item_names_for_order %}
 		{% if item.category == "BEV" %}
 		DON'T FORGET --> {{ item }} &nbsp;
 		{% else %}
