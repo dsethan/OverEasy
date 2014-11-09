@@ -12,35 +12,32 @@
 
 {% else %}
 
-<table>
 {% for order in orders_to_display %}
-<tr>
-	<td>{{ order.}}
-	<td>{{ order.entry.date }}</td>
-	<td>&nbsp; &nbsp; </td>
-	<td>{{ order.entry.time }}</td>
-	<td>&nbsp; &nbsp; </td>
-	<td>{{ order.id }}</td>
-	<td>&nbsp; &nbsp; </td>
-	<td>{{ order.view_order_total_in_usd }}</td>
-	<td>&nbsp; &nbsp; </td>
-	<td>
-		{% for item in order.get_all_item_names_for_order %}
-		
-		{{ item }} &nbsp;
 
+<b>{{ order.entry.time }}</b> {{ order.entry.date }}<br>
+{{ order.profile.user.first_name }} {{ order.profile.user.last_name}}<br>
+{{ order.profile.address }}<br>
+{{ order.profile.phone }}<br>
+Total: {{ order.total }}<br>
+
+
+		{% for item in order.get_all_item_names_for_order() %}
+		{% if item.category == "BEV" %}
+		DON'T FORGET --> {{ item }} &nbsp;
+		{% else %}
+		{{ item}} &nbsp;
+		{% endif %}
 		{% endfor %}
-	</td>
-</tr>
+
 {% endfor %}
-</table>
 {% endif %}
 
-<h2>Tomorrow's Orders</h2>
+
+<h3>Tomorrow's Orders</h3>
 
 {% if no_orders_tomorrow %}
 
-<h2> There are currently no orders for tomorrow at this time.</h2>
+<h4>Currently, there are no orders assigned to you tomorrow.</h4>
 
 {% else %}
 
