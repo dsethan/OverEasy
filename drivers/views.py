@@ -20,8 +20,7 @@ def send_text(profile, driver):
 	account_sid = "ACa2d2fde5fb38917dc892c94654f345cd"
 	auth_token = "d5b72594bce3487a3dff812a08bc8265"
 	client = TwilioRestClient(account_sid, auth_token)
-	
-	msg = "Hey " + str(profile.user.first_name) + "! Just letting you know your driver " + str(driver.user.first_name) + " is outside with your food! You can reach your driver at " + str(driver.phone) "." 
+	msg = "Hey! " + str(profile.user.first_name) + "Your Over Easy driver " + str(driver.user.first_name ) + " is outside with your breakfast."	
 	message = client.messages.create(to=profile.phone, 
 		from_=settings.TWILIO_PHONE, 
 		body=msg)
