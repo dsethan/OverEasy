@@ -26,7 +26,7 @@ TEMPLATE_DEBUG = True
 
 LOCAL = False
 
-PAY_TEST = False
+PAY_TEST = True
 
 ALLOWED_HOSTS = []
 
