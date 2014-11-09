@@ -14,6 +14,35 @@ from restaurants.models import Restaurant
 from orders.models import Order, OrderItem
 from drivers.models import DriverOrder
 from cal.models import Entry
+from twilio.rest import TwilioRestClient
+
+def send_text(profile, driver):
+	account_sid = "ACa2d2fde5fb38917dc892c94654f345cd"
+	auth_token = "d5b72594bce3487a3dff812a08bc8265"
+	client = TwilioRestClient(account_sid, auth_token)
+	
+	msg = "Hey " + str(profile.user.first_name) + "! Just letting you know your driver " + str(driver.user.first_name) + " is outside with your food! You can reach your driver at " + str(driver.phone) "." 
+	message = client.messages.create(to=profile.phone, 
+		from_=settings.TWILIO_PHONE, 
+		body=msg)
+
+def process_arrival(request):
+	context = RequestContext(request)
+	user = request.user
+	if request.method == 'POST':
+		order_id = request.POST.get('order_id')
+		driver_id = request.POST.get('driver_id')
+
+		order = Order.objects.get(id=order_id)
+		driver = DriverProfile.objects.get(id=driver_id)
+
+		profile = order.profile
+
+		send_text(profile, driver)
+
+		return HttpResponse("Finished text")
+
+
 
 @user_passes_test(lambda u: u.is_superuser)
 def manage_drivers(request):
