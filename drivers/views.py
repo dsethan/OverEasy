@@ -187,7 +187,7 @@ def view_driver(request):
 		for entry in Entry.objects.filter(date=tomorrow).order_by('time'):
 			for do in DriverOrder.objects.filter(driver=driver):
 				if do.order.entry == entry:
-					orders_to_display.append(do.order)
+					orders_for_tomorrow.append(do.order)
 
 		no_orders_tomorrow = False
 
