@@ -95,7 +95,7 @@ def remove_from_cart(request):
 		entry_id = request.POST.get('entry_id')
 		cart_item.delete()
 
-		string_to_redirect = "/menu/" + str(entry_id)
+		string_to_redirect = "/cal/" + str(entry_id) + "/"
 		#return HttpResponse(entry_id)
 
 		return redirect(string_to_redirect)
