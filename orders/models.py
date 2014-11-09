@@ -21,8 +21,8 @@ class Order(models.Model):
 	date_placed = models.DateField(auto_now=True)
 	time_placed = models.TimeField(auto_now=True)
 
-	date_delivered = models.DateField(auto_now=True)
-	time_delivered = models.TimeField(auto_now=True)
+	date_delivered = models.DateField(auto_now=False)
+	time_delivered = models.TimeField(auto_now=False)
 
 	status = models.CharField(max_length=3, choices=STATUS, default=PENDING)
 
