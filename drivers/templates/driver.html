@@ -57,27 +57,40 @@ Total: {{ order.total }}<br>
 
 {% else %}
 
-<table>
 {% for order in orders_for_tomorrow %}
-<tr>
-	<td>{{ order.entry.date }}</td>
-	<td>&nbsp; &nbsp; </td>
-	<td>{{ order.entry.time }}</td>
-	<td>&nbsp; &nbsp; </td>
-	<td>{{ order.id }}</td>
-	<td>&nbsp; &nbsp; </td>
-	<td>{{ order.view_order_total_in_usd }}</td>
-	<td>&nbsp; &nbsp; </td>
-	<td>
-		{% for item in order.get_all_item_names_for_order %}
-		
-		{{ item }} &nbsp;
 
+{% if order.status != "DVD" %}
+<b>{{ order.entry.time }}</b> {{ order.entry.date }}<br>
+{{ order.profile.user.first_name }} {{ order.profile.user.last_name}}<br>
+{{ order.profile.address }}<br>
+{{ order.profile.phone }}<br>
+Total: {{ order.total }}<br>
+
+
+		{% for item in order.get_all_item_names_for_order_with_category %}
+		{% if item.1 == "BEV" %}
+		DON'T FORGET --> {{ item.0 }} &nbsp;
+		{% else %}
+		{{ item.0 }} &nbsp;
+		{% endif %}
 		{% endfor %}
-	</td>
-</tr>
+
+
+         <form action="/driver/process_arrival/" method="POST">
+             
+         {% csrf_token %}
+
+
+			
+			<input type="hidden" name="order_id" value="{{ order.id }}">
+			<input type="hidden" name="driver_id" value="{{ driver.id }}">
+            <input type="submit" class="btn btn-default" style="width:300px; height: 70%; color:#000000; ; background-color:#E3ECFD; border-color: #7E95F5; font-style: bold;" value="Active Tomorrow" disabled/>
+
+            </form>
+
+{% endif %}
+
 {% endfor %}
-</table>
 {% endif %}
 
 
