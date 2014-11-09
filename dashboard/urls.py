@@ -10,5 +10,4 @@ urlpatterns = patterns('',
 	url(r'^initialize_new_menu_item', views.initialize_new_menu_item, name='initialize_new_menu_item'),
 	url(r'^cal_process_add', views.cal_process_add, name='cal_process_add'),
 	url(r'^initialize_week', views.initialize_week, name='initialize_week'),
-	url(r'^process_arrival', views.process_arrival, name='process_arrival'),
     )
