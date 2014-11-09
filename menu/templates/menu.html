@@ -69,7 +69,7 @@
 			<hr>
 			<div class="menu_box">
 				<div class="product_title">
-  					<p class="alignleft">B.E.C.</p>
+  					<p class="alignleft">BE&amp;C</p>
   					<p class="alignright">$3</p>
 				</div>
 				<div style="clear: both;"></div>
@@ -88,29 +88,6 @@
 					<br>
 				</form>
 				</div>
-			</div>
-			<hr>
-			<div class="menu_box">
-				<div class="product_title">
-  					<p class="alignleft">BURRITO #1</p>
-  					<p class="alignright">$3.25</p>
-				</div>
-				<div style="clear: both;"></div>
-				<br>
-				<div class="product_desc">
-					Scrambled eggs, carmelized peppers and onions, cheddar, crispy potatoes, and chipotle aioli.
-				</div>
-				<div class="product_button">
-				<form role="form" method="post" action="/menu/">
-					{% csrf_token %}
-					<input type="hidden" name="item_id" value="3">
-					<input type="hidden" name="entry_id" value="{{ entry_id }}">
-				
-					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
-					<!--<input type="submit" name="submit" value="Add to Cart">-->
-					<br>
-					</form>
-			</div>
 			</div>
 			<hr>
 			<div class="menu_box">
@@ -134,6 +111,30 @@
 					<br>
 				</form>
 				</div>
+			</div>
+			<hr>
+
+			<div class="menu_box">
+				<div class="product_title">
+  					<p class="alignleft">BURRITO #1</p>
+  					<p class="alignright">$3.25</p>
+				</div>
+				<div style="clear: both;"></div>
+				<br>
+				<div class="product_desc">
+					Scrambled eggs, carmelized peppers and onions, cheddar, crispy potatoes, and chipotle aioli.
+				</div>
+				<div class="product_button">
+				<form role="form" method="post" action="/menu/">
+					{% csrf_token %}
+					<input type="hidden" name="item_id" value="3">
+					<input type="hidden" name="entry_id" value="{{ entry_id }}">
+				
+					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
+					<!--<input type="submit" name="submit" value="Add to Cart">-->
+					<br>
+					</form>
+			</div>
 			</div>
 			<hr>
 			<div class="menu_box">
