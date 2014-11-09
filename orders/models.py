@@ -2,11 +2,14 @@ from django.db import models
 from users.models import UserProfile
 from cal.models import Entry
 from item.models import Item
+from datetime import datetime, date, time, timedelta
 
 class Order(models.Model):
 	PENDING = 'PDG'
 	DELIVERY = 'OUT'
 	DELIVERED = 'DVD'
+	DATE = date(2000, 1, 1)
+	TIME = time(12, 00)
 
 	STATUS = (
 		(PENDING, 'PDG'),
@@ -21,8 +24,8 @@ class Order(models.Model):
 	date_placed = models.DateField(auto_now=True)
 	time_placed = models.TimeField(auto_now=True)
 
-	date_delivered = models.DateField(auto_now=False)
-	time_delivered = models.TimeField(auto_now=False)
+	date_delivered = models.DateField(auto_now=False, default=DATE)
+	time_delivered = models.TimeField(auto_now=False, default=TIME)
 
 	status = models.CharField(max_length=3, choices=STATUS, default=PENDING)
 
