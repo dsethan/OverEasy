@@ -421,6 +421,7 @@ button.input {
 #secondarytext {
   font-size: 12px;
   font-family: 'Cabin', sans-serif;
+  margin-top: -4px;
 }
 
 .alignleft {
