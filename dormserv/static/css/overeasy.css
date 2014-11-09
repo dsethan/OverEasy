@@ -418,6 +418,10 @@ button.input {
   font-size: 25px;
 }
 
+#secondarytest {
+  font-size: 12px;
+}
+
 .alignleft {
   float: left;
 }
