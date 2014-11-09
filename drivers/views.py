@@ -47,6 +47,9 @@ def process_arrival(request):
 		order.time_delivered = datetime.now().time()
 		order.status = 'DVD'
 
+		order.date_placed = orig_date_placed
+		order.time_placed = orig_time_placed
+
 		order.save()
 
 		return redirect('/driver')
