@@ -47,6 +47,14 @@ class Order(models.Model):
 			ors.append(str_to_return)
 		return ors
 
+	def get_all_item_names_for_order_with_category(self):
+		ors = []
+		for o in OrderItem.objects.filter(order=self):
+			str_to_return = str(o.item.name) + " Qty: " + str(o.quantity)
+			ors.append((str_to_return, o.item.prep_category))
+		return ors
+
+
 class OrderItem(models.Model):
 	item = models.ForeignKey(Item)
 	order = models.ForeignKey(Order)
