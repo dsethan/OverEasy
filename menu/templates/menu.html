@@ -76,7 +76,7 @@
 				<div class="product_desc">
 					Scrambled eggs, carmelized peppers and onions, cheddar, crispy potatoes, and chipotle aioli.
 				</div>
-				
+				<div class="product_button">
 				<form role="form" method="post" action="/menu/">
 					{% csrf_token %}
 					<input type="hidden" name="item_id" value="3">
@@ -85,7 +85,8 @@
 					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
 					<!--<input type="submit" name="submit" value="Add to Cart">-->
 					<br>
-				</form>
+					</form>
+			</div>
 			</div>
 			<hr>
 			<div class="menu_box">
