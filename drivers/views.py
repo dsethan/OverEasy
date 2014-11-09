@@ -40,9 +40,13 @@ def process_arrival(request):
 		profile = order.profile
 
 		send_text(profile, driver)
+		orig_time_placed = order.time_placed
+		orig_date_placed = order.date_placed
 
 		order.date_delivered = date.today()
 		order.time_delivered = datetime.now().time()
+		order.date_placed = orig_date_placed
+		order.time_placed = orig_time_placed
 		order.status = 'DVD'
 
 		order.save()
