@@ -26,6 +26,8 @@ def send_text(profile, driver):
 		from_=settings.TWILIO_PHONE, 
 		body=msg)
 
+	return
+
 def process_arrival(request):
 	context = RequestContext(request)
 	user = request.user
