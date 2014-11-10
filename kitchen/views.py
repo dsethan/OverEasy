@@ -37,6 +37,20 @@ def view_kitchen(request):
 			no_orders = True
 
 
+		matrix = []
+
+		for entry in Entry.objects.filter(date=today).order_by('time'):
+			entry_item = []
+			for i in Item.objects.all():
+				item = i
+				count = 0
+				for oi in OrderItem.objects.all():
+					if (oi.order.entry == entry) and (oi.item == item):
+						count = count + oi.quantity
+				to_add = (entry, item, count)
+				entry_item.append(to_add)
+			matrix.append(entry_item)
+
 		tomorrow = today + timedelta(days=1)
 
 		orders_for_tomorrow = []
@@ -53,6 +67,7 @@ def view_kitchen(request):
 		return render_to_response(
 			"kitchen.html",
 			{
+			'matrix':matrix;
 			'no_orders':no_orders,
 			'no_orders_tomorrow':no_orders_tomorrow,
 			'orders_to_display':orders_to_display,
