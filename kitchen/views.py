@@ -67,7 +67,7 @@ def view_kitchen(request):
 		return render_to_response(
 			"kitchen.html",
 			{
-			'matrix':matrix;
+			'matrix':matrix,
 			'no_orders':no_orders,
 			'no_orders_tomorrow':no_orders_tomorrow,
 			'orders_to_display':orders_to_display,
