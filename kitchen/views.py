@@ -42,6 +42,10 @@ def view_kitchen(request):
 		entries = Entry.objects.filter(date=today).order_by('time')
 		all_order_items = OrderItem.objects.all()
 
+		for i in all_order_items:
+			if i.order.entry.date != today:
+				all_order_items.remove(i)
+
 		for entry in entries:
 			entry_item = []
 			for i in items:
