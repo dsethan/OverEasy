@@ -38,6 +38,8 @@ def view_kitchen(request):
 
 
 		matrix = []
+		items = Item.objects.all()
+		entries = Entry.objects.filter(date=today).order_by('time')
 
 		for entry in Entry.objects.filter(date=today).order_by('time'):
 			entry_item = []
@@ -72,6 +74,8 @@ def view_kitchen(request):
 			'no_orders_tomorrow':no_orders_tomorrow,
 			'orders_to_display':orders_to_display,
 			'orders_for_tomorrow':orders_for_tomorrow,
+			'items':items,
+			'entries':entries,
 			},
 			context)
 

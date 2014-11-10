@@ -12,6 +12,23 @@
 
 {{ matrix }}
 
+<table>
+	<tr>
+		<td> </td>
+		{% for i in items %}
+		<td>{{ i.name }}</td>
+		{% endfor %}
+	</tr>
+	<tr>
+		<td> </td>
+	{% for entry in matrix %}
+		<td>{{ entry.0.0 }}</td>
+		{% for item in entry %}
+		<td>{{ item.name }} {{ item.3 }}</td>
+		{% endfor %}
+	{% endfor %}
+	</tr>
+</table>
 
 <table>
 {% for order in orders_to_display %}
