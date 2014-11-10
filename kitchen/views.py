@@ -49,7 +49,7 @@ def view_kitchen(request):
 				for oi in OrderItem.objects.all():
 					if (oi.order.entry == entry) and (oi.item == item):
 						count = count + oi.quantity
-				to_add = (entry, item, count)
+				to_add = [entry, item, count]
 				entry_item.append(to_add)
 			matrix.append(entry_item)
 
