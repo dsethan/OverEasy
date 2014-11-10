@@ -19,15 +19,14 @@
 		<td>{{ i.name }}</td>
 		{% endfor %}
 	</tr>
-	<tr>
-		<td> </td>
 	{% for entry in matrix %}
+	<tr>
 		<td>{{ entry.0.0 }}</td>
 		{% for item in entry %}
 		<td>{{ item.name }} {{ item.3 }}</td>
 		{% endfor %}
-	{% endfor %}
 	</tr>
+	{% endfor %}
 </table>
 
 <table>
