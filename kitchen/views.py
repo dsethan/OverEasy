@@ -24,7 +24,7 @@ def view_kitchen(request):
 
 	if able_to_access:
 
-		today = datetime.today().date()
+		today = datetime.today().date() + timedelta(days=1)
 
 		orders_to_display = []
 
@@ -41,9 +41,10 @@ def view_kitchen(request):
 		items = Item.objects.all()
 		entries = Entry.objects.filter(date=today).order_by('time')
 
-		for entry in Entry.objects.filter(date=today).order_by('time'):
+
+		for entry in entries:
 			entry_item = []
-			for i in Item.objects.all():
+			for i in items:
 				item = i
 				count = 0
 				for oi in OrderItem.objects.filter(item=item):
