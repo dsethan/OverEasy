@@ -24,7 +24,7 @@ def view_kitchen(request):
 
 	if able_to_access:
 
-		today = datetime.today().date() + timedelta(days=1)
+		today = datetime.today().date()
 
 		orders_to_display = []
 
