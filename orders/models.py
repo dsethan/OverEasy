@@ -23,8 +23,8 @@ class Order(models.Model):
 	total = models.IntegerField(default=0)
 	entry = models.ForeignKey(Entry)
 
-	date_placed = models.DateField(auto_now=False, default=DATE_NOW)
-	time_placed = models.TimeField(auto_now=False, default=TIME_NOW)
+	date_placed = models.DateField(auto_now_add=True)
+	time_placed = models.TimeField(auto_now_add=True)
 
 	date_delivered = models.DateField(auto_now=False, default=DATE)
 	time_delivered = models.TimeField(auto_now=False, default=TIME)
