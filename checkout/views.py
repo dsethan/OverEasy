@@ -405,6 +405,8 @@ def create_order(cart_id, user, context):
 			order=new_order,
 			quantity=items[item]
 			)
+		item.number_ordered = item.number_ordered + 1
+		
 		new_order_item.save()
 
 	entry.available = entry.available - 1

@@ -214,8 +214,13 @@
 					<input type="hidden" name="item_id" value="7">
 					<input type="hidden" name="entry_id" value="{{ entry_id }}">
 				
+					{% if green_num_ordered <= 8 %}
+
 					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
 					<!--<input type="submit" name="submit" value="Add to Cart">-->
+					{% else %}
+					<center>SOLD OUT</center>
+					{% endif %}
 					<br>
 				</form>
 				</div>
@@ -238,8 +243,13 @@
 					<input type="hidden" name="item_id" value="11">
 					<input type="hidden" name="entry_id" value="{{ entry_id }}">
 				
+					{% if red_num_ordered <= 8 %}
+
 					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
 					<!--<input type="submit" name="submit" value="Add to Cart">-->
+					{% else %}
+					<center>SOLD OUT</center>
+					{% endif %}
 					<br>
 				</form>
 				</div>
@@ -262,9 +272,13 @@
 					<input type="hidden" name="item_id" value="1">
 					<input type="hidden" name="entry_id" value="{{ entry_id }}">
 				
+					{% if almond_num_ordered <= 8 %}
+
 					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
 					<!--<input type="submit" name="submit" value="Add to Cart">-->
-					<br>
+					{% else %}
+					<center>SOLD OUT</center>
+					{% endif %}
 				</form>
 				</div>
 			</div>
@@ -286,9 +300,13 @@
 					<input type="hidden" name="item_id" value="15">
 					<input type="hidden" name="entry_id" value="{{ entry_id }}">
 				
+					{% if grapefruit_num_ordered <= 8 %}
+
 					<center><input type="image" src="{% static "img/menu/button-notoggle.png"%}" alt="Add to Cart" width="20px"/></center>
 					<!--<input type="submit" name="submit" value="Add to Cart">-->
-					<br>
+					{% else %}
+					<center>SOLD OUT</center>
+					{% endif %}
 				</form>
 				</div>
 			</div>

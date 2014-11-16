@@ -55,6 +55,11 @@ def display_menu(request, entry_id=False):
 
 	all_items = Item.objects.all()
 
+	green_num_ordered = Item.objects.get(name="Green").number_ordered
+	red_num_ordered = Item.objects.get(name="Red").number_ordered
+	almond_num_ordered = Item.objects.get(name="Almond").number_ordered
+	grapefruit_num_ordered = Item.objects.get(name="Grapefruit").number_ordered
+
 	return render_to_response(
 		'menu.html',
 		{
@@ -68,6 +73,10 @@ def display_menu(request, entry_id=False):
 		'item_urls':item_urls,
 		'total':total,
 		'total_price':total_price,
+		'green_num_ordered':green_num_ordered,
+		'red_num_ordered':red_num_ordered,
+		'almond_num_ordered':almond_num_ordered,
+		'grapefruit_num_ordered':grapefruit_num_ordered,
 		},
 		context)
 
